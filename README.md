@@ -1,4 +1,4 @@
-# OWL_LearningPortal
+# OWLearning Portal
 Professional learning portal in React / Redux and Express / MongoDB backend.
 
 ## What's in the package?
