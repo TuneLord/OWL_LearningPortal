@@ -1,3 +1,4 @@
+![OWLearning Portal](https://github.com/TuneLord/OWL_LearningPortal/blob/master/packages/public/images/owl.PNG)
 # OWLearning Portal
 Professional learning portal in React / Redux and Express / MongoDB backend.
 
