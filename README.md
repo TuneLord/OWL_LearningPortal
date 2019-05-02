@@ -8,7 +8,11 @@ Professional learning portal in React / Redux and Express / MongoDB backend.
 * **components** - all React .js components in folders with styles,
 * **actions** - all action creators for redux,
 * **reducers** - all reducers for redux,
-* **mocks** - place for temporary JSON object to help component creation process.
+* **mocks** - place for temporary JSON object to help component creation process,
+* **middleware** - all middleware connections,
+* **models** - models for data validation,
+* **routes** - all routes for react-router,
+* **styles** - only one global.css file with global styles
 
 **PUBLIC**
 * **images** - all images used in project,
@@ -17,8 +21,11 @@ Professional learning portal in React / Redux and Express / MongoDB backend.
 ## NPM Packages
 * react,
 * redux,
+* react-redux,
+* redux-thunk,
 * mongodb,
 * mongoose,
+* expressJS,
 * react-burger-menu,
 * material-ui,
 * material-icons.
