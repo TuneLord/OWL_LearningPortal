@@ -1,9 +1,12 @@
 import React from 'react';
 import './App.css';
+import Login from '../Login/login';
 
-function App() {
+const App = () => {
     return (
-        <div className="App"></div>
+        <div className="App">
+            <Login/>
+        </div>
     );
 }
 

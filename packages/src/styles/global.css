@@ -1,0 +1,17 @@
+/* Clearfix */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variables */
+
+:root {
+    /* Colors */
+    --orange: orange;
+
+    --loaderBackground: rgba(0, 0, 0, .8);
+    ;
+    /* Fonts */
+}
