@@ -1,0 +1,43 @@
+@import '../../styles/global.css';
+
+.loader {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--loaderBackground);
+}
+
+.loader svg {
+    font-size: 50px;
+    color: var(--orange);
+    -webkit-animation: rotate-center 1.5s linear infinite both;
+    animation: rotate-center 1.5s linear infinite both;
+}
+
+/* Animation rotate-center */
+
+@-webkit-keyframes rotate-center {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate-center {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
