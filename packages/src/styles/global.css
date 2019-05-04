@@ -3,15 +3,31 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: var(--mainFont);
 }
 
 /* Variables */
 
 :root {
     /* Colors */
-    --orange: orange;
+        /*  Font color  */
+        --mainColor: #323232;
 
-    --loaderBackground: rgba(0, 0, 0, .8);
-    ;
+        /* SplashScreen */
+        --border: #d2cdcd;
+        --menuBackground: #ffa726;
+        --menuCross: #e65100;
+        --menuAccents: #fff;
+
+        /* Loader */
+        --loaderBackground: rgba(0, 0, 0, .8);
+
     /* Fonts */
+    --mainFont: 'Roboto', sans-serif;
+    --logoFont: 'Fredoka One', cursive;
+
+}
+
+html {
+    color: var(--mainColor);
 }
