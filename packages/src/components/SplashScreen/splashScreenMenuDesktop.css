@@ -1,0 +1,67 @@
+@import "../../styles/global.css";
+
+/* Kontener menu ******************************************************************************************************/
+.splashScreenMenuDesktop {
+    width: 100vw;
+    height: 90px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 26px;
+}
+
+.splashScreenMenuDesktop a {
+    text-decoration: none;
+    color: var(--mainColor);
+    padding: 15px 15px;
+}
+
+.splashScreenMenuDesktop a:hover {
+    color: var(--menuBackground);
+}
+
+.splashScreenMenuDesktop a:last-child, .splashScreenMenuDesktop a:nth-child(4) {
+    color: var(--menuCross);
+}
+
+.splashScreenMenuDesktop a:last-child {
+    border: 1px solid var(--menuCross);
+    border-radius: 20px;
+}
+
+.splashScreenMenuDesktop a:nth-child(4):hover {
+    color: var(--menuBackground);
+}
+
+.splashScreenMenuDesktop a:last-child:hover {
+    border-color: var(--menuBackground);
+    background-color: var(--menuBackground);
+    color: var(--menuAccents);
+}
+
+    /* Kontener logo ******************************************************************************************************/
+.splashScreenMenuDesktop__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.splashScreenMenuDesktop__logo h1 {
+    font-size: 12px;
+    font-family: var(--logoFont);
+}
+
+.splashScreenMenuDesktop__logo h1 > span {
+    font-size: 16px;
+    padding-left: 10px;
+    font-family: var(--logoFont);
+    color: var(--mainColor);
+}
+
+.splashScreenMenuDesktop__logo svg {
+    font-size: 40px;
+    color: var(--menuBackground);
+}
+
+
