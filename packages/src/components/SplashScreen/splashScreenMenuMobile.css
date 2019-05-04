@@ -1,6 +1,6 @@
 @import "../../styles/global.css";
 
-/* Kontener menu ******************************************************************************************************/
+/* Kontener menu w wersji mobile **************************************************************************************/
 .splashScreenMenuMobile {
     width: 100vw;
     height: 90px;
@@ -34,7 +34,6 @@
     font-size: 40px;
     color: var(--menuBackground);
 }
-
 
 /* Przycisk menu BURGER ***********************************************************************************************/
 .bm-burger-button {
