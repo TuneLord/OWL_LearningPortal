@@ -1,9 +1,10 @@
 @import "../../styles/global.css";
 
+/* Kontener ekranu powitalnego ****************************************************************************************/
 .splashScreenContent {
     width: 100vw;
     height: auto;
-    background-image: url('./images/background2.png');
+    background-image: url('../../images/background2.png');
     background-size: contain;
     display: flex;
     justify-content: center;
@@ -44,7 +45,7 @@
     background-color: var(--menuCross);
 }
 
-/* RWD */
+/* RWD ****************************************************************************************************************/
 
 @media screen and (min-width: 767px) {
     .splashScreenContent div h1 {
