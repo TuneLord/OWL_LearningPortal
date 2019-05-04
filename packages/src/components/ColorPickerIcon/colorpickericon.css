@@ -1,0 +1,19 @@
+:root
+{
+    --color-picker-width: 170px;
+}
+
+.editor-color-wrapper
+{
+    position: relative;
+}
+
+.editor-color-picker
+{
+    position: absolute !important;
+    left: calc((-1)*var(--color-picker-width)/2 + 8px);
+    top: 25px;
+    background-color: #ddd !important;
+    opacity: 0.9;
+    z-index: 100;
+}
