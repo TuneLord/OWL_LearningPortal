@@ -24,67 +24,95 @@ import {ic_format_paint as paint} from 'react-icons-kit/md/ic_format_paint';
 
 import ColorPickerIcon from "../ColorPickerIcon/colorpickericon";
 import ImageSource from "./sources/ImageSource";
-import ImageBlock from "./ImageBlock";
+import ImageBlock from "./decorators/ImageBlock";
 import UserInputDialogContent from "../UserInputDialogContent/userInputDialogContent"
 
 import "draft-js/dist/Draft.css";
-import "./texteditor.css";
+import "./textEditor.css";
 
 
 class TextEditor extends React.Component
 {
-
-    state = { textColor: "#000000", backgroundColor: "#fff", dialogOpen: false, callback: ""}
-
     // Initialization from sessionStorage. It will be changed to either from server or from storage.
     initial = JSON.parse(sessionStorage.getItem("draftail:content"))
+    
     // Plugins extends editor
     plugins = [createLinkifyPlugin({ target: "_blank" })]
-    // Definition of  "block type" buttons
-    blockTypes = 
-    [
-        { type: BLOCK_TYPE.HEADER_ONE, description: "Nagłówek 1" },
-        { type: BLOCK_TYPE.HEADER_TWO, description: "Nagłówek 2" },
-        { type: BLOCK_TYPE.HEADER_THREE, description: "Nagłówek 3" },
-        { type: BLOCK_TYPE.HEADER_FOUR, description: "Nagłówek 4" },
-        { type: BLOCK_TYPE.HEADER_FIVE, description: "Nagłówek 5" },
-        { 
-            type: BLOCK_TYPE.UNORDERED_LIST_ITEM,
-            icon: <Icon icon={list} />,
-            description: "Lista", 
-        },
-        { 
-            type: BLOCK_TYPE.ORDERED_LIST_ITEM,
-            icon: <Icon icon={listNumbered} />,
-            description: "Lista numerowana", 
-        },
-        { 
-            type: BLOCK_TYPE.BLOCKQUOTE,
-            icon: <Icon icon={quotesLeft} />,
-            description: "Blok cytatu", 
-        },
-        { type: BLOCK_TYPE.CODE, description: "Blok kodu" },
-        { 
-            type: BLOCK_TYPE.UNSTYLED,
-            icon: <Icon icon={section} />,
-            description: "Paragraf", 
-        },
-    ]
-    // Definiton of "entity type" buttons
-    // Autosaving callback. It should be improved to both saving in storage and in server.
-    // It should handle "server down" case.
-    onSave = (content) =>
-    {
-        sessionStorage.setItem("draftail:content", JSON.stringify(content))
-    }
-    // Function for updating and creating "inline type" buttons
 
+    state = 
+    { 
+        textColor: "#000000",
+        backgroundColor: "#fff",
+        dialogOpen: false, 
+        callback: ""
+    }
+
+    // Callbacks used for changing buttons' colors
+    onColorTextPickerChange(color, event)
+    {
+        event.preventDefault();
+        this.setState({ textColor: color.hex });
+    }
+    onColorBackgroundPickerChange(color, event)
+    {
+        event.preventDefault();
+        this.setState( { backgroundColor: color.hex})
+    }
+
+    // For handling dialog component
     onDialogClose = () =>
     {
         this.setState({ dialogOpen: false });
     }
+    // This is used for asynchronous waiting for user input
+    onImageCreation(callback)
+    {   
+        this.setState({ callback, dialogOpen:true });
+    }
 
-    createEntityStyles()
+    // Autosaving callback. 
+    // ## It should be improved to both saving in storage and in server.
+    // ## It should handle "server down" case.
+    onSave = (content) =>
+    {
+        sessionStorage.setItem("draftail:content", JSON.stringify(content))
+    } 
+    
+    // All three functions below are used for creating and updating buttons in toolbar
+    // ### some of this shoul be moved to constructor
+    _createBlockStyles()
+    {
+        this.blockTypes = 
+        [
+            { type: BLOCK_TYPE.HEADER_ONE, description: "Nagłówek 1" },
+            { type: BLOCK_TYPE.HEADER_TWO, description: "Nagłówek 2" },
+            { type: BLOCK_TYPE.HEADER_THREE, description: "Nagłówek 3" },
+            { type: BLOCK_TYPE.HEADER_FOUR, description: "Nagłówek 4" },
+            { type: BLOCK_TYPE.HEADER_FIVE, description: "Nagłówek 5" },
+            { 
+                type: BLOCK_TYPE.UNORDERED_LIST_ITEM,
+                icon: <Icon icon={list} />,
+                description: "Lista", 
+            },
+            { 
+                type: BLOCK_TYPE.ORDERED_LIST_ITEM,
+                icon: <Icon icon={listNumbered} />,
+                description: "Lista numerowana", 
+            },
+            { 
+                type: BLOCK_TYPE.BLOCKQUOTE,
+                icon: <Icon icon={quotesLeft} />,
+                description: "Blok cytatu", 
+            },
+            { type: BLOCK_TYPE.CODE, description: "Blok kodu" },
+            { 
+                type: BLOCK_TYPE.UNSTYLED,
+                icon: <Icon icon={section} />,
+                description: "Paragraf", 
+            },
+        ]
+    }
+    _createEntityStyles()
     {
         this.entityTypes=
         [
@@ -98,7 +126,7 @@ class TextEditor extends React.Component
             // { type: ENTITY_TYPE.HORIZONTAL_RULE },
         ] 
     }
-    createInlineStyles()
+    _createInlineStyles()
     {
         this.inlineStyles = 
         [
@@ -187,31 +215,16 @@ class TextEditor extends React.Component
             
         ]
     }
-
-    // Callbacks used for changing buttons' colors
-    onColorTextPickerChange(color, event)
+    _createToolbar()
     {
-        event.preventDefault();
-        this.setState({ textColor: color.hex });
-    }
-    
-    onColorBackgroundPickerChange(color, event)
-    {
-        event.preventDefault();
-        this.setState( { backgroundColor: color.hex})
+        this._createInlineStyles();
+        this._createEntityStyles();
+        this._createBlockStyles();
     }
 
-    onImageCreation(callback)
-    {   
-        this.setState({ callback, dialogOpen:true });
-    }
-
-    
     render()
     {
-        this.createInlineStyles();
-        this.createEntityStyles();
-        console.log(this.state)
+        this._createToolbar();
         return(
             <div>
                 <DraftailEditor
