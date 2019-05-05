@@ -1,20 +1,34 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 
-const User = require('../models/userModel')
+const {User, validateUser} = require('../models/userModel')
 
-const signUp = express.Router();
+const router = express.Router();
 
-signUp.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
+    const { error } = validateUser(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+
+
     const { name, email, password} = req.body;
-    const newUser = new User({
+
+    //checks if user already exist    
+    let user = await User.findOne({email: email});
+    if(user) return res.status(400).send('User already registered.');
+
+    user = new User({
         name: name,
         email: email,
-        password: password
+        password: await bcrypt.hash(password, await bcrypt.genSalt(10))
     });
 
-    const result = await newUser.save();
-
-    res.status(200).send(result);
+    try {
+        await user.save();
+        res.status(200).send('User registered.');
+    } catch (err) {
+        console.log(err.message);
+        res.status(400).send(err.message);
+    }
 })
 
-module.exports = signUp;
+module.exports = router;
