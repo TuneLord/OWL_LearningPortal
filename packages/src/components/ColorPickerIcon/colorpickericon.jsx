@@ -23,16 +23,16 @@ export default class ColorPickerIcon extends React.Component
     onIconMouseDown = event =>
     {
         event.preventDefault();
-        event.stopPropagation();
-        this.setState({ isOpened: !this.state.isOpened});
+        event.stopPropagation();    // Prevents from toggling color styling
+        this.setState({ isOpened: !this.state.isOpened});   // Showing and hiding color picker
     }
 
     onMouseDown = event =>
     {
-        event.preventDefault();
+        event.preventDefault();      // Prevents from toggling color styling
         event.stopPropagation();
     }
-
+    // Function that hides color picker when user clicks somewhere else
     onBlur = event =>
     {
         if (this.state.isOpened) this.setState({ isOpened: false});

@@ -1,14 +1,14 @@
 :root
 {
-    --color-picker-width: 170px;
+    /* used for positioning the color picker */
+    --color-picker-width: 170px;    
 }
-
+/* whole icon */
 .editor-color-wrapper
 {
     position: relative;
-    margin-right: 0;
 }
-
+/* color picker popper; importants used to override some inline styles */
 .editor-color-picker
 {
     position: absolute !important;
@@ -18,7 +18,7 @@
     opacity: 0.9;
     z-index: 100;
 }
-
+/* positioning again */
 .editor-color-arrow
 {
     margin-right: -10px;
