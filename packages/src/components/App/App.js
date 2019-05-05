@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Login from '../Login/login';
-import TextEditor from "../TextEditor/textEditor";
+import TextEditor from "../TextEditor/textEditor"
 
 
 const App = () => {

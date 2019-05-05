@@ -20,6 +20,7 @@ import {section} from 'react-icons-kit/icomoon/section';
 import {quotesLeft} from 'react-icons-kit/icomoon/quotesLeft';
 import {ic_keyboard_arrow_down as arrowDown} from 'react-icons-kit/md/ic_keyboard_arrow_down';
 import {ic_format_paint as paint} from 'react-icons-kit/md/ic_format_paint';
+import {images} from 'react-icons-kit/icomoon/images'
 
 
 import ColorPickerIcon from "../ColorPickerIcon/colorpickericon";
@@ -120,7 +121,9 @@ class TextEditor extends React.Component
                 type: ENTITY_TYPE.IMAGE,
                 source: ImageSource,
                 block: ImageBlock,
-                UIHandler: this.onImageCreation.bind(this)
+                UIHandler: this.onImageCreation.bind(this),
+                icon: <Icon icon={images} />,
+                description: "Obraz"
             },
             // { type: ENTITY_TYPE.IMAGE },
             // { type: ENTITY_TYPE.HORIZONTAL_RULE },
