@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { DraftailEditor, BLOCK_TYPE, INLINE_STYLE, ENTITY_TYPE } from "draftail";
+import createLinkifyPlugin from 'draft-js-linkify-plugin';
+
 import Icon from "react-icons-kit";
 import {textColor} from 'react-icons-kit/icomoon/textColor'
 import {bold} from 'react-icons-kit/icomoon/bold'
@@ -16,26 +18,28 @@ import {listNumbered} from 'react-icons-kit/icomoon/listNumbered'
 import {section} from 'react-icons-kit/icomoon/section'
 import {quotesLeft} from 'react-icons-kit/icomoon/quotesLeft'
 import {ic_keyboard_arrow_down as arrowDown} from 'react-icons-kit/md/ic_keyboard_arrow_down'
+import {ic_format_paint as paint} from 'react-icons-kit/md/ic_format_paint'
 
 import ColorPickerIcon from "../ColorPickerIcon/colorpickericon"
 
 import "draft-js/dist/Draft.css";
-import "draftail/dist/draftail.css";
 import "./texteditor.css";
 
 class TextEditor extends React.Component
 {
-    state = { textColor: "#000000"}
+    state = { textColor: "#000000", backgroundColor: "#fff"}
 
     initial = JSON.parse(sessionStorage.getItem("draftail:content"))
+
+    plugins = [createLinkifyPlugin({ target: "_blank" })]
     
     blockTypes = 
     [
-        { type: BLOCK_TYPE.HEADER_ONE },
-        { type: BLOCK_TYPE.HEADER_TWO },
-        { type: BLOCK_TYPE.HEADER_THREE },
-        { type: BLOCK_TYPE.HEADER_FOUR },
-        { type: BLOCK_TYPE.HEADER_FIVE },
+        { type: BLOCK_TYPE.HEADER_ONE, description: "Nagłówek 1" },
+        { type: BLOCK_TYPE.HEADER_TWO, description: "Nagłówek 2" },
+        { type: BLOCK_TYPE.HEADER_THREE, description: "Nagłówek 3" },
+        { type: BLOCK_TYPE.HEADER_FOUR, description: "Nagłówek 4" },
+        { type: BLOCK_TYPE.HEADER_FIVE, description: "Nagłówek 5" },
         { 
             type: BLOCK_TYPE.UNORDERED_LIST_ITEM,
             icon: <Icon icon={list} />,
@@ -51,7 +55,7 @@ class TextEditor extends React.Component
             icon: <Icon icon={quotesLeft} />,
             description: "Blok cytatu", 
         },
-        { type: BLOCK_TYPE.CODE },
+        { type: BLOCK_TYPE.CODE, description: "Blok kodu" },
         { 
             type: BLOCK_TYPE.UNSTYLED,
             icon: <Icon icon={section} />,
@@ -114,6 +118,25 @@ class TextEditor extends React.Component
                     color: this.state.textColor
                 }
             },
+            {
+                description: "Kolor tła",
+                type: `backgroundColor-${this.state.textColor}`,
+                icon: (
+                        <div>
+                            <Icon icon={paint} style={ {color: this.state.backgroundColor}} />
+                            <ColorPickerIcon 
+                                icon={arrowDown}
+                                onPickerChange={this.onColorBackgroundPickerChange.bind(this)}
+                                color={this.state.backgroundColor}
+                                colors={['#000000', '#333333', '#4D4D4D', '#666666', '#808080', '#999999', '#B3B3B3', '#CCCCCC', '#FFFFFF', '#9F0500', '#D33115', '#F44E3B', '#C45100', '#E27300', '#FE9200', '#FB9E00', '#FCC400', '#FCDC00', '#808900', '#B0BC00', '#DBDF00', '#194D33', '#68BC00', '#A4DD00', '#0C797D', '#16A5A5', '#68CCCA', '#0062B1', '#009CE0', '#73D8FF', '#653294', '#7B64FF', '#AEA1FF', '#AB149E', '#FA28FF',  '#FDA1FF']}
+                                width="210px"
+                            />
+                        </div>),
+                style: 
+                {
+                    backgroundColor: this.state.backgroundColor
+                }
+            },
             { 
                 type: INLINE_STYLE.CODE,
                 icon: <Icon icon={embed}/>,
@@ -144,7 +167,13 @@ class TextEditor extends React.Component
 
     onColorTextPickerChange(color, event)
     {
+        event.preventDefault();
         this.setState({ textColor: color.hex });
+    }
+    onColorBackgroundPickerChange(color, event)
+    {
+        event.preventDefault();
+        this.setState( { backgroundColor: color.hex})
     }
     render()
     {
@@ -154,6 +183,7 @@ class TextEditor extends React.Component
                 <DraftailEditor
                     rawContentState={this.initial || null}
                     onSave={this.onSave}
+                    plugins={this.plugins}
                     blockTypes={this.blockTypes}
                     inlineStyles={this.inlineStyles}
                     // entityTypes={this.entityTypes}
