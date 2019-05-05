@@ -28,7 +28,6 @@ export default class ImageSource extends Component {
 
   componentDidMount()
   {
-    console.log(this.props);
     this.props.entityType.UIHandler(this.callback.bind(this));
   }
 
