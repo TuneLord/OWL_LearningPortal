@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const helmet = require('helmet')
 
 const app = express();
 const signUp = require('./routes/signUp');
@@ -12,6 +13,7 @@ mongoose.connect(`mongodb+srv://${config.username}:${config.password}@owlportal-
     .then(()=> console.log("Connected to MongoDB Atlas!"))
     .catch((err)=> console.log("Error", err))
 
+app.use(helmet());
 app.use(express.json());
 
 app.use('/users', signUp);

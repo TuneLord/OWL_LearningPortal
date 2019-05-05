@@ -1,6 +1,5 @@
-const dbConnection = {
+module.exports = {
     username: process.env.owlDbUser,
-    password: process.env.owlDbPass
-}
-
-module.exports = dbConnection;
+    password: process.env.owlDbPass,
+    jwtKey: process.env.owlJwtKey
+};
