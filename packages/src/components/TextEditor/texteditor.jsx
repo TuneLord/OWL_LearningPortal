@@ -29,10 +29,11 @@ class TextEditor extends React.Component
 {
     state = { textColor: "#000000", backgroundColor: "#fff"}
 
+    // Initialization from sessionStorage. It will be changed to either from server or from storage.
     initial = JSON.parse(sessionStorage.getItem("draftail:content"))
-
+    // Plugins extends editor
     plugins = [createLinkifyPlugin({ target: "_blank" })]
-    
+    // Definition of  "block type" buttons
     blockTypes = 
     [
         { type: BLOCK_TYPE.HEADER_ONE, description: "Nagłówek 1" },
@@ -62,19 +63,20 @@ class TextEditor extends React.Component
             description: "Paragraf", 
         },
     ]
-
+    // Definiton of "entity type" buttons
     entityTypes=
     [
         { type: ENTITY_TYPE.LINK },
         { type: ENTITY_TYPE.IMAGE },
         { type: ENTITY_TYPE.HORIZONTAL_RULE },
     ] 
-
+    // Autosaving callback. It should be improved to both saving in storage and in server.
+    // It should handle "server down" case.
     onSave = (content) =>
     {
         sessionStorage.setItem("draftail:content", JSON.stringify(content))
     }
-
+    // Function for updating and creating "inline type" buttons
     createInlineStyles()
     {
         this.inlineStyles = 
@@ -164,17 +166,19 @@ class TextEditor extends React.Component
             
         ]
     }
-
+    // Callbacks used for changing buttons' colors
     onColorTextPickerChange(color, event)
     {
         event.preventDefault();
         this.setState({ textColor: color.hex });
     }
+    
     onColorBackgroundPickerChange(color, event)
     {
         event.preventDefault();
         this.setState( { backgroundColor: color.hex})
     }
+    
     render()
     {
         this.createInlineStyles();
