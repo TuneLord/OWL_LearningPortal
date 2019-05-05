@@ -2,32 +2,39 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DraftailEditor, BLOCK_TYPE, INLINE_STYLE, ENTITY_TYPE } from "draftail";
 import createLinkifyPlugin from 'draft-js-linkify-plugin';
+import Dialog from '@material-ui/core/Dialog';
 
 import Icon from "react-icons-kit";
-import {textColor} from 'react-icons-kit/icomoon/textColor'
-import {bold} from 'react-icons-kit/icomoon/bold'
-import {underline} from 'react-icons-kit/icomoon/underline'
-import {italic} from 'react-icons-kit/icomoon/italic'
-import {strikethrough} from 'react-icons-kit/icomoon/strikethrough'
-import {superscript2 as superscript} from 'react-icons-kit/icomoon/superscript2'
-import {subscript2 as subscript} from 'react-icons-kit/icomoon/subscript2'
-import {embed2 as embed} from 'react-icons-kit/icomoon/embed2'
-import {quotesRight} from 'react-icons-kit/icomoon/quotesRight'
-import {list2 as list} from 'react-icons-kit/icomoon/list2'
-import {listNumbered} from 'react-icons-kit/icomoon/listNumbered'
-import {section} from 'react-icons-kit/icomoon/section'
-import {quotesLeft} from 'react-icons-kit/icomoon/quotesLeft'
-import {ic_keyboard_arrow_down as arrowDown} from 'react-icons-kit/md/ic_keyboard_arrow_down'
-import {ic_format_paint as paint} from 'react-icons-kit/md/ic_format_paint'
+import {textColor} from 'react-icons-kit/icomoon/textColor';
+import {bold} from 'react-icons-kit/icomoon/bold';
+import {underline} from 'react-icons-kit/icomoon/underline';
+import {italic} from 'react-icons-kit/icomoon/italic';
+import {strikethrough} from 'react-icons-kit/icomoon/strikethrough';
+import {superscript2 as superscript} from 'react-icons-kit/icomoon/superscript2';
+import {subscript2 as subscript} from 'react-icons-kit/icomoon/subscript2';
+import {embed2 as embed} from 'react-icons-kit/icomoon/embed2';
+import {quotesRight} from 'react-icons-kit/icomoon/quotesRight';
+import {list2 as list} from 'react-icons-kit/icomoon/list2';
+import {listNumbered} from 'react-icons-kit/icomoon/listNumbered';
+import {section} from 'react-icons-kit/icomoon/section';
+import {quotesLeft} from 'react-icons-kit/icomoon/quotesLeft';
+import {ic_keyboard_arrow_down as arrowDown} from 'react-icons-kit/md/ic_keyboard_arrow_down';
+import {ic_format_paint as paint} from 'react-icons-kit/md/ic_format_paint';
 
-import ColorPickerIcon from "../ColorPickerIcon/colorpickericon"
+
+import ColorPickerIcon from "../ColorPickerIcon/colorpickericon";
+import ImageSource from "./sources/ImageSource";
+import ImageBlock from "./ImageBlock";
+import UserInputDialogContent from "../UserInputDialogContent/userInputDialogContent"
 
 import "draft-js/dist/Draft.css";
 import "./texteditor.css";
 
+
 class TextEditor extends React.Component
 {
-    state = { textColor: "#000000", backgroundColor: "#fff"}
+
+    state = { textColor: "#000000", backgroundColor: "#fff", dialogOpen: false, callback: ""}
 
     // Initialization from sessionStorage. It will be changed to either from server or from storage.
     initial = JSON.parse(sessionStorage.getItem("draftail:content"))
@@ -64,12 +71,6 @@ class TextEditor extends React.Component
         },
     ]
     // Definiton of "entity type" buttons
-    entityTypes=
-    [
-        { type: ENTITY_TYPE.LINK },
-        { type: ENTITY_TYPE.IMAGE },
-        { type: ENTITY_TYPE.HORIZONTAL_RULE },
-    ] 
     // Autosaving callback. It should be improved to both saving in storage and in server.
     // It should handle "server down" case.
     onSave = (content) =>
@@ -77,6 +78,26 @@ class TextEditor extends React.Component
         sessionStorage.setItem("draftail:content", JSON.stringify(content))
     }
     // Function for updating and creating "inline type" buttons
+
+    onDialogClose = () =>
+    {
+        this.setState({ dialogOpen: false });
+    }
+
+    createEntityStyles()
+    {
+        this.entityTypes=
+        [
+            { 
+                type: ENTITY_TYPE.IMAGE,
+                source: ImageSource,
+                block: ImageBlock,
+                UIHandler: this.onImageCreation.bind(this)
+            },
+            // { type: ENTITY_TYPE.IMAGE },
+            // { type: ENTITY_TYPE.HORIZONTAL_RULE },
+        ] 
+    }
     createInlineStyles()
     {
         this.inlineStyles = 
@@ -166,6 +187,7 @@ class TextEditor extends React.Component
             
         ]
     }
+
     // Callbacks used for changing buttons' colors
     onColorTextPickerChange(color, event)
     {
@@ -178,10 +200,18 @@ class TextEditor extends React.Component
         event.preventDefault();
         this.setState( { backgroundColor: color.hex})
     }
+
+    onImageCreation(callback)
+    {   
+        this.setState({ callback, dialogOpen:true });
+    }
+
     
     render()
     {
         this.createInlineStyles();
+        this.createEntityStyles();
+        console.log(this.state)
         return(
             <div>
                 <DraftailEditor
@@ -190,12 +220,23 @@ class TextEditor extends React.Component
                     plugins={this.plugins}
                     blockTypes={this.blockTypes}
                     inlineStyles={this.inlineStyles}
-                    // entityTypes={this.entityTypes}
+                    entityTypes={this.entityTypes}
                 />
+                <Dialog open={this.state.dialogOpen}> 
+                    <UserInputDialogContent 
+                        title="Kreator obrazu"
+                        inputId="input" 
+                        type="text" 
+                        placeholder="http://" 
+                        label="Adres obrazu"
+                        callback={this.state.callback}
+                        onClose={this.onDialogClose}
+                    />
+                </Dialog>
             </div>
         )
     }
     
-};
+};  
 
 export default connect()(TextEditor);
