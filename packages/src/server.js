@@ -17,6 +17,6 @@ mongoose.connect(`mongodb+srv://${config.username}:${config.password}@owlportal-
 app.use(helmet());
 app.use(express.json());
 
-app.use('/users', signUp);
+app.use('/register', signUp);
 app.use('/login', login);
 
