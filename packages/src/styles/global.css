@@ -19,6 +19,9 @@
         --menuCross: #e65100;
         --menuAccents: #fff;
 
+        /* MainView */
+        --mainViewMenu: #fffde7;
+
         /* Loader */
         --loaderBackground: rgba(0, 0, 0, .8);
 
