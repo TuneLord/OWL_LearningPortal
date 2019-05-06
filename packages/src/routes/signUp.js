@@ -1,12 +1,12 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 
-const {User, validateUser} = require('../models/userModel')
+const {User, validateUserSignUp} = require('../models/userModel')
 
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    const { error } = validateUser(req.body);
+    const { error } = validateUserSignUp(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
 

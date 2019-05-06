@@ -5,7 +5,7 @@ const userSchema = require('../schemas/userSchema')
 
 const User = mongoose.model('User', userSchema);
 
-const validateUser = (user) => {
+const validateUserSignUp = (user) => {
     const schema = Joi.object().keys({
         name: Joi.string().alphanum().min(3).max(30).required(),
         email: Joi.string().email({ minDomainSegments: 2 }),
@@ -15,5 +15,18 @@ const validateUser = (user) => {
     return Joi.validate(user,schema)
 }
 
+const validateUserLogin = (user) => {
+    const schema = Joi.object().keys({
+        email: Joi.string().email({ minDomainSegments: 2 }),
+        password: Joi.string().regex(/^(?=.*\d).{4,30}$/)
+    })
 
-module.exports = {User, validateUser};
+    return Joi.validate(user,schema)
+}
+
+
+module.exports = {
+    User,
+    validateUserSignUp,
+    validateUserLogin
+};
