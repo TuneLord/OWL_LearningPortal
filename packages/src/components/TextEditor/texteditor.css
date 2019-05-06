@@ -1,4 +1,25 @@
-//copied styles
+.editor-link
+{
+  text-decoration: unset;
+  cursor: pointer;
+}
+
+.editor-link-text
+{
+  color: #000;
+  background: #EEF8FF;
+  line-height: 1.5;
+  border-bottom: 1px dotted #43b1b0;
+  box-sizing: border-box;
+  padding: 4px 0 1px;
+}
+
+.editor-link-icon
+{
+  color: #71C4C4
+}
+
+/* copied styles */
 
 .Draftail-Icon {
     fill: currentColor;

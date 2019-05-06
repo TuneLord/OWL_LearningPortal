@@ -21,11 +21,14 @@ import {quotesLeft} from 'react-icons-kit/icomoon/quotesLeft';
 import {ic_keyboard_arrow_down as arrowDown} from 'react-icons-kit/md/ic_keyboard_arrow_down';
 import {ic_format_paint as paint} from 'react-icons-kit/md/ic_format_paint';
 import {images} from 'react-icons-kit/icomoon/images'
+import {link} from 'react-icons-kit/icomoon/link'
 
 
 import ColorPickerIcon from "../ColorPickerIcon/colorpickericon";
 import ImageSource from "./sources/ImageSource";
 import ImageBlock from "./decorators/ImageBlock";
+import LinkSource from "./sources/linkSource";
+import LinkDecorator from "./decorators/LinkDecorator"
 import UserInputDialogContent from "../UserInputDialogContent/userInputDialogContent"
 
 import "draft-js/dist/Draft.css";
@@ -45,7 +48,12 @@ class TextEditor extends React.Component
         textColor: "#000000",
         backgroundColor: "#fff",
         dialogOpen: false, 
-        callback: ""
+        callback: "",
+        title: "",
+        inputId: "editor-dialog-input",
+        type: "text",
+        placeholder:"", 
+        label: ""
     }
 
     // Callbacks used for changing buttons' colors
@@ -68,7 +76,30 @@ class TextEditor extends React.Component
     // This is used for asynchronous waiting for user input
     onImageCreation(callback)
     {   
-        this.setState({ callback, dialogOpen:true });
+        this.setState(
+            {
+                callback, 
+                dialogOpen:true,
+                title: "Kreator obrazu",
+                inputId: "editor-dialog-input",
+                type: "text",
+                placeholder:"http://", 
+                label: "Adres obrazu"
+            });
+    }
+
+    onLinkCreation(callback)
+    {   
+        this.setState(
+            {
+                callback, 
+                dialogOpen:true,
+                title: "Kreator linku",
+                inputId: "editor-dialog-input",
+                type: "text",
+                placeholder:"http://", 
+                label: "Cel linku"
+            });
     }
 
     // Autosaving callback. 
@@ -123,9 +154,16 @@ class TextEditor extends React.Component
                 block: ImageBlock,
                 UIHandler: this.onImageCreation.bind(this),
                 icon: <Icon icon={images} />,
-                description: "Obraz"
+                description: "Obraz",
             },
-            // { type: ENTITY_TYPE.IMAGE },
+            { 
+                type: ENTITY_TYPE.LINK,
+                source: LinkSource,
+                decorator: LinkDecorator,
+                UIHandler: this.onLinkCreation.bind(this),
+                description: "Link",
+                icon: <Icon icon={link} />
+            },
             // { type: ENTITY_TYPE.HORIZONTAL_RULE },
         ] 
     }
@@ -240,11 +278,11 @@ class TextEditor extends React.Component
                 />
                 <Dialog open={this.state.dialogOpen}> 
                     <UserInputDialogContent 
-                        title="Kreator obrazu"
-                        inputId="input" 
-                        type="text" 
-                        placeholder="http://" 
-                        label="Adres obrazu"
+                        title={this.state.title}
+                        inputId={this.state.inputId}
+                        type={this.state.type} 
+                        placeholder={this.state.placeholder} 
+                        label={this.state.label}
                         callback={this.state.callback}
                         onClose={this.onDialogClose}
                     />
