@@ -4,6 +4,7 @@ const helmet = require('helmet')
 
 const app = express();
 const signUp = require('./routes/signUp');
+const login = require('./routes/login');
 const config = require('./config')
 
 
@@ -17,4 +18,5 @@ app.use(helmet());
 app.use(express.json());
 
 app.use('/users', signUp);
+app.use('/login', login);
 
