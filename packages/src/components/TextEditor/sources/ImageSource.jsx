@@ -5,7 +5,7 @@ export default class ImageSource extends Component {
   callback(src) 
   {
     const { editorState, entityType, onComplete } = this.props
-
+    
     if (src) {
       const content = editorState.getCurrentContent()
       const contentWithEntity = content.createEntity(
