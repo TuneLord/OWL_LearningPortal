@@ -12,13 +12,6 @@ class Login extends React.Component {
             isDisable: true
         };
     }
-
-    validate(email, password) {
-        return {
-            email: /.+@.+\..+/i.test(email),
-            password: password.length > 6,
-        };
-    }
     
     onChangeEmail = (e) => {
         let error = '';
@@ -59,12 +52,32 @@ class Login extends React.Component {
         });
     }
 
+    onSubmitForm = async(e) => {
+        e.preventDefault();
+
+        const requestBody = {};
+        requestBody.email = this.state.email;
+        requestBody.password = this.state.password;
+        try {
+            const response = await fetch('/login', {
+                method: "post",
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify(requestBody)
+            });
+            if (response.status !== 200) throw response;
+            sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
     render() {
-        console.log(this.state)
         return (
             <div className='login'>
                 <h2>Zaloguj się</h2>
-                <form>
+                <form onSubmit={this.onSubmitForm}>
                     <div>
                         <i className="fas fa-envelope"></i>
                         <input type='email' value={this.state.email} onChange={this.onChangeEmail} placeholder='podaj adres e-mail' />                       
