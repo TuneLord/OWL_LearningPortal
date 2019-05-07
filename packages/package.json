@@ -45,5 +45,6 @@
   "devDependencies": {
     "lint": "^1.1.2",
     "prettier": "^1.17.0"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
