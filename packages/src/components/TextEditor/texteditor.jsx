@@ -1,7 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { DraftailEditor, BLOCK_TYPE, INLINE_STYLE, ENTITY_TYPE } from "draftail";
+import { composeDecorators } from "draft-js-plugins-editor";
+import createFocusPlugin from "draft-js-focus-plugin"
+import createBlockDndPlugin from "draft-js-drag-n-drop-plugin"
 import createLinkifyPlugin from 'draft-js-linkify-plugin';
+import createResizeablePlugin from 'draft-js-resizeable-plugin';
+import createAlignmentPlugin from 'draft-js-alignment-plugin';
 import Dialog from '@material-ui/core/Dialog';
 
 import Icon from "react-icons-kit";
@@ -29,19 +34,40 @@ import ImageSource from "./sources/ImageSource";
 import ImageBlock from "./decorators/ImageBlock";
 import LinkSource from "./sources/linkSource";
 import LinkDecorator from "./decorators/LinkDecorator"
+import LinkifyDecorator from "./decorators/linkifyDecorator"
 import UserInputDialogContent from "../UserInputDialogContent/userInputDialogContent"
 
 import "draft-js/dist/Draft.css";
+import "draft-js-focus-plugin/lib/plugin.css";
+import "draft-js-alignment-plugin/lib/plugin.css"
 import "./textEditor.css";
 
+const linkifyPlugin = createLinkifyPlugin({ target: "_blank", component: LinkifyDecorator });
+const focusPlugin = createFocusPlugin();
+const dndPlugin = createBlockDndPlugin();
+const resizeablePlugin = createResizeablePlugin();
+const alignmentPlugin = createAlignmentPlugin();
+const imageDecorator = composeDecorators(
+    dndPlugin.decorator, 
+    focusPlugin.decorator, 
+    resizeablePlugin.decorator, 
+    alignmentPlugin.decorator);
+const { AlignmentTool } = alignmentPlugin;
 
 class TextEditor extends React.Component
 {
     // Initialization from sessionStorage. It will be changed to either from server or from storage.
-    initial = JSON.parse(sessionStorage.getItem("draftail:content"))
+    initial = JSON.parse(sessionStorage.getItem("draftail:content"));
     
     // Plugins extends editor
-    plugins = [createLinkifyPlugin({ target: "_blank" })]
+    plugins = 
+    [
+        linkifyPlugin,
+        dndPlugin,
+        focusPlugin, 
+        resizeablePlugin, 
+        alignmentPlugin
+    ];
 
     state = 
     { 
@@ -54,7 +80,7 @@ class TextEditor extends React.Component
         type: "text",
         placeholder:"", 
         label: ""
-    }
+    };
 
     // Callbacks used for changing buttons' colors
     onColorTextPickerChange(color, event)
@@ -151,7 +177,7 @@ class TextEditor extends React.Component
             { 
                 type: ENTITY_TYPE.IMAGE,
                 source: ImageSource,
-                block: ImageBlock,
+                block: imageDecorator(ImageBlock),
                 UIHandler: this.onImageCreation.bind(this),
                 icon: <Icon icon={images} />,
                 description: "Obraz",
@@ -276,6 +302,7 @@ class TextEditor extends React.Component
                     inlineStyles={this.inlineStyles}
                     entityTypes={this.entityTypes}
                 />
+                <AlignmentTool />
                 <Dialog open={this.state.dialogOpen}> 
                     <UserInputDialogContent 
                         title={this.state.title}
