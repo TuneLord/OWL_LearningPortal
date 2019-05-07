@@ -19,8 +19,11 @@
     --menuCross: #e65100;
     --menuAccents: #fff;
 
-    /* Loader */
-    --loaderBackground: rgba(0, 0, 0, .8);
+        /* MainView */
+        --mainViewMenu: #fffde7;
+
+        /* Loader */
+        --loaderBackground: rgba(0, 0, 0, .8);
 
     /* Fonts */
     --mainFont: 'Roboto', sans-serif;
