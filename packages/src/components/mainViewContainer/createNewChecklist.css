@@ -1,0 +1,19 @@
+.createNewChecklist {
+    background-color: #00c853;
+    font-size: 30px;
+    line-height: 140%;
+    cursor: pointer;
+    transform: 0.3s;
+}
+
+.createNewChecklist>* {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.createNewChecklist:hover {
+    background: #00e676;
+    box-shadow: 0 0 2px grey;
+}

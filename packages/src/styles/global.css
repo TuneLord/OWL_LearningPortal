@@ -10,17 +10,17 @@
 
 :root {
     /* Colors */
-        /*  Font color  */
-        --mainColor: #323232;
+    /*  Font color  */
+    --mainColor: #323232;
 
-        /* SplashScreen */
-        --border: #d2cdcd;
-        --menuBackground: #ffa726;
-        --menuCross: #e65100;
-        --menuAccents: #fff;
+    /* SplashScreen */
+    --border: #d2cdcd;
+    --menuBackground: #ffa726;
+    --menuCross: #e65100;
+    --menuAccents: #fff;
 
-        /* Loader */
-        --loaderBackground: rgba(0, 0, 0, .8);
+    /* Loader */
+    --loaderBackground: rgba(0, 0, 0, .8);
 
     /* Fonts */
     --mainFont: 'Roboto', sans-serif;
@@ -30,4 +30,15 @@
 
 html {
     color: var(--mainColor);
+}
+
+.state {
+    height: 14vh;
+    width: 22vw;
+    text-align: center;
+    color: var(--menuAccents);
+    padding: 20px;
+    border-radius: 5px;
+    margin: 15px 30px 30px;
+    position: relative;
 }
