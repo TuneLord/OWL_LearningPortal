@@ -1,0 +1,16 @@
+.checklistCounter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #1c2b36;
+}
+
+.checklistNumber {
+    font-size: 36px;
+    width: 100%;
+}
+
+.checklistCounter p {
+    font-size: 30px;
+}
