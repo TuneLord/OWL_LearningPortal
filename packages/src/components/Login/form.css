@@ -1,5 +1,5 @@
 * { margin: 0; padding: 0; }
-input { outline: none; border: none;}
+input, button { outline: none; border: none;}
 
 .form {
     --input-bg-color: #fff8e1;
@@ -27,13 +27,13 @@ input { outline: none; border: none;}
     box-shadow: 0 2px 8px 0 #E3E3E3;
 }
 
-.form form > div:not(.error) {
+.form form > div.form-el {
     display: flex;
     align-items: center;
     padding-bottom: 10px;
     border-bottom: 1px solid #E3E3E3;
 }
-.form form>div:not(.error):not(:nth-of-type(1)) {
+.form form>div.form-el:not(:nth-of-type(1)) {
     margin-top: 20px;
 }
 
@@ -68,4 +68,40 @@ input { outline: none; border: none;}
     font-size: 16px;
     cursor: pointer;
     background-color: var(--main-color);
+}
+
+.form .or {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #E3E3E3;
+    margin-top: 30px;
+}
+
+.form .or span {
+    position: absolute;
+    display: block;
+    padding: 0 10px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #666;
+    top: -7px;
+}
+
+.form button.gplus {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 10px 20px;
+    color: var(--main-color);
+    border-radius: 28px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid var(--main-color);
+}
+
+.form button.gplus svg {
+    margin-right: 10px;
 }
