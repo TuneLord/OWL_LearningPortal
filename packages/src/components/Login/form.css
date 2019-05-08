@@ -1,46 +1,49 @@
 * { margin: 0; padding: 0; }
 input { outline: none; border: none;}
 
-.login {
+.form {
     --input-bg-color: #fff8e1;
     --error-bg-color: #ffece8;
     --main-color: #e65100;
 
     text-align: center;
     font-family: sans-serif;
+
+    margin: 30px 0; 
 }   
 
-.login h2 {
+.form h2 {
     font-size: 30px;
     margin-bottom: 50px;
 }
     
-.login form {
+.form form {
     display: flex;
     flex-direction: column;
     max-width: 420px;
     padding: 30px;      
     margin: 0 auto;
+    box-shadow: 0 2px 8px 0 #E3E3E3;
 }
 
-.login form > div:not(.error) {
+.form form > div:not(.error) {
     display: flex;
     align-items: center;
     padding-bottom: 10px;
     border-bottom: 1px solid #E3E3E3;
 }
-.login form>div:not(.error):not(:nth-of-type(1)) {
+.form form>div:not(.error):not(:nth-of-type(1)) {
     margin-top: 20px;
 }
 
-.login form svg {
+.form form svg {
     font-size: 18px;
     text-align: left;
     width: 28px !important;
     color: var(--main-color);
 }
 
-.login input:not([type=submit]) {
+.form input:not([type=submit]) {
     flex-grow: 1;
     padding: 0 0 0 10px;
     font-size: 14px;
@@ -48,7 +51,7 @@ input { outline: none; border: none;}
     background-color: var(--input-bg-color);
 }
 
-.login form .error {
+.form form .error {
     position: relative;
     text-align: left; 
     font-size: 14px;
@@ -56,7 +59,7 @@ input { outline: none; border: none;}
     padding: 8px 10px;
 }
 
-.login #submit {
+.form #submit {
     margin-top: 30px;
     height: 54px;
     color: #fff;
@@ -64,10 +67,4 @@ input { outline: none; border: none;}
     font-size: 16px;
     cursor: pointer;
     background-color: var(--main-color);
-}
-
-@media (min-width: 576px) {
-    .login form {     
-        box-shadow: 0 2px 8px 0 #E3E3E3;
-    }
 }

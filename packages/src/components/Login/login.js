@@ -1,6 +1,7 @@
 import React from 'react';
-import './login.css';
+import './form.css';
 import { connect } from 'react-redux';
+import { loginStatus } from '../../actions/loginStatus'
 
 class Login extends React.Component {
     constructor(props) {
@@ -19,8 +20,6 @@ class Login extends React.Component {
 
         if (e.target.value.length === 0)
             error = 'To pole jest wymagane';
-        else if (!(/.+@.+\..+/i.test(e.target.value)))
-            error = 'Niewłaściwy format adresu email';
         else isDisable = false;
 
         this.setState({
@@ -39,8 +38,6 @@ class Login extends React.Component {
 
         if (e.target.value.length === 0)
             error = 'To pole jest wymagane';
-        else if (!(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*#?&]{6,}/.test(e.target.value)))
-            error = 'Hasło musi składać się przynajmniej z jednej cyfry, jednej dużej i jednej małej litery oraz posiadać min. 6 znaków';
         else isDisable = false;
         this.setState({
             password: e.target.value,
@@ -68,14 +65,28 @@ class Login extends React.Component {
             });
             if (response.status !== 200) throw response;
             sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
-        } catch(err) {
+            this.props.loginStatus(true);
+            console.log('Logowanie przebiegło pomyślnie')
+        } catch (err) {
             console.log(err);
+            if ([404, 400].includes(err.status)) {
+                let error = 'Błędny email lub hasło';
+                this.setState({
+                    email: '',
+                    password: '',
+                    isDisable: true,
+                    errors: {
+                        email: error,
+                        password: error
+                    }
+                });
+            }
         }
     }
 
     render() {
         return (
-            <div className='login'>
+            <div className='form login'>
                 <h2>Zaloguj się</h2>
                 <form onSubmit={this.onSubmitForm}>
                     <div>
@@ -95,11 +106,9 @@ class Login extends React.Component {
     }
 }   
 
-// Tu zwracamy interesujący nas fragment ze stora (przechowywacza stanów)
-const mapStateToProps = (state) => {
-    console.log(state);
-    return state;
-}
+// const mapStateToProps = (state) => {
+//     console.log(state);
+//     return state;
+// }
 
-// Przyjmuje cały stan i zwraca propsy dla komponentu
-export default connect(mapStateToProps)(Login);
+export default connect(null, { loginStatus })(Login);
