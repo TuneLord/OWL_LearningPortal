@@ -7,6 +7,7 @@ import createBlockDndPlugin from "draft-js-drag-n-drop-plugin"
 import createLinkifyPlugin from "draft-js-linkify-plugin";
 import createResizeablePlugin from "draft-js-resizeable-plugin";
 import createAlignmentPlugin from "draft-js-alignment-plugin";
+import createEmojiPlugin from 'draft-js-emoji-plugin';
 import Dialog from "@material-ui/core/Dialog";
 // Icons
 import Icon from "react-icons-kit";
@@ -35,10 +36,12 @@ import LinkDecorator from "./decorators/LinkDecorator";
 import LinkifyDecorator from "./decorators/LinkifyDecorator";
 import ImageSource from "./sources/ImageSource";
 import LinkSource from "./sources/LinkSource";
+import emojiIconDecorator from "./decorators/EmojiIconDecorator"
 // CSS
 import "draft-js/dist/Draft.css";
 import "draft-js-focus-plugin/lib/plugin.css";
 import "draft-js-alignment-plugin/lib/plugin.css";
+import "draft-js-emoji-plugin/lib/plugin.css";
 import "./TextEditor.css";
 
 // Plugins initialization
@@ -47,12 +50,14 @@ const focusPlugin = createFocusPlugin();
 const dndPlugin = createBlockDndPlugin();
 const resizeablePlugin = createResizeablePlugin();
 const alignmentPlugin = createAlignmentPlugin();
+const emojiPlugin = createEmojiPlugin();
 const imageDecorator = composeDecorators(
     dndPlugin.decorator, 
     focusPlugin.decorator, 
     resizeablePlugin.decorator, 
     alignmentPlugin.decorator);
 const { AlignmentTool } = alignmentPlugin;
+const { EmojiSuggestions, EmojiSelect } = emojiPlugin;
 
 class TextEditor extends React.Component
 {
@@ -66,7 +71,8 @@ class TextEditor extends React.Component
         dndPlugin,
         focusPlugin, 
         resizeablePlugin, 
-        alignmentPlugin
+        alignmentPlugin,
+        emojiPlugin
     ];
 
     state = 
@@ -190,6 +196,10 @@ class TextEditor extends React.Component
                 description: "Link",
                 icon: <Icon icon={link} />
             },
+            {
+                type: "emoji",
+                icon: 
+            }
             // { type: ENTITY_TYPE.HORIZONTAL_RULE },
         ] 
     }
@@ -322,6 +332,8 @@ class TextEditor extends React.Component
                     inlineStyles={this.inlineStyles}
                     entityTypes={this.entityTypes}
                 />
+                <EmojiSuggestions />
+                <EmojiSelect />
                 <AlignmentTool />
                 <Dialog open={this.state.dialogOpen}> 
                     <UserInputDialogContent 
