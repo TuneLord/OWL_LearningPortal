@@ -1,47 +1,47 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import { DraftailEditor, BLOCK_TYPE, INLINE_STYLE, ENTITY_TYPE } from "draftail";
 import { composeDecorators } from "draft-js-plugins-editor";
 import createFocusPlugin from "draft-js-focus-plugin"
 import createBlockDndPlugin from "draft-js-drag-n-drop-plugin"
-import createLinkifyPlugin from 'draft-js-linkify-plugin';
-import createResizeablePlugin from 'draft-js-resizeable-plugin';
-import createAlignmentPlugin from 'draft-js-alignment-plugin';
-import Dialog from '@material-ui/core/Dialog';
-
+import createLinkifyPlugin from "draft-js-linkify-plugin";
+import createResizeablePlugin from "draft-js-resizeable-plugin";
+import createAlignmentPlugin from "draft-js-alignment-plugin";
+import Dialog from "@material-ui/core/Dialog";
+// Icons
 import Icon from "react-icons-kit";
-import {textColor} from 'react-icons-kit/icomoon/textColor';
-import {bold} from 'react-icons-kit/icomoon/bold';
-import {underline} from 'react-icons-kit/icomoon/underline';
-import {italic} from 'react-icons-kit/icomoon/italic';
-import {strikethrough} from 'react-icons-kit/icomoon/strikethrough';
-import {superscript2 as superscript} from 'react-icons-kit/icomoon/superscript2';
-import {subscript2 as subscript} from 'react-icons-kit/icomoon/subscript2';
-import {embed2 as embed} from 'react-icons-kit/icomoon/embed2';
-import {quotesRight} from 'react-icons-kit/icomoon/quotesRight';
-import {list2 as list} from 'react-icons-kit/icomoon/list2';
-import {listNumbered} from 'react-icons-kit/icomoon/listNumbered';
-import {section} from 'react-icons-kit/icomoon/section';
-import {quotesLeft} from 'react-icons-kit/icomoon/quotesLeft';
-import {ic_keyboard_arrow_down as arrowDown} from 'react-icons-kit/md/ic_keyboard_arrow_down';
-import {ic_format_paint as paint} from 'react-icons-kit/md/ic_format_paint';
-import {images} from 'react-icons-kit/icomoon/images'
-import {link} from 'react-icons-kit/icomoon/link'
-
-
-import ColorPickerIcon from "../ColorPickerIcon/colorpickericon";
-import ImageSource from "./sources/ImageSource";
+import { textColor } from "react-icons-kit/icomoon/textColor";
+import { bold } from "react-icons-kit/icomoon/bold";
+import { underline } from "react-icons-kit/icomoon/underline";
+import { italic } from "react-icons-kit/icomoon/italic";
+import { strikethrough } from "react-icons-kit/icomoon/strikethrough";
+import { superscript2 as superscript } from "react-icons-kit/icomoon/superscript2";
+import { subscript2 as subscript } from "react-icons-kit/icomoon/subscript2";
+import { embed2 as embed } from "react-icons-kit/icomoon/embed2";
+import { quotesRight } from "react-icons-kit/icomoon/quotesRight";
+import { list2 as list } from "react-icons-kit/icomoon/list2";
+import { listNumbered } from "react-icons-kit/icomoon/listNumbered";
+import { section } from "react-icons-kit/icomoon/section";
+import { quotesLeft } from "react-icons-kit/icomoon/quotesLeft";
+import { ic_keyboard_arrow_down as arrowDown } from "react-icons-kit/md/ic_keyboard_arrow_down";
+import { ic_format_paint as paint } from "react-icons-kit/md/ic_format_paint";
+import { images } from "react-icons-kit/icomoon/image";
+import { link } from "react-icons-kit/icomoon/lin";
+// Internal inport
+import ColorPickerIcon from "../ColorPickerIcon";
+import UserInputDialogContent from "../UserInputDialogContent"
 import ImageBlock from "./decorators/ImageBlock";
-import LinkSource from "./sources/linkSource";
-import LinkDecorator from "./decorators/LinkDecorator"
-import LinkifyDecorator from "./decorators/linkifyDecorator"
-import UserInputDialogContent from "../UserInputDialogContent/userInputDialogContent"
-
+import LinkDecorator from "./decorators/LinkDecorator";
+import LinkifyDecorator from "./decorators/LinkifyDecorator";
+import ImageSource from "./sources/ImageSource";
+import LinkSource from "./sources/LinkSource";
+// CSS
 import "draft-js/dist/Draft.css";
 import "draft-js-focus-plugin/lib/plugin.css";
-import "draft-js-alignment-plugin/lib/plugin.css"
-import "./textEditor.css";
+import "draft-js-alignment-plugin/lib/plugin.css";
+import "./TextEditor.css";
 
+// Plugins initialization
 const linkifyPlugin = createLinkifyPlugin({ target: "_blank", component: LinkifyDecorator });
 const focusPlugin = createFocusPlugin();
 const dndPlugin = createBlockDndPlugin();
@@ -227,7 +227,17 @@ class TextEditor extends React.Component
                                 icon={arrowDown}
                                 onPickerChange={this.onColorTextPickerChange.bind(this)}
                                 color={this.state.textColor}
-                                colors={['#000000', '#333333', '#4D4D4D', '#666666', '#808080', '#999999', '#B3B3B3', '#CCCCCC', '#FFFFFF', '#9F0500', '#D33115', '#F44E3B', '#C45100', '#E27300', '#FE9200', '#FB9E00', '#FCC400', '#FCDC00', '#808900', '#B0BC00', '#DBDF00', '#194D33', '#68BC00', '#A4DD00', '#0C797D', '#16A5A5', '#68CCCA', '#0062B1', '#009CE0', '#73D8FF', '#653294', '#7B64FF', '#AEA1FF', '#AB149E', '#FA28FF',  '#FDA1FF']}
+                                colors={[
+                                    '#000000', '#333333', '#4D4D4D', '#666666', 
+                                    '#808080', '#999999', '#B3B3B3', '#CCCCCC', 
+                                    '#FFFFFF', '#9F0500', '#D33115', '#F44E3B', 
+                                    '#C45100', '#E27300', '#FE9200', '#FB9E00', 
+                                    '#FCC400', '#FCDC00', '#808900', '#B0BC00', 
+                                    '#DBDF00', '#194D33', '#68BC00', '#A4DD00', 
+                                    '#0C797D', '#16A5A5', '#68CCCA', '#0062B1', 
+                                    '#009CE0', '#73D8FF', '#653294', '#7B64FF', 
+                                    '#AEA1FF', '#AB149E', '#FA28FF', '#FDA1FF'
+                                ]}
                                 width="210px"
                             />
                         </div>),
@@ -246,7 +256,17 @@ class TextEditor extends React.Component
                                 icon={arrowDown}
                                 onPickerChange={this.onColorBackgroundPickerChange.bind(this)}
                                 color={this.state.backgroundColor}
-                                colors={['#000000', '#333333', '#4D4D4D', '#666666', '#808080', '#999999', '#B3B3B3', '#CCCCCC', '#FFFFFF', '#9F0500', '#D33115', '#F44E3B', '#C45100', '#E27300', '#FE9200', '#FB9E00', '#FCC400', '#FCDC00', '#808900', '#B0BC00', '#DBDF00', '#194D33', '#68BC00', '#A4DD00', '#0C797D', '#16A5A5', '#68CCCA', '#0062B1', '#009CE0', '#73D8FF', '#653294', '#7B64FF', '#AEA1FF', '#AB149E', '#FA28FF',  '#FDA1FF']}
+                                colors={[
+                                    '#000000', '#333333', '#4D4D4D', '#666666', 
+                                    '#808080', '#999999', '#B3B3B3', '#CCCCCC', 
+                                    '#FFFFFF', '#9F0500', '#D33115', '#F44E3B', 
+                                    '#C45100', '#E27300', '#FE9200', '#FB9E00', 
+                                    '#FCC400', '#FCDC00', '#808900', '#B0BC00', 
+                                    '#DBDF00', '#194D33', '#68BC00', '#A4DD00', 
+                                    '#0C797D', '#16A5A5', '#68CCCA', '#0062B1', 
+                                    '#009CE0', '#73D8FF', '#653294', '#7B64FF', 
+                                    '#AEA1FF', '#AB149E', '#FA28FF', '#FDA1FF'
+                                ]}
                                 width="210px"
                             />
                         </div>),

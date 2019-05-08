@@ -3,7 +3,7 @@ import Icon from "react-icons-kit"
 import { BlockPicker } from 'react-color';
 import Slide from '@material-ui/core/Slide';
 
-import "./colorpickericon.css";
+import "./ColorPickerIcon.css";
 
 export default class ColorPickerIcon extends React.Component
 {
