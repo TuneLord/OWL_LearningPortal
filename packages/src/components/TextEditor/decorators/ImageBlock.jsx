@@ -23,6 +23,6 @@ export default class ImageBlock extends React.Component
     const { entity } = blockProps;
     const { src, alt } = entity.getData();
     const newClassName = unionClassNames("editor-image-block", className);
-    return <img {...elementProps} className={newClassName} src={src} alt={alt} width="256" />''
+    return <img {...elementProps} className={newClassName} src={src} alt={alt} width="256" />;
   }
 }

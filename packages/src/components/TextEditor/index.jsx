@@ -25,8 +25,8 @@ import { section } from "react-icons-kit/icomoon/section";
 import { quotesLeft } from "react-icons-kit/icomoon/quotesLeft";
 import { ic_keyboard_arrow_down as arrowDown } from "react-icons-kit/md/ic_keyboard_arrow_down";
 import { ic_format_paint as paint } from "react-icons-kit/md/ic_format_paint";
-import { images } from "react-icons-kit/icomoon/image";
-import { link } from "react-icons-kit/icomoon/lin";
+import { images } from "react-icons-kit/icomoon/images";
+import { link } from "react-icons-kit/icomoon/link";
 // Internal inport
 import ColorPickerIcon from "../ColorPickerIcon";
 import UserInputDialogContent from "../UserInputDialogContent"
