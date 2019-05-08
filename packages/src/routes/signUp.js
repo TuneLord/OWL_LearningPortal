@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
     if(error) return res.status(400).send(error.details[0].message);
 
 
-    const { name, email, password} = req.body;
+    const { name, email, password, type} = req.body;
 
     //checks if user already exist    
     let user = await User.findOne({email: email.toLowerCase()});
@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
     user = new User({
         name: name,
         email: email.toLowerCase(),
-        password: await bcrypt.hash(password, await bcrypt.genSalt(10))
+        password: await bcrypt.hash(password, await bcrypt.genSalt(10)),
+        type: type
     });
 
     try {

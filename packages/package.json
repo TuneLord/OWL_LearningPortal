@@ -25,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "back": "nodemon src/server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "lint": "^1.1.2",
+    "nodemon": "^1.19.0",
     "prettier": "^1.17.0"
   },
   "proxy": "http://localhost:3001"

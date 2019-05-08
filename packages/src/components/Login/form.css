@@ -15,6 +15,7 @@ input { outline: none; border: none;}
 .form h2 {
     font-size: 30px;
     margin-bottom: 50px;
+    font-weight: normal;
 }
     
 .form form {
