@@ -1,3 +1,5 @@
+@import '../../styles/global.css';
+
 .checklistCounter {
     display: flex;
     justify-content: center;
@@ -7,10 +9,30 @@
 }
 
 .checklistNumber {
-    font-size: 36px;
+    font-size: 26px;
     width: 100%;
 }
 
 .checklistCounter p {
-    font-size: 30px;
+    font-size: 16px;
+}
+
+@media (min-width: 1024px) {
+    .checklistNumber {
+        font-size: 28px;
+    }
+
+    .checklistCounter p {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .checklistNumber {
+        font-size: 32px;
+    }
+
+    .checklistCounter p {
+        font-size: 22px;
+    }
 }

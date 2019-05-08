@@ -8,9 +8,9 @@ export default class ChecklistEditorContainer extends Component {
     // }
     render() {
         return (
-            <section className="checklistEditorContainer">
-                <div className="checklistHeader">
-                    <h3>Edytuj checklistę</h3>
+            <section className="checklistEditor__container">
+                <div className="checklist__header">
+                    <h3>Edytuj listę</h3>
                 </div>
                 <div className="checklistEditor">
                     <p>Tutaj będzie edytor</p>
