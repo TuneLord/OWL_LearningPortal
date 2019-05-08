@@ -25,7 +25,9 @@ class Register extends React.Component {
             error = 'To pole jest wymagane';
         else if (e.target.value.length < 3)
             error = 'Nazwa powinna posiadać min. 3 znaki';
-        else if (!(/^[a-zA-Z\d@$!%*#?&]{3,}$/.test(e.target.value)))
+        else if (e.target.value.length > 50)
+            error = 'Dozwolona długość nazwy do 50 znaków';
+        else if (!(/^[a-zA-Z\d@$!%*#?&]+$/.test(e.target.value)))
             error = 'Nazwa zawiera niedozwolone znaki';
         else isDisable = false;
 
@@ -65,7 +67,9 @@ class Register extends React.Component {
 
         if (e.target.value.length === 0)
             error = 'To pole jest wymagane';
-        else if (!(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*#?&]{6,}/.test(e.target.value)))
+        else if (e.target.value.length > 50)
+            error = 'Dozwolona długość hasła do 50 znaków';
+        else if (!(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*#?&]+/.test(e.target.value)))
             error = 'Hasło musi składać się przynajmniej z jednej cyfry, jednej dużej i jednej małej litery oraz posiadać min. 6 znaków';
         else isDisable = false;
         this.setState({
@@ -89,7 +93,7 @@ class Register extends React.Component {
         requestBody.name =  this.state.name;
         requestBody.email = this.state.email;
         requestBody.password = this.state.password;
-        // requestBody.type = this.state.type;
+        requestBody.type = this.state.type;
 
         try {
             const response = await fetch('/register', {
