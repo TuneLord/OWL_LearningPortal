@@ -31,18 +31,7 @@ class Login extends React.Component {
                 email: error
             }
         });
-    }
-
-        </div>
-    );
-};
-
-// Tu zwracamy interesujący nas fragment ze stora (przechowywacza stanów)
-const mapStateToProps = (state) => {
-    console.log(state);
-    return state;
-};
-
+    };
 
     onChangePassword = (e) => {
         let error = '';
