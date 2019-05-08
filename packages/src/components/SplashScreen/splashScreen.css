@@ -1,0 +1,7 @@
+/* Cały widok ze wszystkimi komponentami w ramach ekranu powitalnego **************************************************/
+
+.splashScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

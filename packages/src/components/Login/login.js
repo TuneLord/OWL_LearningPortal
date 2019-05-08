@@ -33,6 +33,17 @@ class Login extends React.Component {
         });
     }
 
+        </div>
+    );
+};
+
+// Tu zwracamy interesujący nas fragment ze stora (przechowywacza stanów)
+const mapStateToProps = (state) => {
+    console.log(state);
+    return state;
+};
+
+
     onChangePassword = (e) => {
         let error = '';
         let isDisable = true;
