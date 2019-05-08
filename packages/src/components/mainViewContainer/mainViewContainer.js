@@ -5,7 +5,7 @@ import { CreateNewChecklistButton } from './createNewChecklist';
 import ChecklistEditorContainer from './checklistEditorContainer';
 
 
-export class MainViewContainer extends Component {
+export default class MainViewContainer extends Component {
     // constructor(props) {
     //     super(props)
     // }
@@ -13,8 +13,8 @@ export class MainViewContainer extends Component {
         const windowWidth = window.innerWidth;
 
         return (
-            <section className="mainViewContainer">
-                <div className="mainViewHeader">
+            <section className="mainView__container">
+                <div className="mainView__header">
                     <h2>Panel mentora</h2>
                 </div>
                 <div className="stateContainter">

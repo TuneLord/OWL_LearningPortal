@@ -14,16 +14,16 @@
     --mainColor: #323232;
 
     /* SplashScreen */
-    --border: #d2cdcd;
+    --border: #e1e1e1;
     --menuBackground: #ffa726;
     --menuCross: #e65100;
     --menuAccents: #fff;
 
-        /* MainView */
-        --mainViewMenu: #fffde7;
 
-        /* Loader */
-        --loaderBackground: rgba(0, 0, 0, .8);
+    --mainViewMenu: #fffde7;
+
+    /* Loader */
+    --loaderBackground: rgba(0, 0, 0, .8);
 
     /* Fonts */
     --mainFont: 'Roboto', sans-serif;
@@ -36,12 +36,19 @@ html {
 }
 
 .state {
-    height: 14vh;
-    width: 22vw;
+    height: 12vh;
+    width: 80%;
     text-align: center;
     color: var(--menuAccents);
-    padding: 20px;
+    padding: 10px;
     border-radius: 5px;
-    margin: 15px 30px 30px;
+    margin: 15px auto;
     position: relative;
+}
+
+@media (min-width: 1024px) {
+    .state {
+        width: 18vw;
+        margin: 15px 20px 30px;
+    }
 }

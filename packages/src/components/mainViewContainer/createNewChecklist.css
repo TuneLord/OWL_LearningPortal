@@ -1,6 +1,9 @@
+@import '../../styles/global.css';
+
 .createNewChecklist {
+    display: none;
     background-color: #00c853;
-    font-size: 30px;
+    font-size: 14px;
     line-height: 140%;
     cursor: pointer;
     transform: 0.3s;
@@ -16,4 +19,17 @@
 .createNewChecklist:hover {
     background: #00e676;
     box-shadow: 0 0 2px grey;
+}
+
+@media (min-width: 1024px) {
+    .createNewChecklist {
+        display: block;
+        font-size: 22px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .createNewChecklist {
+        font-size: 26px;
+    }
 }
