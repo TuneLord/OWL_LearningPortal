@@ -1,3 +1,8 @@
+
+.textEditor__container {
+  width: 100%;
+}
+
 .editor-link
 {
   text-decoration: unset;
@@ -82,6 +87,7 @@
   .Draftail-Editor .public-DraftEditor-content,
   .Draftail-Editor .public-DraftEditorPlaceholder-root {
     padding: 0.75rem;
+    height: calc(100vh - 290px);
   }
   .Draftail-Editor .public-DraftEditor-content > * > figure {
     margin: 0;
