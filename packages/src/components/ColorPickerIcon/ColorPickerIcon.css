@@ -1,0 +1,26 @@
+:root
+{
+    /* used for positioning the color picker */
+    --color-picker-width: 170px;    
+}
+/* whole icon */
+.editor-color-wrapper
+{
+    position: relative;
+}
+/* color picker popper; importants used to override some inline styles */
+.editor-color-picker
+{
+    position: absolute !important;
+    left: calc((-1)*var(--color-picker-width)/2 + var(--color-picker-width)*0.01);
+    top: 25px;
+    background-color: #ddd !important;
+    opacity: 0.9;
+    z-index: 100;
+}
+
+/* positioning again */
+.editor-color-arrow
+{
+    margin-right: -10px;
+}
