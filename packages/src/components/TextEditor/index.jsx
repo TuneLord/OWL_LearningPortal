@@ -8,6 +8,7 @@ import createLinkifyPlugin from "draft-js-linkify-plugin";
 import createResizeablePlugin from "draft-js-resizeable-plugin";
 import createAlignmentPlugin from "draft-js-alignment-plugin";
 import createEmojiPlugin from 'draft-js-emoji-plugin';
+import DefaultVideoComponent from "draft-js-video-plugin/lib/video/components/DefaultVideoComponent.js"
 import Dialog from "@material-ui/core/Dialog";
 // Icons
 import Icon from "react-icons-kit";
@@ -28,20 +29,22 @@ import { ic_keyboard_arrow_down as arrowDown } from "react-icons-kit/md/ic_keybo
 import { ic_format_paint as paint } from "react-icons-kit/md/ic_format_paint";
 import { images } from "react-icons-kit/icomoon/images";
 import { link } from "react-icons-kit/icomoon/link";
+import { film } from "react-icons-kit/icomoon/film";
 // Internal inport
 import ColorPickerIcon from "../ColorPickerIcon";
 import UserInputDialogContent from "../UserInputDialogContent"
 import ImageBlock from "./decorators/ImageBlock";
+import videoBlock from "./decorators/VideoBlock";
 import LinkDecorator from "./decorators/LinkDecorator";
 import LinkifyDecorator from "./decorators/LinkifyDecorator";
 import ImageSource from "./sources/ImageSource";
 import LinkSource from "./sources/LinkSource";
-import emojiIconDecorator from "./decorators/EmojiIconDecorator"
+import VideoSource from "./sources/VideoSource";
+import EmojiIconDecorator from "./decorators/EmojiIconDecorator";
 // CSS
 import "draft-js/dist/Draft.css";
 import "draft-js-focus-plugin/lib/plugin.css";
 import "draft-js-alignment-plugin/lib/plugin.css";
-import "draft-js-emoji-plugin/lib/plugin.css";
 import "./TextEditor.css";
 
 // Plugins initialization
@@ -50,8 +53,8 @@ const focusPlugin = createFocusPlugin();
 const dndPlugin = createBlockDndPlugin();
 const resizeablePlugin = createResizeablePlugin();
 const alignmentPlugin = createAlignmentPlugin();
-const emojiPlugin = createEmojiPlugin();
-const imageDecorator = composeDecorators(
+const emojiPlugin = createEmojiPlugin({ selectButtonContent: "🙂" });
+const mediaDecorator = composeDecorators(
     dndPlugin.decorator, 
     focusPlugin.decorator, 
     resizeablePlugin.decorator, 
@@ -72,7 +75,7 @@ class TextEditor extends React.Component
         focusPlugin, 
         resizeablePlugin, 
         alignmentPlugin,
-        emojiPlugin
+        emojiPlugin,
     ];
 
     state = 
@@ -125,12 +128,25 @@ class TextEditor extends React.Component
         this.setState(
             {
                 callback, 
-                dialogOpen:true,
+                dialogOpen: true,
                 title: "Kreator linku",
                 inputId: "editor-dialog-input",
                 type: "text",
                 placeholder:"http://", 
                 label: "Cel linku"
+            });
+    }
+    onVideoCreation(callback)
+    {
+        this.setState(
+            {
+                callback, 
+                dialogOpen: true,
+                title: "Kreator wideo",
+                inputId: "editor-dialog-input",
+                type: "text",
+                placeholder:"http://", 
+                label: "Adres wideo"
             });
     }
 
@@ -183,10 +199,18 @@ class TextEditor extends React.Component
             { 
                 type: ENTITY_TYPE.IMAGE,
                 source: ImageSource,
-                block: imageDecorator(ImageBlock),
+                block: mediaDecorator(ImageBlock),
                 UIHandler: this.onImageCreation.bind(this),
                 icon: <Icon icon={images} />,
                 description: "Obraz",
+            },
+            {
+                type: "VIDEO",
+                source: VideoSource,
+                block: mediaDecorator(videoBlock(DefaultVideoComponent)),
+                UIHandler: this.onVideoCreation.bind(this),
+                description: "Wideo",
+                icon: <Icon icon={film} />
             },
             { 
                 type: ENTITY_TYPE.LINK,
@@ -196,10 +220,6 @@ class TextEditor extends React.Component
                 description: "Link",
                 icon: <Icon icon={link} />
             },
-            {
-                type: "emoji",
-                icon: 
-            }
             // { type: ENTITY_TYPE.HORIZONTAL_RULE },
         ] 
     }
@@ -309,7 +329,14 @@ class TextEditor extends React.Component
                 type: INLINE_STYLE.KEYBOARD,
                 description: "Skrót klawiszowy"
             },
-            
+            {
+                type: "emoji",
+                icon: (
+                <EmojiIconDecorator>
+                    <EmojiSelect />
+                </EmojiIconDecorator>),
+                description: "Emoji"
+            }
         ]
     }
     _createToolbar()
@@ -333,7 +360,6 @@ class TextEditor extends React.Component
                     entityTypes={this.entityTypes}
                 />
                 <EmojiSuggestions />
-                <EmojiSelect />
                 <AlignmentTool />
                 <Dialog open={this.state.dialogOpen}> 
                     <UserInputDialogContent 
