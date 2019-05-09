@@ -22,6 +22,7 @@
         /* MainView */
         --mainViewMenu: #fffde7;
         --mainViewChecklists:  #f5f3f0;
+        --mainViewChecklistsIcons: #ffe082;
 
         /* Loader */
         --loaderBackground: rgba(0, 0, 0, .8);

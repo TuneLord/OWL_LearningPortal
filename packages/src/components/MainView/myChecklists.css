@@ -1,9 +1,11 @@
 @import '../../styles/global.css';
 
-
+/* ustawienie kontenera do zmiany po zmergowaniu z mainView */
 .mychecklists_container {
     width: 45%;
-    height: 65vh;
+    height: 80vh;
+    float: right;
+    margin-right: 15px;
     -webkit-box-shadow: 7px 13px 32px -28px rgba(122,118,122,0.68);
     -moz-box-shadow: 7px 13px 32px -28px rgba(122,118,122,0.68);
     box-shadow: 7px 13px 32px -28px rgba(122,118,122,0.68);
@@ -40,8 +42,23 @@
     background-color: #fffde7;
 }
 
+.mychecklist_author {
+    font-size: 0.75rem;
+    font-style: italic;
+}
+
+.icon-color {
+ color: var(--mainViewChecklistsIcons);
+}
+
+.icon-color:hover {
+ color: var(--menuBackground);
+}
+
+
 .icon-float {
     float: right;
+    margin-left: 20px;
 }
 
 /* scrollbar */
@@ -54,8 +71,7 @@
 
 .mychecklists_list::-webkit-scrollbar-thumb
 {
-    background-color: var(--menuBackground);
-    
+    background-color: var(--mainViewChecklistsIcons);  
     background-image: -webkit-gradient(linear, 0 0, 0 100%,
                        color-stop(.5, rgba(255, 255, 255, .2)),
                        color-stop(.5, transparent), to(transparent));
@@ -66,6 +82,7 @@
 @media only screen and (max-width: 768px) {
     .mychecklists_container {
         height: auto;
+        width: 90%;
     }
     .mychecklists_list {
         overflow-y: auto;
