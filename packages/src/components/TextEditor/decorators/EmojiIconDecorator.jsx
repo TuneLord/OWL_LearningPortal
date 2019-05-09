@@ -1,16 +1,26 @@
-import React from "react";
+import React, { createRef } from "react";
 
-export default (Component) => class EmojiIconDecorator extends React.Component
+export default class EmojiIconDecorator extends React.Component
 {
-    onClick = (e) =>
+    ref = createRef();
+
+    componentDidMount()
+    {
+        this.ref.current.parentElement.onmousedown = this.onMouseDown;
+        // console.log(this.ref.current.children[0].children[0])
+        // replaceElement(this.ref.current.children[0].children[0], "div");
+        // console.log(this.ref.current.children[0].children[0]);
+    }
+    onMouseDown = (e) =>
     {
         e.stopPropagation();
+        e.preventDefault();
     }
     render()
     {
         return(
-            <div onClick={this.onClick}>
-                <Component />
+            <div ref={this.ref} onMouseDown={this.onMouseDown}>
+                {this.props.children}
             </div>
         )
     }
