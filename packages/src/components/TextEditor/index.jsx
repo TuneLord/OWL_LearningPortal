@@ -350,7 +350,7 @@ class TextEditor extends React.Component
     {
         this._createToolbar();
         return(
-            <div>
+            <div className="textEditor__container">
                 <DraftailEditor
                     rawContentState={this.initial || null}
                     onSave={this.onSave}
