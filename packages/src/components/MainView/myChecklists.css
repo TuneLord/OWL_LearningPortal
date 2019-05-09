@@ -1,27 +1,80 @@
 @import '../../styles/global.css';
 
 /* ustawienie kontenera do zmiany po zmergowaniu z mainView */
+
+#mychecklists {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mychecklists_content {
+    width: 70%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.mychecklists_content div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.countButton {
+    background-color: var(--menuAccents);
+    border: 1px solid var(--menuBackground);
+}
+
+.logicButton {
+    background-color: var(--menuCross);
+    font-weight: bold;
+}
+
+.logicButton:hover {
+    background-color: var(--menuBackground);
+    cursor: pointer;
+}
+
+.countButton, .logicButton {
+    width: 40%;
+    height: 100px;
+    margin: 50px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
 .mychecklists_container {
-    width: 45%;
-    height: 80vh;
-    float: right;
+    width: 30%;
+    height: 100vh;
     margin-right: 15px;
     -webkit-box-shadow: 7px 13px 32px -28px rgba(122,118,122,0.68);
     -moz-box-shadow: 7px 13px 32px -28px rgba(122,118,122,0.68);
     box-shadow: 7px 13px 32px -28px rgba(122,118,122,0.68);
-    border-radius: 10%;
-    border: 1px solid var(--mainViewChecklists);
+    border: 1px solid var(--border);
+    border-top: none;
 }
 
 .mychecklists_title {
     color: var(--menuBackground);
-    margin: 15px;
-    padding: 5px;
+    padding: 50px 5px 15px 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mychecklists_title h3 {
+    color: var(--mainColor);
 }
 
 .mychecklists_title__header {
     display: inline-block;
     margin-left: 5px;
+    font-size: 16px;
+
 }
 
 .mychecklists_list {

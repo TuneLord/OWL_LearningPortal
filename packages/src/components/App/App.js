@@ -6,16 +6,17 @@ import {
     BrowserRouter as Router,
     Route
   } from 'react-router-dom'
-import mainView from '../MainView/mainView';
+import MainView from '../MainView/mainView';
 
 const App = () => {
     return (
         <Router>
             <div className="App">
                 <Login/>
+                <MainView />
             </div>
             <Route exact path="/" component={SplashScreen} />
-            <Route path='/me/:id' component={mainView} />
+            <Route path='/me/:id' component={MainView} />
         </Router>
     );
 };
