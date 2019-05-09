@@ -1,0 +1,33 @@
+.register input[type=radio] {
+    display: none;
+}
+
+.register label {
+    position: relative;
+    color: #666;
+    font-size: 14px;
+    padding-left: 22px;
+    margin-right: 30px;
+}
+.register label:before {
+    content: "";
+    left: 0;
+    top: 1px;
+    display: inline-block;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid #E3E3E3;
+}
+
+.register input[type=radio]:checked+label:after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    top: 6px;
+    left: 5px;
+    background-color: var(--main-color);
+}
