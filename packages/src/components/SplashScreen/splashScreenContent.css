@@ -1,0 +1,63 @@
+@import "../../styles/global.css";
+
+/* Kontener ekranu powitalnego ****************************************************************************************/
+.splashScreenContent {
+    width: 100vw;
+    height: auto;
+    background-image: url('../../images/background2.png');
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+}
+
+.splashScreenContent div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    padding: 0 26px;
+    text-align: center;
+    height: calc(100vh - 90px);
+    max-width: 800px;
+}
+
+.splashScreenContent div h1 {
+    font-size: 28px;
+    padding: 30px 0;
+    font-weight: normal;
+}
+
+.splashScreenContent div p {
+    color: var(--menuBackground);
+}
+
+.splashScreenContent div a {
+    margin: 30px 0;
+    padding: 20px;
+    text-decoration: none;
+    background-color: var(--menuBackground);
+    border-radius: 20px;
+    color: var(--menuAccents);
+}
+
+.splashScreenContent div a:hover {
+    background-color: var(--menuCross);
+}
+
+/* RWD ****************************************************************************************************************/
+
+@media screen and (min-width: 767px) {
+    .splashScreenContent div h1 {
+        font-size: 35px;
+    }
+
+    .splashScreenContent div p {
+        font-size: 20px;
+        font-weight: lighter;
+    }
+
+    .splashScreenContent div a {
+        padding: 20px 55px;
+    }
+}

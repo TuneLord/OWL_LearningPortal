@@ -1,0 +1,124 @@
+@import "../../styles/global.css";
+
+/* Kontener menu w wersji mobile **************************************************************************************/
+.splashScreenMenuMobile {
+    width: 100vw;
+    height: 90px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Kontener logo ******************************************************************************************************/
+.splashScreenMenuMobile__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 26px;
+}
+
+.splashScreenMenuMobile__logo h1 {
+    font-size: 12px;
+    font-family: var(--logoFont);
+}
+
+.splashScreenMenuMobile__logo h1 > span {
+    font-size: 16px;
+    padding-left: 10px;
+    font-family: var(--logoFont);
+    color: var(--mainColor);
+}
+
+.splashScreenMenuMobile__logo svg {
+    font-size: 40px;
+    color: var(--menuBackground);
+}
+
+/* Przycisk menu BURGER ***********************************************************************************************/
+.bm-burger-button {
+    position: fixed;
+    width: 30px;
+    height: 26px;
+    right: 36px;
+    top: 32px;
+}
+
+/* Paski przycisku menu BURGER ****************************************************************************************/
+.bm-burger-bars {
+    background: var(--border);
+}
+
+.bm-burger-bars-hover {
+    background: var(--menuBackground);
+    cursor: pointer;
+}
+
+/* Przycisk zamknięcia X **********************************************************************************************/
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+}
+
+/* Kształt przycisku zamknięcia X *************************************************************************************/
+.bm-cross {
+    background: var(--menuCross);
+}
+
+/* Najlepiej nie ruszać */
+.bm-menu-wrap {
+    position: fixed;
+    top: 0;
+}
+
+/* Pasek boczny, który wyjeżdża ***************************************************************************************/
+.bm-menu {
+    background: var(--menuBackground);
+    padding: 3.5em 0.5em 0;
+    font-size: 1.15em;
+    width: 60vw;
+    height: 50%;
+}
+
+/* Wrapper dla listy elementów menu ***********************************************************************************/
+.bm-item-list {
+    color: #b8b7ad;
+    height: auto;
+}
+
+/* Pojedynczy element menu ********************************************************************************************/
+.bm-item {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--mainColor);
+    padding: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.menu-item svg {
+    font-size: 30px;
+}
+
+.menu-item:first-child {
+    margin-bottom: 40px;
+}
+
+.bm-item:hover {
+    color: var(--menuAccents);
+    border: none;
+}
+
+.bm-item:active, .bm-item:focus {
+    border: none;
+}
+
+.bm-item:last-child, .bm-item:nth-child(5) {
+    color: var(--menuCross);
+}
+
+.bm-item:last-child:hover, .bm-item:nth-child(5):hover {
+    color: var(--menuAccents);
+}
+

@@ -1,0 +1,30 @@
+@import '../../styles/global.css';
+
+.mainViewMenuDesktop {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 50px 0;
+    border: 1px solid var(--border);
+}
+
+.mainViewMenuDesktop a {
+    padding: 8px 0;
+    text-decoration: none;
+    color: var(--mainColor);
+}
+
+.mainViewMenuDesktop div {
+    margin-bottom: 50px;
+}
+
+.mainViewMenuDesktop a:last-child {
+    color: var(--menuCross);
+}
+
+.mainViewMenuDesktop a:hover {
+    color: var(--menuBackground);
+}
