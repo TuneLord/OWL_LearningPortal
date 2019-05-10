@@ -1,6 +1,7 @@
 @import '../../styles/global.css';
 
-#mychecklists {
+
+#myteams {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -8,7 +9,16 @@
     align-items: center;
 }
 
-.mychecklists_content {
+#myteam {
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.myteams_content {
     width: 70%;
     height: 100vh;
     display: flex;
@@ -16,45 +26,24 @@
     padding: 0 50px;
 }
 
-.mychecklists_buttons {
+.myteams_buttons {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.countButton {
-    background-color: var(--menuAccents);
-    border: 1px solid var(--menuBackground);
-}
-
-.logicButton {
-    background-color: var(--menuCross);
-    font-weight: bold;
-    border: none;
-    outline: none;
-}
-
-.logicButton:hover {
+.countTeamButton {
     background-color: var(--menuBackground);
-    cursor: pointer;
-    border: none;
-    outline: none;
-}
-
-.countButton, .logicButton {
     width: 47.5%;
     height: 100px;
     margin: 50px 0;
     font-size: 16px;
     border-radius: 5px;
+    border: none;
+    outline: none;
 }
 
-.textEditor {
-    display: flex;
-    justify-content: center;
-}
-
-.mychecklists_container {
+.myteams_container {
     width: 30%;
     height: 100vh;
     margin-right: 15px;
@@ -65,7 +54,7 @@
     border-top: none;
 }
 
-.mychecklists_title {
+.myteams_title, .myteam_title {
     color: var(--menuBackground);
     padding: 50px 5px 15px 5px;
     text-align: center;
@@ -74,18 +63,27 @@
     align-items: center;
 }
 
-.mychecklists_title h3 {
+.myteam_checklistsTitle {
+    color: var(--menuBackground);
+}
+
+.myteam {
+    display: flex;
+    justify-content: center;
+}
+
+.myteams_title h3 {
     color: var(--mainColor);
 }
 
-.mychecklists_title__header {
+.myteams_title__header {
     display: inline-block;
     margin-left: 5px;
     font-size: 16px;
 
 }
 
-.mychecklists_list {
+.myteams_list {
     list-style-type: none;
     overflow-y: scroll;
     margin-left: 15px;
@@ -93,20 +91,27 @@
     height: 80%;
 }
 
-.mychecklists_checklista {
+.myteam_list {
+    list-style-type: none;
+    overflow-y: scroll;
+    height: 50%;
+    width: 100%;
+}
+
+.myteams_team {
     border-bottom: 1px solid var(--mainViewChecklists);
     padding: 15px;
     cursor: pointer;
 }
 
-.mychecklists_checklista:hover {
+.myteams_team:hover {
     background-color: #fffde7;
 }
 
-.mychecklist_author {
+/* .myteam_author {
     font-size: 0.75rem;
     font-style: italic;
-}
+} */
 
 .icon-color {
  color: var(--mainViewChecklistsIcons);
@@ -124,13 +129,13 @@
 
 /* scrollbar */
 
-.mychecklists_list::-webkit-scrollbar
+.myteams_list::-webkit-scrollbar, .myteam_list::-webkit-scrollbar
 {
     width: 8px;
     background-color: var(--mainViewChecklists);
 }
 
-.mychecklists_list::-webkit-scrollbar-thumb
+.myteams_list::-webkit-scrollbar-thumb, .myteam_list::-webkit-scrollbar-thumb
 {
     background-color: var(--mainViewChecklistsIcons);  
     background-image: -webkit-gradient(linear, 0 0, 0 100%,
@@ -141,11 +146,16 @@
 
 /* mobile */
 @media only screen and (max-width: 768px) {
-    .mychecklists_container {
+    .myteams_container {
         height: auto;
         width: 90%;
     }
-    .mychecklists_list {
+    .myteams_list, .myteam_list {
         overflow-y: auto;
     }
+
+    #myteam {
+        height: auto;
+    }
+
 } 
