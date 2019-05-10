@@ -7,16 +7,17 @@ import {
     Route
   } from 'react-router-dom'
 import MainView from '../MainView/mainView';
+import MyTeams from '../MainView/myTeams';
 
 const App = () => {
     return (
         <Router>
             <div className="App">
-                <Login/>
-                <MainView />
+                {/* <Login/>
+                <MainView /> */}
             </div>
             <Route exact path="/" component={SplashScreen} />
-            <Route path='/me/:id' component={MainView} />
+            <Route path='/me' component={MainView} />
         </Router>
     );
 };

@@ -11,10 +11,10 @@ export const MainViewMenuDesktop = () => {
             <span>OWL</span>earning Portal
           </h1>
         </div>
-        <a className="menu-item" href="/mychecklists">
+        <a className="menu-item" href="/me">
           Moje checklisty
         </a>
-        <a className="menu-item" href="/myteams">
+        <a className="menu-item" href="/me/myteams">
           Moje zespoły
         </a>
         <a className="menu-item" href="/settings">
