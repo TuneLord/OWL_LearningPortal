@@ -29,7 +29,7 @@ export default class MyTeams extends Component {
       <section id="myteams">
         <div className="myteams_content">
             <div className="myteams_buttons">
-              <button className="countButton">2 Liczba teamów</button>
+              <button className="countTeamButton">2 Liczba teamów</button>
             </div>
             <div className="myteam">
               <MyTeam data={this.state.data[0].coworkers} title={this.state.data[0].title} checklisty={this.state.data[0].checklisty} />

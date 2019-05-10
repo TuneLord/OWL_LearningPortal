@@ -1,7 +1,5 @@
 @import '../../styles/global.css';
 
-/* ustawienie kontenera do zmiany po zmergowaniu z mainView */
-
 #mychecklists {
     width: 100%;
     height: 100vh;
@@ -32,11 +30,15 @@
 .logicButton {
     background-color: var(--menuCross);
     font-weight: bold;
+    border: none;
+    outline: none;
 }
 
 .logicButton:hover {
     background-color: var(--menuBackground);
     cursor: pointer;
+    border: none;
+    outline: none;
 }
 
 .countButton, .logicButton {
