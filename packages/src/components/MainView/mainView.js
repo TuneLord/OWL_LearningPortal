@@ -3,7 +3,7 @@ import "./mainView.css";
 import { MainViewMenuDesktop } from "./mainViewMenuDesktop";
 import MainViewContainer from '../mainViewContainer/mainViewContainer';
 
-export default class mainView extends Component {
+export default class MainView extends Component {
   render() {
     const windowWidth = window.innerWidth;
 
