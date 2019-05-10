@@ -13,8 +13,8 @@ export default class mainView extends Component {
       <section className="mainView">
         {windowWidth > 1025 ? <MainViewMenuDesktop /> : null}
         <div className="mainView__container">
-        {path === '/me/myteams' ? <MyTeams /> : null}
-        {path === `/me` ? <MyChecklists /> :null}
+        {path.endsWith('/myteams') ? <MyTeams /> : null}
+        {path.endsWith( '/me') ? <MyChecklists /> :null}
         </div>
       </section>
     );
