@@ -17,6 +17,7 @@
     grid-row: 1 / span 1;
     padding: 20px 30px;
     border-bottom: 1px solid var(--border);
+    text-align: center;
 }
 
 .mainView__header h2 {

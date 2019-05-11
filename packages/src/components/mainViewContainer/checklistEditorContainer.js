@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './checklistEditorContainer.css';
-
+import TextEditor from '../TextEditor/index';
 
 export default class ChecklistEditorContainer extends Component {
     // constructor(props){
@@ -10,10 +10,12 @@ export default class ChecklistEditorContainer extends Component {
         return (
             <section className="checklistEditor__container">
                 <div className="checklist__header">
-                    <h3>Edytuj listę</h3>
+                    <h3>Edytor listy</h3>
                 </div>
                 <div className="checklistEditor">
-                    <p>Tutaj będzie edytor</p>
+                    {/* <div className='textEditor'> */}
+                    <TextEditor />
+                    {/* </div> */}
                 </div>
             </section>
 

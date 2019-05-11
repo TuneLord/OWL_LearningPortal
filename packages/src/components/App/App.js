@@ -5,18 +5,18 @@ import SplashScreen from '../SplashScreen/splashScreen';
 import {
     BrowserRouter as Router,
     Route
-  } from 'react-router-dom'
+} from 'react-router-dom'
 import MainView from '../MainView/mainView';
 
 const App = () => {
     return (
         <Router>
             <div className="App">
-                <Login/>
+                {/* <Login/> */}
                 <MainView />
             </div>
-            <Route exact path="/" component={SplashScreen} />
-            <Route path='/me/:id' component={MainView} />
+            {/* <Route exact path="/" component={SplashScreen} />
+            <Route path='/me/:id' component={MainView} /> */}
         </Router>
     );
 };
