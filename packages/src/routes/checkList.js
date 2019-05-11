@@ -38,4 +38,12 @@ router.get('/:id', auth, checkListExistance, async (req, res) => {
     res.status(200).send(req.checklist);
 });
 
+router.delete('/:id', auth, checkListExistance, async (req, res) => {
+    console.log(req.user);
+    const isOwner = req.checklist.authorId === req.user._id;
+    if (!isOwner) return res.status(403).send('Access denied - not an owner.');
+
+    res.status(200).send(isOwner);
+});
+
 module.exports = router;
