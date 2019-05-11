@@ -5,6 +5,7 @@ input, button { outline: none; border: none;}
     --input-bg-color: #fff8e1;
     --error-bg-color: #ffece8;
     --main-color: #e65100;
+    --second-color: #ffa726;
 
     text-align: center;
     font-family: sans-serif;
@@ -64,10 +65,14 @@ input, button { outline: none; border: none;}
     margin-top: 30px;
     height: 54px;
     color: #fff;
-    border-radius: 28px;
+    border-radius: 18px;
     font-size: 16px;
     cursor: pointer;
     background-color: var(--main-color);
+}
+
+.form #submit:hover {
+    background-color: var(--second-color);
 }
 
 .form .or {
@@ -95,13 +100,22 @@ input, button { outline: none; border: none;}
     margin-top: 30px;
     padding: 10px 20px;
     color: var(--main-color);
-    border-radius: 28px;
+    border-radius: 14px;
     font-size: 14px;
     cursor: pointer;
     background-color: #fff;
     border: 1px solid var(--main-color);
 }
 
+.form button.gplus:hover {
+    border-color: var(--second-color);
+    color: var(--second-color);
+}
+
 .form button.gplus svg {
     margin-right: 10px;
+}
+
+.form button.gplus:hover svg {
+    color: var(--second-color);
 }
