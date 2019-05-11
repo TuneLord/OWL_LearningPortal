@@ -12,9 +12,9 @@ export default class MainView extends Component {
       <section className="mainView">
         {windowWidth > 1025 ? <MainViewMenuDesktop /> : null}
         <MainViewContainer />
-        <div className="mainView__container">
+        {/* <div className="mainView__container">
           <MyChecklists />
-        </div>
+        </div> */}
       </section>
     );
   }

@@ -1,12 +1,17 @@
 /* Sekcja zawierająca edytor tekstu*/
 
 .checklistEditor__container {
+    display: none;
     background-color: #f0f3f3;
     grid-column: 1 / span 1;
     grid-row: 3 / span 1;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     padding: 0 0.5vw;
+}
+
+.checklistEditor__container h3 {
+    text-align: center;
 }
 
 .checklist__header {
@@ -14,10 +19,17 @@
     margin-bottom: 1vh;
     padding: 28px 30px 22px;
     border-radius: 5px;
+    height: 10%;
 }
 
 .checklistEditor {
     background-color: #fff;
     border-radius: 5px;
-    height: 70vh;
+    height: 88%;
+}
+
+@media (min-width: 1024px) {
+    .checklistEditor__container {
+        display: flex;
+    }
 }

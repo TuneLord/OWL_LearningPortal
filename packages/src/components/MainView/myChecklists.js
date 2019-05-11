@@ -25,7 +25,7 @@ export default class MyChecklists extends Component {
   render() {
     return (
       <section id="mychecklists">
-        <div className="mychecklists_content">
+        {/* <div className="mychecklists_content">
             <div className="mychecklists_buttons">
               <button className="countButton">2 Liczba checklist</button>
               <button className="logicButton"> Utwórz checklistę </button>
@@ -33,7 +33,7 @@ export default class MyChecklists extends Component {
             <div className={'textEditor'}>
               <TextEditor />
             </div>
-        </div>
+        </div> */}
         <div className="mychecklists_container">
           <div className="mychecklists_title">
             <i className="material-icons">

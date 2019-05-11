@@ -3,7 +3,7 @@ import './mainViewContainer.css';
 import { ChecklistCounter } from './checklistCounter';
 import { CreateNewChecklistButton } from './createNewChecklist';
 import ChecklistEditorContainer from './checklistEditorContainer';
-
+import MyChecklists from '../MainView/myChecklists';
 
 export default class MainViewContainer extends Component {
     // constructor(props) {
@@ -24,6 +24,7 @@ export default class MainViewContainer extends Component {
                 {windowWidth > 1025 ?
                     <ChecklistEditorContainer /> :
                     null}
+                <MyChecklists />
             </section>
         )
     }
