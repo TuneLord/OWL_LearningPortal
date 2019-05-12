@@ -2,6 +2,8 @@ const express = require('express');
 
 const auth = require('../middleware/auth');
 const checkListExistance = require('../middleware/checkListExistance');
+const isAuthor = require('../middleware/isAuthor');
+
 const Checklist = require('../models/checkListModel');
 const { User } = require('../models/userModel');
 
@@ -11,20 +13,19 @@ router.post('/',auth, async (req, res) => {
 
     //tworzy nowy obiekt checklisty
     const checklist = new Checklist ({
-        authorId: req.body.authorId, //tutaj id zalogowanego użytkownika tworzącego checklistę wyciągnięte z tokena
+        authorId: req.user._id, //tutaj id zalogowanego użytkownika tworzącego checklistę wyciągnięte z tokena
         name: req.body.name,
         content: req.body.content,
-        isChecked: req.body.isChecked,
-        members:[req.body.authorId]
+        members: [req.user._id]
     });
 
     //zapisuję ją do bazy i przechowuję wynik
     const result = await checklist.save();
 
     //znajduję autora
-    const user = await User.findById(req.body.authorId);
+    const user = await User.findById(req.user._id);
     user.checkLists.push(
-        {name:result.name, listId:result._id, isChecked:result.isChecked, isOwner: true}
+        {name:result.name, listId:result._id, isChecked:false, isOwner: true}
     );
     await user.save();
 
@@ -38,11 +39,17 @@ router.get('/:id', auth, checkListExistance, async (req, res) => {
     res.status(200).send(req.checklist);
 });
 
-router.delete('/:id', auth, checkListExistance, async (req, res) => {
-    //sprawdza czy użytkownik próbujący usunąć listę jest jej właścicielem, jeśli nie to lista nie zostaje usunięta
-    const isOwner = req.checklist.authorId === req.user._id;
-    if (!isOwner) return res.status(403).send('Access denied - not an owner.');
+router.put('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
+    
+    //jeśli, która kolwiek z tych wartości została przekazana w body, to nastąpi jej update, jeśli nie to podstawi to co wcześniej
+    req.checklist.name = req.body.name || req.checklist.name;
+    req.checklist.content = req.body.content || req.checklist.content;
 
+    await req.checklist.save();
+    res.status(200).send('Checklist updated.');
+});
+
+router.delete('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
     //iteruje się po członkach listy w celu usnięcia ich przypisania do niej w obiekcie User
     req.checklist.members.forEach(async member => {
         const user = await User.findById(member);
