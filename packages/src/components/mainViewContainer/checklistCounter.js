@@ -8,4 +8,4 @@ export const ChecklistCounter = ({ number = 0 }) => {
             <p>Liczba twoich checklist</p>
         </div>
     )
-}
+};

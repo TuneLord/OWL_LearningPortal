@@ -10,8 +10,9 @@
     align-items: center;
     padding: 50px 0;
     border: 1px solid var(--border);
-    z-index: 10;
     background-color: #fffde7;
+    z-index: 10;
+    transition: 0.4s;
 }
 
 .fa-times {
@@ -22,13 +23,14 @@
 }
 
 .mainViewMenuMobile a {
+    font-size: 1.4em;
     padding: 12px 0;
     text-decoration: none;
     color: var(--mainColor);
 }
 
 .mainViewMenuMobile div {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .mainViewMenuMobile a:last-child {
