@@ -27,6 +27,17 @@
         /* Loader */
         --loaderBackground: rgba(0, 0, 0, .8);
 
+        /* Editor */
+        --editorMainColor: #000;
+        --editorBackground: #fff;
+        --editorBorder: #ddd;
+        --editorToolbarBackground: #e65100;
+        --editorBoxShadow: rgba(0, 0, 0, 0.1);
+        --editorAlternativeBoxShadow: rgba(220,220,220,1);
+        --editorLinkBackground: #EEF8FF;
+        --editorBaloonBackground: rgba(17, 17, 17, 0.9);
+        --editorBaloonColor: #fff;
+
     /* Fonts */
     --mainFont: 'Roboto', sans-serif;
     --logoFont: 'Fredoka One', cursive;
