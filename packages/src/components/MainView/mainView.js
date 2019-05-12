@@ -10,6 +10,13 @@ export default class MainView extends Component {
   state = {
     menuMobilePosition: '-400px'
   };
+
+  // componentDidMount()
+  // {
+  //   const token = sessionStorage.getItem("x-auth-token");
+  //   if (!token) this.props.history.push("/");
+  // }
+
   mobileMenuEnter() {
     this.setState({ menuMobilePosition: '0px' })
   };
@@ -19,15 +26,17 @@ export default class MainView extends Component {
   };
 
   render() {
+
     const windowWidth = window.innerWidth;
     const path = window.location.pathname;
+    const { id } = this.props.match.params;
 
     return (
       <section className="mainView">
-        {windowWidth > 1025 ? <MainViewMenuDesktop /> : null}
+        {windowWidth > 1025 ? <MainViewMenuDesktop id={id} /> : null}
         {windowWidth < 1025 ? <MainViewMenuMobile onClick={() => this.mobileMenuClose()} menuPosition={this.state.menuMobilePosition} /> : null}
-        {path.endsWith('/myteams') ? <MyTeams /> : null}
-        {path.endsWith('/me') ? <MainViewContainer onClick={() => this.mobileMenuEnter()} /> : null}
+        {path.endsWith(`/myteams/${id}`) ? <MyTeams /> : null}
+        {path.endsWith(`/me/${id}`) ? <MainViewContainer onClick={() => this.mobileMenuEnter()} /> : null}
       </section>
     );
   };
