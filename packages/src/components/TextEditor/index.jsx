@@ -47,6 +47,15 @@ import "draft-js-focus-plugin/lib/plugin.css";
 import "draft-js-alignment-plugin/lib/plugin.css";
 import "./TextEditor.css";
 
+// To use TextEditor you shold provide:
+// props.value: initial editor's content
+// props.onSave: callback which is runned whenever something is changed in editor
+
+
+
+
+
+
 // Plugins initialization
 const linkifyPlugin = createLinkifyPlugin({ target: "_blank", component: LinkifyDecorator });
 const focusPlugin = createFocusPlugin();
@@ -63,10 +72,8 @@ const { AlignmentTool } = alignmentPlugin;
 const { EmojiSuggestions, EmojiSelect } = emojiPlugin;
 
 class TextEditor extends React.Component
-{
-    // Initialization from sessionStorage. It will be changed to either from server or from storage.
-    initial = JSON.parse(sessionStorage.getItem("draftail:content"));
-    
+{    
+    editor = React.createRef();
     // Plugins extends editor
     plugins = 
     [
@@ -90,6 +97,18 @@ class TextEditor extends React.Component
         placeholder:"", 
         label: ""
     };
+
+    static defaultProps =
+    {
+        readOnly: false,
+        value: null,
+        onChange: null,
+    }
+    
+    componentDidMount()
+    {
+        if(this.props.readOnly) this.editor.current.setState({ readOnly: true });
+    }
 
     // Callbacks used for changing buttons' colors
     onColorTextPickerChange(color, event)
@@ -155,7 +174,7 @@ class TextEditor extends React.Component
     // ## It should handle "server down" case.
     onSave = (content) =>
     {
-        sessionStorage.setItem("draftail:content", JSON.stringify(content))
+        if (this.props.onSave) this.props.onSave(content);
     } 
     
     // All three functions below are used for creating and updating buttons in toolbar
@@ -348,16 +367,21 @@ class TextEditor extends React.Component
 
     render()
     {
+        console.log(this.props.readOnly);
         this._createToolbar();
         return(
             <div className="textEditor__container">
                 <DraftailEditor
-                    rawContentState={this.initial || null}
+                    rawContentState={this.props.value}
                     onSave={this.onSave}
                     plugins={this.plugins}
                     blockTypes={this.blockTypes}
                     inlineStyles={this.inlineStyles}
                     entityTypes={this.entityTypes}
+                    readOnly={true}
+                    maxListNesteing={4}
+                    ref={this.editor}
+                    topToolbar={this.props.readOnly ? null : undefined}
                 />
                 <EmojiSuggestions />
                 <AlignmentTool />
