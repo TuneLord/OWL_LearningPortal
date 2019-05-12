@@ -18,4 +18,15 @@ userSchema.methods.unpinCheckList = function(checkListId) {
     return this.checkLists.filter(el => String(el.listId) !== String(checkListId));
 }
 
+userSchema.methods.modifyCheckList = function (checkListId) {
+    return this.checkLists.map(el => {
+        if(String(el.listId) === String(checkListId)) {
+            el.name = "kalafior";
+            return el;
+        } else {
+            return el
+        }
+    });
+}
+
 module.exports = userSchema;
