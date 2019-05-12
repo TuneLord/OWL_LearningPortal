@@ -7,6 +7,8 @@ import createBlockDndPlugin from "draft-js-drag-n-drop-plugin"
 import createLinkifyPlugin from "draft-js-linkify-plugin";
 import createResizeablePlugin from "draft-js-resizeable-plugin";
 import createAlignmentPlugin from "draft-js-alignment-plugin";
+import createEmojiPlugin from 'draft-js-emoji-plugin';
+import DefaultVideoComponent from "draft-js-video-plugin/lib/video/components/DefaultVideoComponent.js"
 import Dialog from "@material-ui/core/Dialog";
 // Icons
 import Icon from "react-icons-kit";
@@ -27,19 +29,32 @@ import { ic_keyboard_arrow_down as arrowDown } from "react-icons-kit/md/ic_keybo
 import { ic_format_paint as paint } from "react-icons-kit/md/ic_format_paint";
 import { images } from "react-icons-kit/icomoon/images";
 import { link } from "react-icons-kit/icomoon/link";
+import { film } from "react-icons-kit/icomoon/film";
 // Internal inport
 import ColorPickerIcon from "../ColorPickerIcon";
 import UserInputDialogContent from "../UserInputDialogContent"
 import ImageBlock from "./decorators/ImageBlock";
+import videoBlock from "./decorators/VideoBlock";
 import LinkDecorator from "./decorators/LinkDecorator";
 import LinkifyDecorator from "./decorators/LinkifyDecorator";
 import ImageSource from "./sources/ImageSource";
 import LinkSource from "./sources/LinkSource";
+import VideoSource from "./sources/VideoSource";
+import EmojiIconDecorator from "./decorators/EmojiIconDecorator";
 // CSS
 import "draft-js/dist/Draft.css";
 import "draft-js-focus-plugin/lib/plugin.css";
 import "draft-js-alignment-plugin/lib/plugin.css";
 import "./TextEditor.css";
+
+// To use TextEditor you shold provide:
+// props.value: initial editor's content
+// props.onSave: callback which is runned whenever something is changed in editor
+
+
+
+
+
 
 // Plugins initialization
 const linkifyPlugin = createLinkifyPlugin({ target: "_blank", component: LinkifyDecorator });
@@ -47,18 +62,18 @@ const focusPlugin = createFocusPlugin();
 const dndPlugin = createBlockDndPlugin();
 const resizeablePlugin = createResizeablePlugin();
 const alignmentPlugin = createAlignmentPlugin();
-const imageDecorator = composeDecorators(
+const emojiPlugin = createEmojiPlugin({ selectButtonContent: "🙂" });
+const mediaDecorator = composeDecorators(
     dndPlugin.decorator, 
     focusPlugin.decorator, 
     resizeablePlugin.decorator, 
     alignmentPlugin.decorator);
 const { AlignmentTool } = alignmentPlugin;
+const { EmojiSuggestions, EmojiSelect } = emojiPlugin;
 
 class TextEditor extends React.Component
-{
-    // Initialization from sessionStorage. It will be changed to either from server or from storage.
-    initial = JSON.parse(sessionStorage.getItem("draftail:content"));
-    
+{    
+    editor = React.createRef();
     // Plugins extends editor
     plugins = 
     [
@@ -66,7 +81,8 @@ class TextEditor extends React.Component
         dndPlugin,
         focusPlugin, 
         resizeablePlugin, 
-        alignmentPlugin
+        alignmentPlugin,
+        emojiPlugin,
     ];
 
     state = 
@@ -81,6 +97,18 @@ class TextEditor extends React.Component
         placeholder:"", 
         label: ""
     };
+
+    static defaultProps =
+    {
+        readOnly: false,
+        value: null,
+        onChange: null,
+    }
+    
+    componentDidMount()
+    {
+        if(this.props.readOnly) this.editor.current.setState({ readOnly: true });
+    }
 
     // Callbacks used for changing buttons' colors
     onColorTextPickerChange(color, event)
@@ -119,12 +147,25 @@ class TextEditor extends React.Component
         this.setState(
             {
                 callback, 
-                dialogOpen:true,
+                dialogOpen: true,
                 title: "Kreator linku",
                 inputId: "editor-dialog-input",
                 type: "text",
                 placeholder:"http://", 
                 label: "Cel linku"
+            });
+    }
+    onVideoCreation(callback)
+    {
+        this.setState(
+            {
+                callback, 
+                dialogOpen: true,
+                title: "Kreator wideo",
+                inputId: "editor-dialog-input",
+                type: "text",
+                placeholder:"http://", 
+                label: "Adres wideo"
             });
     }
 
@@ -133,7 +174,7 @@ class TextEditor extends React.Component
     // ## It should handle "server down" case.
     onSave = (content) =>
     {
-        sessionStorage.setItem("draftail:content", JSON.stringify(content))
+        if (this.props.onSave) this.props.onSave(content);
     } 
     
     // All three functions below are used for creating and updating buttons in toolbar
@@ -177,10 +218,18 @@ class TextEditor extends React.Component
             { 
                 type: ENTITY_TYPE.IMAGE,
                 source: ImageSource,
-                block: imageDecorator(ImageBlock),
+                block: mediaDecorator(ImageBlock),
                 UIHandler: this.onImageCreation.bind(this),
                 icon: <Icon icon={images} />,
                 description: "Obraz",
+            },
+            {
+                type: "VIDEO",
+                source: VideoSource,
+                block: mediaDecorator(videoBlock(DefaultVideoComponent)),
+                UIHandler: this.onVideoCreation.bind(this),
+                description: "Wideo",
+                icon: <Icon icon={film} />
             },
             { 
                 type: ENTITY_TYPE.LINK,
@@ -299,7 +348,14 @@ class TextEditor extends React.Component
                 type: INLINE_STYLE.KEYBOARD,
                 description: "Skrót klawiszowy"
             },
-            
+            {
+                type: "emoji",
+                icon: (
+                <EmojiIconDecorator>
+                    <EmojiSelect />
+                </EmojiIconDecorator>),
+                description: "Emoji"
+            }
         ]
     }
     _createToolbar()
@@ -311,17 +367,23 @@ class TextEditor extends React.Component
 
     render()
     {
+        console.log(this.props.readOnly);
         this._createToolbar();
         return(
-            <div>
+            <div className="textEditor__container">
                 <DraftailEditor
-                    rawContentState={this.initial || null}
+                    rawContentState={this.props.value}
                     onSave={this.onSave}
                     plugins={this.plugins}
                     blockTypes={this.blockTypes}
                     inlineStyles={this.inlineStyles}
                     entityTypes={this.entityTypes}
+                    readOnly={true}
+                    maxListNesteing={4}
+                    ref={this.editor}
+                    topToolbar={this.props.readOnly ? null : undefined}
                 />
+                <EmojiSuggestions />
                 <AlignmentTool />
                 <Dialog open={this.state.dialogOpen}> 
                     <UserInputDialogContent 
