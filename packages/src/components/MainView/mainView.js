@@ -26,7 +26,7 @@ export default class MainView extends Component {
       <section className="mainView">
         {windowWidth > 1025 ? <MainViewMenuDesktop /> : null}
         {windowWidth < 1025 ? <MainViewMenuMobile onClick={() => this.mobileMenuClose()} menuPosition={this.state.menuMobilePosition} /> : null}
-        {path.endsWith('/myteams') ? <MyTeams /> : null}
+        {path.endsWith('/myteams') ? <MyTeams onClick={() => this.mobileMenuEnter()} /> : null}
         {path.endsWith('/me') ? <MainViewContainer onClick={() => this.mobileMenuEnter()} /> : null}
       </section>
     );

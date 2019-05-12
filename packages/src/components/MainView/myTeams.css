@@ -47,24 +47,35 @@
     width: 30%;
     height: 100vh;
     margin-right: 15px;
-    -webkit-box-shadow: 7px 13px 32px -28px rgba(122,118,122,0.68);
-    -moz-box-shadow: 7px 13px 32px -28px rgba(122,118,122,0.68);
-    box-shadow: 7px 13px 32px -28px rgba(122,118,122,0.68);
+    -webkit-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
+    -moz-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
+    box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
     border: 1px solid var(--border);
     border-top: none;
 }
 
-.myteams_title, .myteam_title {
+.myteams_title,
+.myteam_title {
+    margin-bottom: 1vh;
     color: var(--menuBackground);
-    padding: 50px 5px 15px 5px;
+    padding: 15px 5px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
+    font-size: 20px;
+
+}
+
+.myteams_title {
+    background-color: #fff;
 }
 
 .myteam_checklistsTitle {
     color: var(--menuBackground);
+    padding: 25px 5px;
+    font-size: 20px;
 }
 
 .myteam {
@@ -84,10 +95,10 @@
 }
 
 .myteams_list {
+    background-color: #fff;
+    border-radius: 5px;
     list-style-type: none;
     overflow-y: scroll;
-    margin-left: 15px;
-    margin-right: 15px;
     height: 80%;
 }
 
@@ -95,7 +106,8 @@
     list-style-type: none;
     overflow-y: scroll;
     height: 50%;
-    width: 100%;
+    width: 95%;
+    border: 1px solid var(--border);
 }
 
 .myteams_team {
@@ -114,11 +126,11 @@
 } */
 
 .icon-color {
- color: var(--mainViewChecklistsIcons);
+    color: var(--mainViewChecklistsIcons);
 }
 
 .icon-color:hover {
- color: var(--menuBackground);
+    color: var(--menuBackground);
 }
 
 
@@ -129,18 +141,18 @@
 
 /* scrollbar */
 
-.myteams_list::-webkit-scrollbar, .myteam_list::-webkit-scrollbar
-{
+.myteams_list::-webkit-scrollbar,
+.myteam_list::-webkit-scrollbar {
     width: 8px;
     background-color: var(--mainViewChecklists);
 }
 
-.myteams_list::-webkit-scrollbar-thumb, .myteam_list::-webkit-scrollbar-thumb
-{
-    background-color: var(--mainViewChecklistsIcons);  
+.myteams_list::-webkit-scrollbar-thumb,
+.myteam_list::-webkit-scrollbar-thumb {
+    background-color: var(--mainViewChecklistsIcons);
     background-image: -webkit-gradient(linear, 0 0, 0 100%,
-                       color-stop(.5, rgba(255, 255, 255, .2)),
-                       color-stop(.5, transparent), to(transparent));
+            color-stop(.5, rgba(255, 255, 255, .2)),
+            color-stop(.5, transparent), to(transparent));
 }
 
 
@@ -150,7 +162,9 @@
         height: auto;
         width: 90%;
     }
-    .myteams_list, .myteam_list {
+
+    .myteams_list,
+    .myteam_list {
         overflow-y: auto;
     }
 
@@ -158,4 +172,4 @@
         height: auto;
     }
 
-} 
+}
