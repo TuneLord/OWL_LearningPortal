@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./splashScreenMenuMobile.css";
 import { slide as Menu } from 'react-burger-menu';
+import { Link } from "react-router-dom";
 
 export default class SplashScreenMenuMobile extends Component {
   constructor(props) {
@@ -15,12 +16,12 @@ export default class SplashScreenMenuMobile extends Component {
           <h1><span>OWL</span>earning Portal</h1>
         </div>
         <Menu right width={'60vw'} noOverlay disableOverlayClick>
-          <a className="menu-item" href="/"><i className="fab fa-earlybirds" /></a>
-          <a className="menu-item" href="/howtouse">Jak używać aplikacji?</a>
-          <a className="menu-item" href="/faq">Pytania i odpowiedzi</a>
-          <a className="menu-item" href="/contact">Kontakt</a>
-          <a className="menu-item" href="/login">Zaloguj się</a>
-          <a className="menu-item" href="/register">Załóż konto</a>
+          <Link className="menu-item" to="/"><i className="fab fa-earlybirds" /></Link>
+          <Link className="menu-item" to="/howtouse">Jak używać aplikacji?</Link>
+          <Link className="menu-item" to="/faq">Pytania i odpowiedzi</Link>
+          <Link className="menu-item" to="/contact">Kontakt</Link>
+          <Link className="menu-item" to="/login">Zaloguj się</Link>
+          <Link className="menu-item" to="/register">Załóż konto</Link>
         </Menu>
       </section>
     );

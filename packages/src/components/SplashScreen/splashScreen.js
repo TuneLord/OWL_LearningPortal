@@ -10,6 +10,13 @@ export default class SplashScreen extends Component {
     super(props);
   }
 
+  componentDidMount()
+  {
+    const token = sessionStorage.getItem("x-auth-token");
+    const id = sessionStorage.getItem("id");
+    if (id && token) this.props.history.push(`/me/${id}`);
+  }
+
   render() {
     const windowWidth = window.innerWidth;
 
