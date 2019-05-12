@@ -24,4 +24,4 @@ app.use('/register', signUp);
 app.use('/login', login);
 app.use('/checklist', checkList);
 app.use('/user', user);
-app/use('/teams', teams);
+app.use('/teams', teams);
