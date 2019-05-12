@@ -14,4 +14,8 @@ userSchema.methods.genToken = function() {
     return jwt.sign({_id: this._id, name: this.name, type: this.type}, config.jwtKey);
 }
 
+userSchema.methods.unpinCheckList = function(checkListId) {
+    return this.checkLists.filter(el => String(el.listId) !== String(checkListId));
+}
+
 module.exports = userSchema;

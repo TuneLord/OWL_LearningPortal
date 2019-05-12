@@ -39,11 +39,21 @@ router.get('/:id', auth, checkListExistance, async (req, res) => {
 });
 
 router.delete('/:id', auth, checkListExistance, async (req, res) => {
-    console.log(req.user);
+    //sprawdza czy użytkownik próbujący usunąć listę jest jej właścicielem, jeśli nie to lista nie zostaje usunięta
     const isOwner = req.checklist.authorId === req.user._id;
     if (!isOwner) return res.status(403).send('Access denied - not an owner.');
 
-    res.status(200).send(isOwner);
+    //iteruje się po członkach listy w celu usnięcia ich przypisania do niej w obiekcie User
+    req.checklist.members.forEach(async member => {
+        const user = await User.findById(member);
+        user.checkLists = user.unpinCheckList(req.checklist._id);
+        await user.save();
+    })
+
+    //usuwa listę
+    await Checklist.findByIdAndDelete(req.checklist._id);
+
+    res.status(200).send("Checklist deleted.");
 });
 
 module.exports = router;
