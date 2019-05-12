@@ -46,6 +46,12 @@
 .editor-container
 {
   width: 100%;
+
+}
+
+.Draftail-block--header-one
+{
+  font-size: 2em;
 }
 
 /* copied styles */
