@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 
     try {
         const response = await user.save();
-        res.header('x-auth-token',response.genToken()).status(200).send('User registered.');
+        res.header('x-auth-token',response.genToken()).status(200).send(response._id);
     } catch (err) {
         console.log(err.message);
         res.status(400).send(err.message);
