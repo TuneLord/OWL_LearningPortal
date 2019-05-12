@@ -1,3 +1,4 @@
+@import '../../styles/global.css';
 /* Sekcja zawierająca edytor tekstu*/
 
 .checklistEditor__container {
@@ -11,21 +12,47 @@
 }
 
 .checklistEditor__container h3 {
+    padding: 28px 30px 22px;
     text-align: center;
 }
 
 .checklist__header {
+    display: grid;
+    grid-template-columns: 75% 25%;
     background-color: #fff;
     margin-bottom: 1vh;
-    padding: 28px 30px 22px;
     border-radius: 5px;
     height: 10%;
+}
+
+.checklist__header-save {
+    grid-column: 2 / span 1;
+    margin: 10px 30px 15px 0;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: #00c853;
+    color: #eee;
+    cursor: pointer;
+}
+
+.checklist__header-save:hover {
+    background: #00e676;
+    box-shadow: 0 0 2px grey;
 }
 
 .checklistEditor {
     background-color: #fff;
     border-radius: 5px;
     height: 88%;
+}
+
+.disabled {
+    position: absolute;
+    background-color: #aaa;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    z-index: 9999;
 }
 
 @media (min-width: 1024px) {
