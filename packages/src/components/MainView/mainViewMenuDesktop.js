@@ -1,6 +1,7 @@
 import React from 'react';
 import './mainViewMenuDesktop.css';
 import '../SplashScreen/splashScreenMenuDesktop.css';
+import  {Link} from 'react-router-dom';
 
 export const MainViewMenuDesktop = () => {
     return (
@@ -11,18 +12,18 @@ export const MainViewMenuDesktop = () => {
             <span>OWL</span>earning Portal
           </h1>
         </div>
-        <a className="menu-item" href="/mychecklists">
+        <Link className="menu-item" to="/:id/me">
           Moje checklisty
-        </a>
-        <a className="menu-item" href="/myteams">
-          Moje zespoły
-        </a>
-        <a className="menu-item" href="/settings">
+        </Link>
+        <Link className="menu-item" to="/:id/me/myteams">
+          Moje teamy
+        </Link>
+        <Link className="menu-item" to="/settings">
           Ustawienia
-        </a>
-        <a className="menu-item" href="/logout">
+        </Link>
+        <Link className="menu-item" to="/logout">
           Wyloguj
-        </a>
+        </Link>
       </section>
     );
 }
