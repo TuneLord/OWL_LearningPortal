@@ -4,13 +4,7 @@ import '../SplashScreen/splashScreenMenuDesktop.css';
 
 
 export class MainViewMenuMobile extends Component {
-    // state = {
-    //     menuPosition: '0px'
-    // }
 
-    // mobileMenuClose() {
-    //     this.setState({ menuPosition: '-400px' })
-    // }
     render() {
         return (
             <section className="mainViewMenuMobile" style={{ left: this.props.menuPosition }}>
@@ -26,6 +20,5 @@ export class MainViewMenuMobile extends Component {
                 <a className="menu-item" href="/logout"> Wyloguj </a>
             </section>
         )
-    }
-
-}
+    };
+};

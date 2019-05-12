@@ -18,7 +18,7 @@
 
 .checklist__header {
     display: grid;
-    grid-template-columns: 75% 25%;
+    grid-template-columns: 50% 25% 25%;
     background-color: #fff;
     margin-bottom: 1vh;
     border-radius: 5px;
@@ -26,6 +26,16 @@
 }
 
 .checklist__header-save {
+    grid-column: 3 / span 1;
+    margin: 10px 30px 15px 0;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: #00c853;
+    color: #eee;
+    cursor: pointer;
+}
+
+.checklist__header-change {
     grid-column: 2 / span 1;
     margin: 10px 30px 15px 0;
     border-radius: 5px;

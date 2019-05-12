@@ -11,5 +11,5 @@ export class CreateNewChecklistButton extends Component {
                 <p>Utwórz nową listę</p>
             </div>
         )
-    }
+    };
 };
