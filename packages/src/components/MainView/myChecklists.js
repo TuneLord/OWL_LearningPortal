@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./myChecklists.css";
-import TextEditor from '../TextEditor/index';
+import TextEditor from '../TextEditor';
 
 export default class MyChecklists extends Component {
   state = {
@@ -31,7 +31,7 @@ export default class MyChecklists extends Component {
               <button className="logicButton"> Utwórz checklistę </button>
             </div>
             <div className={'textEditor'}>
-              <TextEditor />
+              <TextEditor value={null} />
             </div>
         </div> */}
         <div className="mychecklists_container">
