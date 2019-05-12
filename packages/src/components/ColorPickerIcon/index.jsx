@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "react-icons-kit"
 import { BlockPicker } from 'react-color';
-import Slide from '@material-ui/core/Slide';
+import Zoom from '@material-ui/core/Zoom';
 
 import "./ColorPickerIcon.css";
 
@@ -44,16 +44,18 @@ export default class ColorPickerIcon extends React.Component
         return (
             <span className="editor-color-wrapper" onMouseDown={this.onMouseDown}>
                 <Icon icon={this.props.icon} onMouseDown={this.onIconMouseDown} className={"editor-color-arrow"}/>
-                <Slide in={this.state.isOpened}>
-                    <BlockPicker
-                        width={this.props.width}
-                        className="editor-color-picker"
-                        onChangeComplete={this.props.onPickerChange}
-                        color={this.props.color}
-                        colors={this.props.colors}
-                        onSwatchHover={this.props.onSwatchHover}
-                    />
-                </Slide>
+                <Zoom in={this.state.isOpened}>
+                    <div style={{ zIndex: 100, position: "relative" }}>
+                        <BlockPicker
+                            width={this.props.width}
+                            className="editor-color-picker"
+                            onChangeComplete={this.props.onPickerChange}
+                            color={this.props.color}
+                            colors={this.props.colors}
+                            onSwatchHover={this.props.onSwatchHover}
+                        />
+                    </div>
+                </Zoom>
             </span>
         )
     }

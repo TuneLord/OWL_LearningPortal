@@ -11,8 +11,8 @@
 
 .editor-link-text
 {
-  color: #000;
-  background-color: #EEF8FF;
+  color: var(--editorMainColor);
+  background-color: var(--editorLinkBackground);
   line-height: 1.5;
   border-bottom: 1px dotted #43b1b0;
   box-sizing: border-box;
@@ -57,10 +57,11 @@
   }
   
   .Draftail-Editor {
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: var(--editorBackground);
+    border: 1px solid var(--editorBorder);
     border-radius: 5px;
-    width: 100%
+    width: 100%;
+    font-family: var(--mainFont);
   }
   .Draftail-Editor--hide-placeholder .public-DraftEditorPlaceholder-root {
     display: none;
@@ -82,7 +83,7 @@
     z-index: 3;
   } */
   .Draftail-Editor .DraftEditor-root {
-    color: #333;
+    color: var(--editorMainColor);
     font-size: 1rem;
     line-height: 1.5;
     font-family: sans-serif;
@@ -110,10 +111,10 @@
   .Draftail-Toolbar {
     position: relative;
     padding: 0.25rem;
-    background-color: #ddd;
-    color: #333;
+    background-color: var(--editorToolbarBackground);
+    color: var(--editorMainColor);
     border-radius: 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--editorBorder);
   }
   .Draftail-Editor--focus .Draftail-Toolbar {
     position: -webkit-sticky;
@@ -132,7 +133,7 @@
     height: 1rem;
     vertical-align: middle;
     margin: 0 0.125rem;
-    background-color: #c4c4c4;
+    background-color: var(--editorMainColor);
   }
   .Draftail-Editor--readonly .Draftail-ToolbarGroup {
     opacity: 0.5;
@@ -186,9 +187,9 @@
   [data-draftail-balloon]::after {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: rgba(17, 17, 17, 0.9);
+    background: var(--editorBaloonBackground);
     border-radius: 4px;
-    color: #fff;
+    color: var(--editorBaloonColor);
     content: attr(aria-label);
     padding: 0.5em 1em;
     white-space: pre;
@@ -227,7 +228,7 @@
   
   .Draftail-DividerBlock {
     border: 0;
-    background: #ddd;
+    background: var(--editorMainColor);
     height: 1px;
     margin: 10px 0;
   }
@@ -267,8 +268,8 @@
     position: absolute;
     z-index: 1000;
     box-sizing: content-box;
-    background: #fff;
-    border: 1px solid #e0e0e0;
+    background: var(--editorBackground);
+    border: 1px solid var(--editorBorder);
     box-shadow: 0 4px 30px 0 gainsboro;
   }
   
@@ -283,7 +284,7 @@
     line-height: 2.5em;
     font-weight: normal;
     font-size: 1em;
-    color: #9e9e9e;
+    color: var(--editorMainColor);
   }
   
   .draftJsEmojiPlugin__emojiSelectPopoverGroups__35t9m {
@@ -307,7 +308,7 @@
     padding-left: .5em;
     font-weight: normal;
     font-size: 1em;
-    color: #9e9e9e;
+    color: var(--editorMainColor);
   }
   
   .draftJsEmojiPlugin__emojiSelectPopoverGroupList__HQ8_y {
@@ -340,10 +341,10 @@
     display: -webkit-box;
     display: flex;
     list-style: none;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--editorBorder);
     border-radius: .5em;
-    background: #fff;
-    box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.1);
+    background: var(--editorBackground);
+    box-shadow: 0 0 0.3em var(--editorBoxShadow);
   }
   
   .draftJsEmojiPlugin__emojiSelectPopoverToneSelectItem__2SgvL {
@@ -352,7 +353,7 @@
   }
   
   .draftJsEmojiPlugin__emojiSelectPopoverToneSelectItem__2SgvL:first-child {
-    border-right: 1px solid #e0e0e0;
+    border-right: 1px solid var(--editorBorder);
   }
   
   .draftJsEmojiPlugin__emojiSelectPopoverEntry__1ErDJ, .draftJsEmojiPlugin__emojiSelectPopoverEntryFocused__M28XS {
@@ -366,7 +367,7 @@
   }
   
   .draftJsEmojiPlugin__emojiSelectPopoverEntryFocused__M28XS {
-    background-color: #efefef;
+    background-color: var(--editorBackground);
   }
   
   .draftJsEmojiPlugin__emojiSelectPopoverEntryIcon__1yNaC {
@@ -394,7 +395,7 @@
     width: 100%;
     height: 100%;
     font-size: 1.2em;
-    color: #bdbdbd;
+    color: var(--editorMainColor);
     background: none;
     border: none;
     outline: none;
@@ -410,14 +411,14 @@
     top: .3em;
     bottom: .3em;
     width: .25em;
-    background-color: #e0e0e0;
+    background-color: var(--editorBackground);
     border-radius: .125em;
     opacity: .1;
     transition: opacity .4s;
   }
   
   .draftJsEmojiPlugin__emojiSelectPopoverScrollbarThumb__jGYdG {
-    background-color: #000;
+    background-color: var(--editorMainColor);
     border-radius: .125em;
     cursor: pointer;
   }
@@ -499,14 +500,14 @@
     display: inline-block;
   }
   .draftJsEmojiPlugin__emojiSuggestions__2ffcV {
-    border: 1px solid #eee;
+    border: 1px solid var(--editorBorder);
     margin-top: 1.75em;
     position: absolute;
     min-width: 220px;
     max-width: 440px;
-    background: #fff;
+    background: var(--editorBackground);
     border-radius: 2px;
-    box-shadow: 0px 4px 30px 0px rgba(220,220,220,1);
+    box-shadow: 0px 4px 30px 0px var(--editorAlterinativeBoxShadow);
     cursor: pointer;
     padding-top: 8px;
     padding-bottom: 8px;
