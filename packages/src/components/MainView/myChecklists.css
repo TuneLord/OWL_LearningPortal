@@ -24,34 +24,6 @@
     justify-content: space-between;
 }
 
-.countButton {
-    background-color: var(--menuAccents);
-    border: 1px solid var(--menuBackground);
-}
-
-.logicButton {
-    background-color: var(--menuCross);
-    font-weight: bold;
-    border: none;
-    outline: none;
-}
-
-.logicButton:hover {
-    background-color: var(--menuBackground);
-    cursor: pointer;
-    border: none;
-    outline: none;
-}
-
-.countButton,
-.logicButton {
-    width: 47.5%;
-    height: 100px;
-    margin: 50px 0;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
 .textEditor {
     display: flex;
     justify-content: center;
@@ -60,7 +32,6 @@
 .mychecklists_container {
     width: 95%;
     height: 100%;
-    /* margin-right: 15px; */
     -webkit-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
     -moz-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
     box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
