@@ -28,3 +28,9 @@
 .mainViewMenuDesktop a:hover {
     color: var(--menuBackground);
 }
+
+@media (max-width : 1024px) {
+    .mainViewMenuDesktop {
+        display: none;
+    }
+}

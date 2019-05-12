@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './createNewChecklist.css';
 
-export const CreateNewChecklistButton = () => {
-    return (
-        <div className="state createNewChecklist">
-            <p>Utwórz nową listę</p>
-        </div>
-    )
+export class CreateNewChecklistButton extends Component {
+
+    render() {
+        return (
+            <div className="state createNewChecklist"
+                onClick={this.props.onClick}
+            >
+                <p>Utwórz nową listę</p>
+            </div>
+        )
+    }
 };
