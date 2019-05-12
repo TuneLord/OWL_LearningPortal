@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const teamSchema = new mongoose.Schema({
-    name: {
+    mentorId: {
         type: String,
         required: true
     },
-    mentor: {
+    name: {
         type: String,
         required: true
     },

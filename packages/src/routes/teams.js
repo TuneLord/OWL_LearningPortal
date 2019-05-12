@@ -1,64 +1,45 @@
 const express = require('express');
-
 const auth = require('../middleware/auth');
-const checkListExistance = require('../middleware/checkListExistance');
-const Checklist = require('../models/checkListModel');
-const {
-    User
-} = require('../models/userModel');
+const Team = require('../models/teamModel');
 
 const router = express.Router();
 
 router.post('/', auth, async (req, res) => {
 
-    //tworzy nowy obiekt checklisty
-    const checklist = new Checklist({
-        authorId: req.body.authorId, //tutaj id zalogowanego użytkownika tworzącego checklistę wyciągnięte z tokena
+    // new team object
+    const team = new Team({
+        mentorId: req.body.mentorId, //tutaj id zalogowanego użytkownika tworzącego checklistę wyciągnięte z tokena
         name: req.body.name,
-        content: req.body.content,
-        isChecked: req.body.isChecked,
-        members: [req.body.authorId]
+        members: [...req.body.members, req.body.mentorId]
     });
+
 
     //zapisuję ją do bazy i przechowuję wynik
-    const result = await checklist.save();
+    const result = await team.save()
 
-    //znajduję autora
-    const user = await User.findById(req.body.authorId);
-    user.checkLists.push({
-        name: result.name,
-        listId: result._id,
-        isChecked: result.isChecked,
-        isOwner: true
-    });
-    await user.save();
-
-    res.status(200).send(user.checkLists);
+    return res.status(200).send(result);
 });
 
-router.get('/:id', auth, checkListExistance, async (req, res) => {
-    const memberId = req.checklist.members.find(member => member === req.user._id);
-    if (!memberId) return res.status(403).send('Access denied - not a member of a checlist.');
+router.get('/:id', auth, async (req, res) => {
 
-    res.status(200).send(req.checklist);
+    const team = await Team.findById(req.params.id);
+    if (!(team.members.includes(req.body.userId))) return res.status(403).send('Access denied - not a team member or mentor.');
+
+    return res.status(200).send(team);
 });
 
-router.delete('/:id', auth, checkListExistance, async (req, res) => {
-    //sprawdza czy użytkownik próbujący usunąć listę jest jej właścicielem, jeśli nie to lista nie zostaje usunięta
-    const isOwner = req.checklist.authorId === req.user._id;
-    if (!isOwner) return res.status(403).send('Access denied - not an owner.');
+router.put('/:id', auth, async (req, res) => {
+    
+} )
 
-    //iteruje się po członkach listy w celu usnięcia ich przypisania do niej w obiekcie User
-    req.checklist.members.forEach(async member => {
-        const user = await User.findById(member);
-        user.checkLists = user.unpinCheckList(req.checklist._id);
-        await user.save();
-    })
+router.delete('/:id', auth, async (req, res) => {
+    const team = await Team.findById(req.params.id);
 
-    //usuwa listę
-    await Checklist.findByIdAndDelete(req.checklist._id);
+    if (!(team.mentorId === req.body.mentorId)) return res.status(403).send('Access denied - not the team mentor.');
 
-    res.status(200).send("Checklist deleted.");
+    await Team.findByIdAndDelete(team._id);
+
+    return res.status(200).send(req.params.id);
 });
 
 module.exports = router;
