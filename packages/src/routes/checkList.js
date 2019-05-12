@@ -45,7 +45,15 @@ router.put('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
     req.checklist.name = req.body.name || req.checklist.name;
     req.checklist.content = req.body.content || req.checklist.content;
 
+    req.checklist.members.forEach(async el => {
+        const user = await User.findById(el);
+        user.checkLists = user.modifyCheckList(req.checklist._id);
+        console.log(user.checkLists);
+        await user.save();
+    })
+
     await req.checklist.save();
+    //await req.user.save();
     res.status(200).send('Checklist updated.');
 });
 
