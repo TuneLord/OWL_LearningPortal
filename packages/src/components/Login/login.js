@@ -67,7 +67,9 @@ class Login extends React.Component {
             if (response.status !== 200) throw response;
             sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             this.props.loginStatus(true);
-            console.log('Logowanie przebiegło pomyślnie')
+            sessionStorage.setItem("id", response.body);
+            this.props.history.push(`/me/${response.body}`);
+            console.log('Logowanie przebiegło pomyślnie');
         } catch (err) {
             console.log(err);
             if ([404, 400].includes(err.status)) {
@@ -97,6 +99,8 @@ class Login extends React.Component {
             if (response.status !== 200) throw response;
             sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             this.props.loginStatus(true);
+            sessionStorage.setItem("id", response.body);
+            this.props.history.push(`/me/${response.body}`);
             console.log('Logowanie przebiegło pomyślnie')
         } catch (err) {
             console.log(err);
