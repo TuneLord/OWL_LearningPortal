@@ -39,36 +39,46 @@ router.get('/:id', auth, checkListExistance, async (req, res) => {
     res.status(200).send(req.checklist);
 });
 
+
+
+
+
 router.put('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
-    
+    const currentName = req.checklist.name;
     //jeśli, która kolwiek z tych wartości została przekazana w body, to nastąpi jej update, jeśli nie to podstawi to co wcześniej
     req.checklist.name = req.body.name || req.checklist.name;
     req.checklist.content = req.body.content || req.checklist.content;
 
-    req.checklist.members.forEach(async el => {
-        const user = await User.findById(el);
-        user.checkLists = user.modifyCheckList(req.checklist._id);
-        console.log(user.checkLists);
-        await user.save();
-    })
+    //zmienia imię w user.checLists tylko wtedy jeśli różni się od poprzedniego
+    if (currentName !== req.checklist.name) {
+        req.checklist.members.forEach(async el => {
+            const user = await User.findById(el);
+ 
+            const newName = user.modifyCheckList(req.checklist._id, req.body.name);
+            user.checkLists = []; //z niewiadomych powodów muszę najpierw przypisać pustą tablicę do user.checkLists, inaczej nie przypisze nowych wartości
+            user.checkLists = newName;
+            console.log('zmieniam imię')
+            await user.save();
+        })
+    }
 
-    await req.checklist.save();
-    //await req.user.save();
-    res.status(200).send('Checklist updated.');
+    const result = await req.checklist.save();
+    res.status(200).send(result);
 });
 
 router.delete('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
+    let deleted;
     //iteruje się po członkach listy w celu usnięcia ich przypisania do niej w obiekcie User
     req.checklist.members.forEach(async member => {
         const user = await User.findById(member);
         user.checkLists = user.unpinCheckList(req.checklist._id);
-        await user.save();
+        deleted = await user.save();
     })
 
     //usuwa listę
     await Checklist.findByIdAndDelete(req.checklist._id);
 
-    res.status(200).send("Checklist deleted.");
+    res.status(200).send(deleted.checkLists);
 });
 
 module.exports = router;
