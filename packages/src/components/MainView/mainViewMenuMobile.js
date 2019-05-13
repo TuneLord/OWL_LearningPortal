@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './mainViewMenuMobile.css';
 import '../SplashScreen/splashScreenMenuDesktop.css';
+import ThemeChanger from '../App/ThemeChanger';
 
 
 export class MainViewMenuMobile extends Component {
@@ -19,6 +20,7 @@ export class MainViewMenuMobile extends Component {
                 <Link className="menu-item" to={`/me/${id}`}>Moje checklisty </Link>
                 <Link className="menu-item" to={`/me/myteams/${id}`}> Moje zespoły </Link>
                 <Link className="menu-item" to={`/settings/${id}`}> Ustawienia </Link>
+                 <Link className="menu-item" to={window.location}><ThemeChanger /></Link>
                 <Link className="menu-item" to="/logout"> Wyloguj </Link>
             </section>
         )
