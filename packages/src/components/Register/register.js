@@ -97,18 +97,19 @@ class Register extends React.Component {
         requestBody.type = this.state.type;
 
         try {
-            const response = await fetch('/register', {
+            let response = await fetch('/register', {
                 method: "post",
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
                 },
                 body: JSON.stringify(requestBody)
             });
-            if (response.status !== 200) throw response
+            if (response.status !== 200) throw response;
             sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             this.props.loginStatus(true);
-            sessionStorage.setItem("id", response.body);
-            this.props.history.push(`/me/${response.body}`);
+            response = await response.json();
+            sessionStorage.setItem("id", response);
+            this.props.history.push(`/me/${response}`);
             console.log('Konto zostało utworzone')
         } catch(err) {
             console.log(err);
