@@ -33,8 +33,8 @@ router.post('/',auth, async (req, res) => {
 });
 
 router.get('/:id', auth, checkListExistance, async (req, res) => {
-    const memberId = req.checklist.members.find(member => member === req.user._id);
-    if (!memberId) return res.status(403).send('Access denied - not a member of a checlist.');
+    const memberId = req.checklist.members.find(member => String(member) === String(req.user._id));
+    if (!memberId) return res.status(403).send('Access denied - not a member of a checklist.');
 
     res.status(200).send(req.checklist);
 });
@@ -57,7 +57,6 @@ router.put('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
             const newName = user.modifyCheckList(req.checklist._id, req.body.name);
             user.checkLists = []; //z niewiadomych powodów muszę najpierw przypisać pustą tablicę do user.checkLists, inaczej nie przypisze nowych wartości
             user.checkLists = newName;
-            console.log('zmieniam imię')
             await user.save();
         })
     }
@@ -67,18 +66,19 @@ router.put('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
 });
 
 router.delete('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
-    let deleted;
     //iteruje się po członkach listy w celu usnięcia ich przypisania do niej w obiekcie User
     req.checklist.members.forEach(async member => {
         const user = await User.findById(member);
         user.checkLists = user.unpinCheckList(req.checklist._id);
-        deleted = await user.save();
+        await user.save();
     })
 
     //usuwa listę
     await Checklist.findByIdAndDelete(req.checklist._id);
 
-    res.status(200).send(deleted.checkLists);
+    //zwraca listy usuwającego usera
+    const ownerChecklists = await User.findById(req.user._id)
+    res.status(200).send(ownerChecklists.checkLists);
 });
 
 module.exports = router;
