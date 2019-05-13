@@ -2,6 +2,7 @@ import React from 'react';
 import './mainViewMenuDesktop.css';
 import '../SplashScreen/splashScreenMenuDesktop.css';
 import  {Link} from 'react-router-dom';
+import ThemeChanger from '../App/ThemeChanger';
 
 export const MainViewMenuDesktop = ({ id }) => {
     return (
@@ -21,6 +22,7 @@ export const MainViewMenuDesktop = ({ id }) => {
         <Link className="menu-item" to={`/settings/${id}`}>
           Ustawienia
         </Link>
+        <Link className="menu-item" to={window.location}><ThemeChanger /></Link>
         <Link className="menu-item" to="/logout">
           Wyloguj
         </Link>
