@@ -67,7 +67,6 @@ class Login extends React.Component {
             if (response.status !== 200) throw response;
             sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             response = await response.json();
-            response = Number.parseInt(response);
             this.props.loginStatus(true);
             sessionStorage.setItem("id", response);
             this.props.history.push(`/me/${response}`);
