@@ -14,7 +14,7 @@ class Login extends React.Component {
             isDisable: true
         };
     }
-    
+
     onChangeEmail = (e) => {
         let error = '';
         let isDisable = true;
@@ -50,7 +50,7 @@ class Login extends React.Component {
         });
     }
 
-    onSubmitForm = async(e) => {
+    onSubmitForm = async (e) => {
         e.preventDefault();
 
         const requestBody = {};
@@ -67,11 +67,12 @@ class Login extends React.Component {
             if (response.status !== 200) throw response;
             sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             response = await response.json();
-            response = Number.parseInt(response);
+            console.log(response);
             this.props.loginStatus(true);
             sessionStorage.setItem("id", response);
             this.props.history.push(`/me/${response}`);
             console.log('Logowanie przebiegło pomyślnie');
+            console.log(response)
         } catch (err) {
             console.log(err);
             if ([404, 400].includes(err.status)) {
@@ -118,7 +119,7 @@ class Login extends React.Component {
                     }
                 });
             }
-        }  
+        }
     }
 
     render() {
@@ -128,15 +129,15 @@ class Login extends React.Component {
                 <form onSubmit={this.onSubmitForm}>
                     <div className="form-el">
                         <i className="fas fa-envelope"></i>
-                        <input type='email' value={this.state.email} onChange={this.onChangeEmail} placeholder='podaj adres e-mail' />                       
+                        <input type='email' value={this.state.email} onChange={this.onChangeEmail} placeholder='podaj adres e-mail' />
                     </div>
                     {this.state.errors.email && (<div className='error'>{this.state.errors.email}</div>)}
                     <div className="form-el">
                         <i className="fas fa-lock"></i>
-                        <input type="password" value={this.state.password} onChange={this.onChangePassword} placeholder='podaj hasło' /> 
+                        <input type="password" value={this.state.password} onChange={this.onChangePassword} placeholder='podaj hasło' />
                     </div>
-                    {this.state.errors.password && (<div className='error'>{this.state.errors.password}</div>)}   
-                    <input id='submit' type='submit' value='Zaloguj się' disabled={this.state.isDisable}/>
+                    {this.state.errors.password && (<div className='error'>{this.state.errors.password}</div>)}
+                    <input id='submit' type='submit' value='Zaloguj się' disabled={this.state.isDisable} />
                     <div className="or"><span>lub</span></div>
                     <GoogleLogin
                         clientId="609136166131-5spsmc9vddptv62kfv0i6uttslesqjfq.apps.googleusercontent.com"
@@ -150,12 +151,12 @@ class Login extends React.Component {
                         onSuccess={this.responseGoogle}
                         onFailure={this.responseGoogle}
                         cookiePolicy={'single_host_origin'}
-                    />      
+                    />
                 </form>
             </div>
         );
     }
-}   
+}
 
 // const mapStateToProps = (state) => {
 //     console.log(state);
