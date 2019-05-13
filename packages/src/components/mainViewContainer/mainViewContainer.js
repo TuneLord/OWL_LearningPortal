@@ -43,9 +43,10 @@ export default class MainViewContainer extends Component {
         this.setState({
             checklistNumber: newChecklistNumber,
             newChecklist: {
-                title: addInput.value,
+                name: addInput.value,
                 author: 'Próba',
                 isDone: false,
+                id: 0
             },
             activeEditor: true
         });
@@ -61,12 +62,15 @@ export default class MainViewContainer extends Component {
         };
 
         try {
-            const response = await fetch(`/checklist`, {
+            let response = await fetch(`/checklist`, {
                 method: "post",
                 headers: requestHeaders,
                 body: JSON.stringify(requestBody)
             })
             if (response.status !== 200) throw response;
+            response = response = await response.json();
+            // this.setState({newChecklist.id: response[response.length - 1].listId });
+            console.log(response[response.length - 1])
         } catch (error) {
             alert("Nie udało się połączyć z serwerem!");
             return
