@@ -3,6 +3,7 @@ const express = require('express');
 const auth = require('../middleware/auth');
 const checkListExistance = require('../middleware/checkListExistance');
 const isAuthor = require('../middleware/isAuthor');
+const isNotAuthor = require('../middleware/isNotAuthor');
 
 const Checklist = require('../models/checkListModel');
 const {
@@ -12,6 +13,8 @@ const {
 const router = express.Router();
 
 router.put('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
+    if(!req.body.email) return res.status(404).send('Provide user email.');
+
     const user = await User.findOne({email:req.body.email});
 
     //sprawdza czy User już ma udostępnioną checlistę, jeśli tak to zwraca komunikat.
@@ -38,5 +41,24 @@ router.put('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
 
     res.status(200).send(resultChecklist);
 });
+
+router.put('/unsub/:id', auth, checkListExistance, isNotAuthor, async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    //sprawdza czy User ma udostępnioną checlistę, jeśli NIE to zwraca komunikat
+    const isAlreadyMember = req.checklist.members.filter(el => {
+        return String(el) === String(user._id);
+    })
+    if (!isAlreadyMember[0]) return res.status(409).send(`Not a member. Subscribe first`);
+
+    user.checkLists = user.unpinCheckList(req.checklist._id);
+    const unsubUser = await user.save();
+
+    req.checklist.members = req.checklist.unpinMember(req.user._id);
+    await req.checklist.save();
+
+    res.status(200).send(unsubUser.checkLists);
+});
+
 
 module.exports = router;
