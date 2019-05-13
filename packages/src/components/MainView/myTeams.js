@@ -11,10 +11,17 @@ export default class MyTeams extends Component {
     data: [{ title: "Mój zespół 1", coworkers: ['kumpel@wp.pl', 'mail.@mail.pl', 'mail.@mail.pl', 'mail.@mail.pl', 'mail.@mail.pl', 'mail.@mail.pl'], checklisty: ['Fajna checklista'] },
     {
       title: "Mój zespół 2",
-      coworkers: []
+      coworkers: ['ja@gmail.com', 'ty@gmail.com'],
+      checklisty: ['Taka o checklista']
     }
-    ]
+    ],
+    teamShowed : 0
   };
+
+    onTeamClick = (e) => {
+      this.setState({teamShowed: e.target.id})
+    }
+
 
   // componentDidMount {
   //     fetch(....., {
@@ -40,7 +47,7 @@ export default class MyTeams extends Component {
             <p>Liczba zespołów</p></button>
         </div>
         <div className="myteam">
-          <MyTeam data={this.state.data[0].coworkers} title={this.state.data[0].title} checklisty={this.state.data[0].checklisty} />
+          <MyTeam data={this.state.data[this.state.teamShowed].coworkers} title={this.state.data[this.state.teamShowed].title} checklisty={this.state.data[this.state.teamShowed].checklisty} />
         </div>
 
         <div className="checklistEditor__container">
@@ -51,8 +58,8 @@ export default class MyTeams extends Component {
             <h3 className="myteams_title__header">Moje teamy</h3>
           </div>
           <ul className="myteams_list">
-            {this.state.data.map(el =>
-              <li className="myteams_team" key={el.title}>
+            {this.state.data.map((el, index) =>
+              <li className="myteams_team" key={el.title} id={index} onClick={e => this.onTeamClick(e)}>
                 {el.title}
                 <i className="material-icons icon-float icon-color">delete_forever</i>
               </li>)}
