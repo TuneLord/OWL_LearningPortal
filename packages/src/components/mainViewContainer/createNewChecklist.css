@@ -1,6 +1,7 @@
 @import '../../styles/global.css';
 
 .createNewChecklist {
+    color: white;
     display: none;
     background-color: #00c853;
     font-size: 14px;

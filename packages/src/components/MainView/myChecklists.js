@@ -23,14 +23,8 @@ export default class MyChecklists extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.newChecklist !== prevProps.newChecklist) {
-      console.log(this.props.newChecklist);
       this.setState({
-        data: [{ title: "Pierwsza checklista", author: "Zbyszek", isDone: false }, {
-          title: "Druga checklista",
-          author: "anonim",
-          isDone: false
-        }, this.props.newChecklist]
-
+        data: [...this.state.data, this.props.newChecklist]
       })
     }
   }
