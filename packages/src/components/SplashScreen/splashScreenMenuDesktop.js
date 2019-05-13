@@ -3,15 +3,12 @@ import "./splashScreenMenuDesktop.css";
 import { Link } from "react-router-dom";
 
 export default class SplashScreenMenuDesktop extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
       <section className={'splashScreenMenuDesktop'}>
         <Link to="/" className={'splashScreenMenuDesktop__logo'}>
-          <i className="fab fa-earlybirds"/>
+          <i className="fab fa-earlybirds" />
           <h1><span>OWL</span>earning Portal</h1>
         </Link>
         <div className={'splashScreenMenuDesktop__menu'}>
