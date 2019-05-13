@@ -50,27 +50,27 @@ export default class MainViewContainer extends Component {
             activeEditor: true
         });
 
-        // const token = sessionStorage.getItem('x-auth-token');
-        // const requestHeaders = {
-        //     'Content-Type': 'application/json',
-        //     "x-auth-token": token
-        // };
-        // const requestBody = {
-        //     'name': this.state.title,
-        //     'content': 'dupa'
-        // };
+        const token = sessionStorage.getItem('x-auth-token');
+        const requestHeaders = {
+            'Content-Type': "application/json; charset=UTF-8",
+            "x-auth-token": token
+        };
+        const requestBody = {
+            'name': this.state.newChecklist.title,
+            'content': null
+        };
 
-        // try {
-        //     const response = await fetch(`/checklist`, {
-        //         method: "post",
-        //         headers: requestHeaders,
-        //         body: JSON.stringify(requestBody)
-        //     })
-        //     if (response.status !== 200) throw response;
-        // } catch (error) {
-        //     alert("Nie udało się połączyć z serwerem!");
-        //     return
-        // };
+        try {
+            const response = await fetch(`/checklist`, {
+                method: "post",
+                headers: requestHeaders,
+                body: JSON.stringify(requestBody)
+            })
+            if (response.status !== 200) throw response;
+        } catch (error) {
+            alert("Nie udało się połączyć z serwerem!");
+            return
+        };
 
         addInput.parentElement.remove();
         this.changeDisabled();
@@ -85,28 +85,28 @@ export default class MainViewContainer extends Component {
         });
 
         sessionStorage.setItem("draftail:content", JSON.stringify(""))
-        // const token = sessionStorage.getItem('x-auth-token');
-        // const content = sessionStorage.getItem('draftail:content');
-        // const requestHeaders = {
-        //     'Content-Type': 'application/json',
-        //     "x-token": token
-        // };
-        // const requestBody = {
-        //     'name': this.state.title,
-        //     'content': content
-        // };
+        const token = sessionStorage.getItem('x-auth-token');
+        const content = sessionStorage.getItem('draftail:content');
+        const requestHeaders = {
+            'Content-Type': 'application/json',
+            "x-token": token
+        };
+        const requestBody = {
+            'name': this.state.newChecklist.title,
+            'content': content
+        };
 
-        // try {
-        //     const response = await fetch(`/checklist`, {
-        //         method: "put",
-        //         headers: requestHeaders,
-        //         body: JSON.stringify(requestBody)
-        //     })
-        //     if (response.status !== 200) throw response;
-        // } catch (error) {
-        //     alert("Nie udało się połączyć z serwerem!");
-        //     return
-        // };
+        try {
+            const response = await fetch(`/checklist`, {
+                method: "put",
+                headers: requestHeaders,
+                body: JSON.stringify(requestBody)
+            })
+            if (response.status !== 200) throw response;
+        } catch (error) {
+            alert("Nie udało się połączyć z serwerem!");
+            return
+        };
     }
 
     render() {
