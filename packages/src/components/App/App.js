@@ -16,9 +16,6 @@ const App = () => {
     return (
         <Router>
             <Switch className="App">
-                {/* <Login/>
-                <MainView /> */}
-
                 <Route path="/me/myteams/:id" component={MainView} />
                 <Route path='/me/:id' component={MainView} />
                 <Route path="/login" component={Login} />
