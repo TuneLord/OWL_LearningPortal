@@ -1,0 +1,48 @@
+@import '../../styles/global.css';
+
+.mainViewMenuMobile {
+    height: 60%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 50px 0;
+    border: 1px solid var(--border);
+    background-color: #fffde7;
+    z-index: 10;
+    transition: 0.4s;
+}
+
+.fa-times {
+    font-size: 2.2em;
+    position: absolute;
+    top: 5%;
+    right: 10%;
+}
+
+.mainViewMenuMobile a {
+    font-size: 1.4em;
+    padding: 12px 0;
+    text-decoration: none;
+    color: var(--mainColor);
+}
+
+.mainViewMenuMobile div {
+    margin-bottom: 20px;
+}
+
+.mainViewMenuMobile a:last-child {
+    color: var(--menuCross);
+}
+
+.mainViewMenuMobile a:hover {
+    color: var(--menuBackground);
+}
+
+@media (min-width : 1024px) {
+    .mainViewMenuMobile {
+        display: none;
+    }
+}

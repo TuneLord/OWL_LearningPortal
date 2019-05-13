@@ -1,0 +1,99 @@
+/* Kontener zawierający całą aplikację po zalogowaniu*/
+@import '../../styles/global.css';
+
+.mainView__container {
+    width: 100%;
+    height: 100vh;
+    background-color: #f0f3f3;
+    border: 1px solid var(--border);
+    border-left: none;
+}
+
+.mainView__header {
+    grid-column: 1 / 3;
+    grid-row: 1 / span 1;
+    position: relative;
+    padding: 20px 30px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.mainView__header h2 {
+    font-size: 24px;
+}
+
+.fa-bars {
+    font-size: 2.2em;
+    position: absolute !important;
+    top: 50%;
+    left: 7%;
+    transform: translateY(-50%)
+}
+
+.stateContainter {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.addInput {
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin: 0 10px;
+    font-size: 1.2em;
+}
+
+.addInput:focus {
+    box-shadow: 0 0 2px var(--menuCross);
+}
+
+.addButton {
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: var(--menuCross);
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.addButton:hover {
+    background-color: var(--menuBackground);
+}
+
+@media (min-width: 1024px) {
+    .mainView__container {
+        display: grid;
+        grid-template-columns: 65% 35%;
+        grid-template-rows: 10% 17% 73%;
+    }
+
+    .mainView__header {
+        grid-column: 1 / 3;
+        grid-row: 1 / span 1;
+        padding: 20px 30px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .mainView__header h2 {
+        font-size: 24px;
+    }
+
+    .stateContainter {
+        grid-column: 1 / span 1;
+        grid-row: 2 / span 1;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .mainView__header h2 {
+        font-size: 28px;
+    }
+
+}
+
+@media (min-width: 1440px) {
+    .mainView__header h2 {
+        font-size: 36px;
+    }
+}

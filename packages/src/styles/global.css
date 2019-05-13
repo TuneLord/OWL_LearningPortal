@@ -10,22 +10,35 @@
 
 :root {
     /* Colors */
-        /*  Font color  */
-        --mainColor: #323232;
+    /*  Font color  */
+    --mainColor: #323232;
 
-        /* SplashScreen */
-        --border: #d2cdcd;
-        --menuBackground: #ffa726;
-        --menuCross: #e65100;
-        --menuAccents: #fff;
+    /* SplashScreen */
+    --border: #e1e1e1;
+    --menuBackground: #ffa726;
+    --menuCross: #e65100;
+    --menuAccents: #fff;
 
         /* MainView */
         --mainViewMenu: #fffde7;
         --mainViewChecklists:  #f5f3f0;
         --mainViewChecklistsIcons: #ffe082;
 
-        /* Loader */
-        --loaderBackground: rgba(0, 0, 0, .8);
+    --mainViewMenu: #fffde7;
+
+    /* Loader */
+    --loaderBackground: rgba(0, 0, 0, .8);
+
+        /* Editor */
+        --editorMainColor: #000;
+        --editorBackground: #fff;
+        --editorBorder: #ddd;
+        --editorToolbarBackground: #e65100;
+        --editorBoxShadow: rgba(0, 0, 0, 0.1);
+        --editorAlternativeBoxShadow: rgba(220,220,220,1);
+        --editorLinkBackground: #EEF8FF;
+        --editorBaloonBackground: rgba(17, 17, 17, 0.9);
+        --editorBaloonColor: #fff;
 
     /* Fonts */
     --mainFont: 'Roboto', sans-serif;
@@ -35,4 +48,22 @@
 
 html {
     color: var(--mainColor);
+}
+
+.state {
+    height: 12vh;
+    width: 80%;
+    text-align: center;
+    color: var(--menuAccents);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 15px auto;
+    position: relative;
+}
+
+@media (min-width: 1024px) {
+    .state {
+        width: 18vw;
+        margin: 15px 20px 30px;
+    }
 }

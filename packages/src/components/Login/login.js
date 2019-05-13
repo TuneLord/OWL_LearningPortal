@@ -57,7 +57,7 @@ class Login extends React.Component {
         requestBody.email = this.state.email;
         requestBody.password = this.state.password;
         try {
-            const response = await fetch('/login', {
+            let response = await fetch('/login', {
                 method: "post",
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
@@ -66,8 +66,12 @@ class Login extends React.Component {
             });
             if (response.status !== 200) throw response;
             sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
+            response = await response.json();
+            response = Number.parseInt(response);
             this.props.loginStatus(true);
-            console.log('Logowanie przebiegło pomyślnie')
+            sessionStorage.setItem("id", response);
+            this.props.history.push(`/me/${response}`);
+            console.log('Logowanie przebiegło pomyślnie');
         } catch (err) {
             console.log(err);
             if ([404, 400].includes(err.status)) {
@@ -87,7 +91,7 @@ class Login extends React.Component {
 
     responseGoogle = async (res) => {
         try {
-            const response = await fetch('/login?googleAuth=true', {
+            let response = await fetch('/login?googleAuth=true', {
                 method: "post",
                 headers: {
                     "Content-type": "application/json; charset=UTF-8",
@@ -96,7 +100,10 @@ class Login extends React.Component {
             });
             if (response.status !== 200) throw response;
             sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
+            response = await response.json();
             this.props.loginStatus(true);
+            sessionStorage.setItem("id", response);
+            this.props.history.push(`/me/${response}`);
             console.log('Logowanie przebiegło pomyślnie')
         } catch (err) {
             console.log(err);
