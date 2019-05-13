@@ -7,6 +7,7 @@ const signUp = require('./routes/signUp');
 const login = require('./routes/login');
 const checkList = require('./routes/checkList');
 const user = require('./routes/user');
+const teams = require('./routes/teams');
 const config = require('./config');
 
 
@@ -23,4 +24,4 @@ app.use('/register', signUp);
 app.use('/login', login);
 app.use('/checklist', checkList);
 app.use('/user', user);
-
+app.use('/teams', teams);
