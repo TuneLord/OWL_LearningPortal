@@ -6,7 +6,8 @@ const app = express();
 const signUp = require('./routes/signUp');
 const login = require('./routes/login');
 const checkList = require('./routes/checkList');
-const config = require('./config')
+const user = require('./routes/user');
+const config = require('./config');
 
 
 app.listen('3001', () => console.log('Listening on PORT 3001.'));
@@ -21,4 +22,5 @@ app.use(express.json());
 app.use('/register', signUp);
 app.use('/login', login);
 app.use('/checklist', checkList);
+app.use('/user', user);
 
