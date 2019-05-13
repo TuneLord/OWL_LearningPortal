@@ -3,23 +3,22 @@ import "./myChecklists.css";
 
 export default class MyChecklists extends Component {
   state = {
-    data: [{ title: "Pierwsza checklista", author: "Zbyszek", isDone: false }, {
-      title: "Druga checklista",
-      author: "anonim",
-      isDone: false
-    }]
+    data: []
   };
 
-  // componentDidMount {
-  //     fetch(....., {
-  //         method: 'GET',
-  //          headers: {
-  //             "x-log-token": localStorage.getItem("token"),
-  //         },
-  //     }).then(resp => resp.json()
-  //     .then(data => setState({data: data})))
-  //     .catch(err => console.log(err))
-  // }
+  async componentDidMount() {
+    const requestHeaders = {
+      'Content-Type': "application/json",
+      "x-auth-token": localStorage.getItem("x-auth-token")
+    };
+    await fetch(`/user`, {
+      method: 'get',
+      headers: requestHeaders,
+    }).then(resp => resp.json()
+      .then(resp => console.log(resp))
+      .then(data => this.setState({ data: data })))
+      .catch(err => console.log(err))
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props.newChecklist !== prevProps.newChecklist) {
