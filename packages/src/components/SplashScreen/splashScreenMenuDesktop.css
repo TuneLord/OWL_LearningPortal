@@ -47,6 +47,11 @@
     align-items: center;
 }
 
+a.splashScreenMenuDesktop__logo:hover
+{
+    color: var(--mainColor);
+}
+
 .splashScreenMenuDesktop__logo h1 {
     font-size: 12px;
     font-family: var(--logoFont);

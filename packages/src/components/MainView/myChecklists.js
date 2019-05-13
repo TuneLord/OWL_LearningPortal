@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./myChecklists.css";
-import TextEditor from '../TextEditor/index';
 
 export default class MyChecklists extends Component {
   state = {
@@ -8,8 +7,7 @@ export default class MyChecklists extends Component {
       title: "Druga checklista",
       author: "anonim",
       isDone: false
-    }
-    ]
+    }]
   };
 
   // componentDidMount {
@@ -22,18 +20,18 @@ export default class MyChecklists extends Component {
   //     .then(data => setState({data: data})))
   //     .catch(err => console.log(err))
   // }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.newChecklist !== prevProps.newChecklist) {
+      this.setState({
+        data: [...this.state.data, this.props.newChecklist]
+      })
+    }
+  }
+
   render() {
     return (
       <section id="mychecklists">
-        <div className="mychecklists_content">
-            <div className="mychecklists_buttons">
-              <button className="countButton">2 Liczba checklist</button>
-              <button className="logicButton"> Utwórz checklistę </button>
-            </div>
-            <div className={'textEditor'}>
-              <TextEditor />
-            </div>
-        </div>
         <div className="mychecklists_container">
           <div className="mychecklists_title">
             <i className="material-icons">
@@ -53,6 +51,5 @@ export default class MyChecklists extends Component {
         </div>
       </section>
     );
-  }
-}
-
+  };
+};

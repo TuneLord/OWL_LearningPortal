@@ -6,9 +6,12 @@ import SplashScreenMenuDesktop from './splashScreenMenuDesktop';
 import { SplashScreenContent } from "./splashScreenContent";
 
 export default class SplashScreen extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // componentDidMount()
+  // {
+  //   const token = sessionStorage.getItem("x-auth-token");
+  //   const id = sessionStorage.getItem("id");
+  //   if (id && token) this.props.history.push(`/me/${id}`);
+  // }
 
   render() {
     const windowWidth = window.innerWidth;
