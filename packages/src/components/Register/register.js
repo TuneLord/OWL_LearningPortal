@@ -17,6 +17,13 @@ class Register extends React.Component {
             isDisable: true
         };
     }
+
+    componentDidMount()
+    {
+        const token = sessionStorage.getItem("x-auth-token");
+        const id = sessionStorage.getItem("id");
+        if (id && token) this.props.history.push(`/me/${id}`);
+    }
     
     onChangeName = (e) => {
         let error = '';
