@@ -30,8 +30,6 @@ export default class ChecklistEditorContainer extends Component {
 			this.setState({
 				initial: JSON.parse(sessionStorage.getItem("draftail:content"))
 			});
-			console.log(this.state.initial);
-			console.log(sessionStorage.getItem("draftail:content"));
 		}
 	}
 

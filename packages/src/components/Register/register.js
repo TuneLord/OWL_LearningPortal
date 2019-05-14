@@ -22,8 +22,8 @@ class Register extends React.Component {
 
     componentDidMount()
     {
-        const token = sessionStorage.getItem("x-auth-token");
-        const id = sessionStorage.getItem("id");
+        const token = localStorage.getItem("x-auth-token");
+        const id = localStorage.getItem("id");
         if (id && token) this.props.history.push(`/me/${id}`);
     }
     
@@ -114,12 +114,11 @@ class Register extends React.Component {
                 body: JSON.stringify(requestBody)
             });
             if (response.status !== 200) throw response;
-            sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
+            localStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             this.props.loginStatus(true);
             response = await response.json();
-            sessionStorage.setItem("id", response);
+            localStorage.setItem("id", response);
             this.props.history.push(`/me/${response}`);
-            console.log('Konto zostało utworzone')
         } catch(err) {
             console.log(err);
             if ([404, 400].includes(err.status)) {
