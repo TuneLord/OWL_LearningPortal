@@ -11,7 +11,7 @@ export default class SplashScreen extends Component {
   }
   componentDidMount()
   {
-    const token = sessionStorage.getItem("x-auth-token");
+    const token = localStorage.getItem("x-auth-token");
     if (token) this.props.history.push(`/me`);
     window.addEventListener("resize", () => {
       this.setState({

@@ -26,7 +26,7 @@ export default class MyTeams extends Component {
                 method: 'get',
                 headers: {
                     'Content-Type': "application/json",
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 },
             })
             resUser = await resUser.json()
@@ -35,7 +35,7 @@ export default class MyTeams extends Component {
                 method: 'get',
                 headers: {
                     'Content-Type': "application/json",
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 },
             })
             resChecklists = await resChecklists.json();
@@ -61,7 +61,7 @@ export default class MyTeams extends Component {
                 method: 'get',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;
@@ -135,7 +135,7 @@ export default class MyTeams extends Component {
                 }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;
@@ -164,7 +164,7 @@ export default class MyTeams extends Component {
                 method: 'delete',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;
