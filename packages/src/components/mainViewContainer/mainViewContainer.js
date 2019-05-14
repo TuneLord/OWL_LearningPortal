@@ -84,6 +84,10 @@ export default class MainViewContainer extends Component {
         this.changeDisabled();
     };
 
+    editExistList() {
+        this.changeDisabled();
+    }
+
     editChecklistName(e) {
         if (this.state.activeEditor) return
         const checklist = e.currentTarget.parentElement;
@@ -137,6 +141,10 @@ export default class MainViewContainer extends Component {
 
     async saveChecklist() {
         const that = this;
+        let listId = null
+        const newList = that.state.activeChecklist.listId
+        if (newList) listId = newList
+        else listId = that.state.activeChecklist.firstElementChild.id
         this.setState({
             activeEditor: false,
             disabled: 'disabled',
@@ -155,7 +163,7 @@ export default class MainViewContainer extends Component {
         };
 
         try {
-            const response = await fetch(`/checklist/${that.state.activeChecklist.listId}`, {
+            const response = await fetch(`/checklist/${listId}`, {
                 method: "put",
                 headers: requestHeaders,
                 body: JSON.stringify(requestBody)
@@ -234,6 +242,7 @@ export default class MainViewContainer extends Component {
                     changeEditorToReader={this.state.showReader}
                     saveDisplay={this.state.saveDisplay} /> : null}
                 <MyChecklists
+                    editChecklist={() => this.editExistList()}
                     editChecklistName={(e, listId) => this.editChecklistName(e, listId)}
                     updateChecklistNumber={() => this.updateChecklistNumber()}
                     newChecklist={this.state.newChecklist}
