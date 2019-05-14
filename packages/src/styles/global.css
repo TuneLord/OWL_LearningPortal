@@ -23,6 +23,7 @@
         --mainViewMenu: #fffde7;
         --mainViewChecklists:  #f5f3f0;
         --mainViewChecklistsIcons: #ffe082;
+        --itemOnHover: #fffde7;
 
     --mainViewMenu: #fffde7;
 
@@ -44,6 +45,45 @@
     --mainFont: 'Roboto', sans-serif;
     --logoFont: 'Fredoka One', cursive;
 
+}
+
+html[data-theme="dark"] {
+       /* Colors */
+    /*  Font color  */
+    --mainColor: #9d9da3;
+
+    /* SplashScreen */
+    --border: #e1e1e1;
+    --menuBackground: #373a66;
+    --menuCross: #384264;
+    --menuAccents: rgb(242, 243, 248);
+
+        /* MainView */
+        --mainViewMenu: #f8f8ee;
+        --mainViewChecklists:  #f0f0f5;
+        --mainViewChecklistsIcons: #487386;
+        --itemOnHover: #030218;
+
+    --mainViewMenu: #030218;
+
+    /* Loader */
+    --loaderBackground: rgba(0, 0, 0, .8);
+
+        /* Editor */
+        --editorMainColor: #000;
+        --editorBackground: #fff;
+        --editorBorder: #ddd;
+        --editorToolbarBackground: #464341;
+        --editorBoxShadow: rgba(0, 0, 0, 0.1);
+        --editorAlternativeBoxShadow: rgba(220,220,220,1);
+        --editorLinkBackground: #EEF8FF;
+        --editorBaloonBackground: rgba(17, 17, 17, 0.9);
+        --editorBaloonColor: #fff;
+
+    /* Fonts */
+    --mainFont: 'Roboto', sans-serif;
+    --logoFont: 'Fredoka One', cursive;
+    background-color: var(--mainViewMenu);
 }
 
 html {
