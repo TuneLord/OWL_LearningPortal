@@ -181,8 +181,8 @@ export default class MyTeam extends Component {
                     {this.props.data.members.map((el, index) =>
                         <li className="myteams_team" key={index} id={index}>
                             {el._id === this.props.data.mentorId ? 
-                                <i class="fas fa-chalkboard-teacher icon-member"></i>
-                                : <i class="fas fa-user-graduate icon-member"></i>
+                                <i className="fas fa-chalkboard-teacher icon-member"></i>
+                                : <i className="fas fa-user-graduate icon-member"></i>
                             }
                             {el.email}
                             {this.props.data.isMentor && el._id !== this.props.data.mentorId && <i className="material-icons icon-float icon-color" onClick={(e) => this.onClickRemoveMember(e)}>delete_forever</i>}
