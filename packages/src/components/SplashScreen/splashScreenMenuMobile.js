@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./splashScreenMenuMobile.css";
 import { slide as Menu } from 'react-burger-menu';
+import ThemeChanger from "../App/ThemeChanger";
 import { Link } from "react-router-dom";
 
 export default class SplashScreenMenuMobile extends Component {
@@ -17,6 +18,7 @@ export default class SplashScreenMenuMobile extends Component {
           <Link className="menu-item" to="/howtouse">Jak używać aplikacji?</Link>
           <Link className="menu-item" to="/faq">Pytania i odpowiedzi</Link>
           <Link className="menu-item" to="/contact">Kontakt</Link>
+          <Link className="menu-item" to={window.location}><ThemeChanger /></Link>
           <Link className="menu-item" to="/login">Zaloguj się</Link>
           <Link className="menu-item" to="/register">Załóż konto</Link>
         </Menu>
