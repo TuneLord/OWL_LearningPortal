@@ -22,7 +22,7 @@ router.post('/', auth, async (req, res) => {
     const result = await team.save()
 
     const user = await User.findById(req.user._id);
-    user.teams = { teamId: result._id, name: result.name, isOwner: true };
+    user.teams.push({ teamId: result._id, name: result.name, isOwner: true });
     await user.save();
 
     return res.status(200).send({ teamId: result._id, name: result.name, isOwner: true });

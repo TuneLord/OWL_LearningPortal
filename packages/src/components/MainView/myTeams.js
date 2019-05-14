@@ -232,15 +232,15 @@ export default class MyTeams extends Component {
                                     }
                                 </ul>
                             </div>
-
+                            {this.state.checkLists.length > 0 && this.state.teams[this.state.teamShowed].isOwner === true &&
                             <div className="checklists-content">
-                            <div className="myteams-title">
-                                <i className="fas fa-tasks"></i>
-                                <h3 className="myteams-title-header">Przypisane checklisty</h3>
-                            </div>
-                            <ul className="">
-                                <div className = "myteams-list">
+                                <div className="myteams-title">
+                                    <i className="fas fa-tasks"></i>
+                                    <h3 className="myteams-title-header">Przypisane checklisty</h3>
                                 </div>
+                                <ul className="">
+                                    <div className = "myteams-list">
+                                    </div>
                                     <div className="add">
                                         <select name="nazwa">
                                             {this.state.checkLists.map((el, index) => 
@@ -251,11 +251,10 @@ export default class MyTeams extends Component {
                                             <button className="" onClick={this.onClickAddTeam} disabled={this.state.addTeam.isDisable}>Przypisz</button>
                                         </div>
                                     </div>                            
-                            </ul>
+                                </ul>
+                            </div>
+                            }
                         </div>
-
-                        </div>
-                        
                         <div className="team-content">
                             <div className="myteams-title">
                                 <i className="material-icons">people</i>
