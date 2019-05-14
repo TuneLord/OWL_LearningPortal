@@ -23,12 +23,9 @@ export default class ChecklistEditorContainer extends Component {
     };
 
     componentDidUpdate(prevProps) {
-        console.log(this.props.cleanEditor, prevProps.cleanEditor, this.state.initial);
         if (this.props.cleanEditor !== prevProps.cleanEditor) {
             this.setState({ initial: "" });
         }
-
-        console.log(this.state.initial)
     };
 
     onSave = (content) => {

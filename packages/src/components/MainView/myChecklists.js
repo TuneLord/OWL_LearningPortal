@@ -3,6 +3,7 @@ import "./myChecklists.css";
 
 export default class MyChecklists extends Component {
   state = {
+    author: null,
     data: []
   };
 
@@ -18,7 +19,11 @@ export default class MyChecklists extends Component {
       })
       response = await response.json()
       console.log(response)
-      this.setState({ data: response.checkLists })
+      this.setState({
+        author: response.name,
+        data: response.checkLists
+      })
+      console.log(this.state.data)
     } catch (err) { console.log(err) }
   }
 
@@ -32,7 +37,7 @@ export default class MyChecklists extends Component {
 
   async deleteChecklist() {
     console.log(this)
-    const that = this.state.data[0];
+    // const that = this.state.data[0];
     const token = sessionStorage.getItem('x-auth-token');
     const requestHeaders = {
       'Content-Type': "application/json; charset=UTF-8",
@@ -63,12 +68,12 @@ export default class MyChecklists extends Component {
           </div>
           <ul className="mychecklists_list">
             {this.state.data ? this.state.data.map(el =>
-              <li className="mychecklists_checklista" key={el.title}>
-                {el.title}
+              <li className="mychecklists_checklista" key={el.name}>
+                {el.name}
                 <i className="material-icons icon-float icon-color">link</i>
                 <i className="material-icons icon-float icon-color">book</i>
                 <i className="material-icons icon-float icon-color" onClick={() => this.deleteChecklist()}>delete</i>
-                <div className="mychecklist_author">Autor: {el.author}</div>
+                <div className="mychecklist_author">Autor: {this.state.author}</div>
               </li>) : null}
           </ul>
         </div>
