@@ -55,9 +55,9 @@ export default class MyChecklists extends Component {
       return;
     }
   }
-  async deleteChecklist(listId, e) {
-    // e.stopPropagation();
+  async deleteChecklist(listId) {
     if (this.props.activeEditor) return
+    if (this.props.inputExist) return
     const token = sessionStorage.getItem("x-auth-token");
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",
@@ -126,6 +126,10 @@ export default class MyChecklists extends Component {
     this.props.changeEditorToReader();
   }
 
+  editName(e, listId) {
+    this.props.editChecklistName(e, listId)
+  }
+
   createMyChecklist = el => (
     <li
       id={el.name}
@@ -139,7 +143,7 @@ export default class MyChecklists extends Component {
         onClick={this.props.editChecklist}>edit</i>
       <i
         className="material-icons icon-float icon-color"
-        onClick={this.props.editChecklistName}
+        onClick={(e, listId) => this.editName(e, listId)}
       >
         title{" "}
       </i>
