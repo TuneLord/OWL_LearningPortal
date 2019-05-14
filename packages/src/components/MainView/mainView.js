@@ -7,7 +7,7 @@ import MyTeams from "./myTeams";
 
 export default class MainView extends Component {
   state = {
-    menuMobilePosition: '-400px'
+    menuMobilePosition: `-${window.innerWidth}px`
   };
 
   mobileMenuEnter() {
@@ -15,18 +15,25 @@ export default class MainView extends Component {
   };
 
   mobileMenuClose() {
-    this.setState({ menuMobilePosition: '-400px' })
+    this.setState({ menuMobilePosition: `-${window.innerWidth}px` })
   };
 
-  render() {
+  componentDidMount = () => {
+    window.addEventListener("resize", () => {
+      this.setState({
+        menuMobilePosition: `-${window.innerWidth}px`
+      })
+    });
+  }
 
+  render() {
     const windowWidth = window.innerWidth;
     const path = window.location.pathname;
 
     return (
       <section className="mainView">
-        {windowWidth > 1025 ? <MainViewMenuDesktop /> : null}
-        {windowWidth < 1025 ? <MainViewMenuMobile onClick={() => this.mobileMenuClose()} menuPosition={this.state.menuMobilePosition} /> : null}
+        {windowWidth > 1024 ? <MainViewMenuDesktop /> : null}
+        {windowWidth <= 1024 ? <MainViewMenuMobile onClick={() => this.mobileMenuClose()} menuPosition={this.state.menuMobilePosition} /> : null}
         {path.endsWith(`/myteams`) ? <MyTeams onClick={() => this.mobileMenuEnter()} /> : null}
         {path.endsWith(`/me`) ? <MainViewContainer onClick={() => this.mobileMenuEnter()} /> : null}
       </section>
