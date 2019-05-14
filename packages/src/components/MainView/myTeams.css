@@ -5,54 +5,69 @@
     min-height: 100vh;
 }
 
-#myteam {
+#myteams .container {
     width: 100%;
-    height: 70vh;
+    min-height: 100vh;
+    background-color: #f0f3f3;
+    display: grid;
+    grid-template-columns: 65% 35%;
+    grid-template-rows: 60px 100px;
+}
+
+#myteams .header {
+    grid-column: 1 / 3;
+    grid-row: 1 / span 1;
+    position: relative;
+    border-bottom: 1px solid var(--border);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 60px;
 }
 
-.myteams_content {
-    width: 70%;
-    height: 100vh;
+#myteams .state-container {
+    box-sizing: border-box;
     display: flex;
-    flex-direction: column;
-    padding: 0 50px;
-}
-
-.myteams_buttons {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.countTeamButton {
-    background-color: var(--menuBackground);
-    width: 47.5%;
+    justify-content: space-around;
+    padding: 16px;
     height: 100px;
-    margin: 50px 0;
+    flex-shrink: 1;
+}
+
+#myteams .state-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--menuCross);
     font-size: 16px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
+    height: 100%;
+    color: var(--menuAccents);
+    border-radius: 23px;
+    padding: 0 16px;
+    width: 40%;
 }
 
-.myteams_container {
-    width: 30%;
-    height: 100vh;
-    margin-right: 15px;
-    -webkit-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    -moz-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    border: 1px solid var(--border);
-    border-top: none;
+#myteams .state-button > span {
+    font-size: 26px;
+    width: 100%;
 }
 
-.myteams_title,
-.myteam_title {
-    margin-bottom: 1vh;
+#myteams .add-team-button {
+    cursor: pointer;
+}
+
+#myteams .add-team-button:hover {
+    background-color: var(--menuBackground);
+}
+
+#myteams .teams-content, #myteams .team-content {
+   margin: 15px;
+   box-sizing: border-box;
+}
+
+#myteams .myteams-title {
+    margin-bottom: 15px;
     color: var(--menuBackground);
     padding: 15px 5px;
     text-align: center;
@@ -61,64 +76,129 @@
     align-items: center;
     border-radius: 5px;
     font-size: 20px;
-
-}
-
-.myteams_title {
     background-color: #fff;
 }
 
-.myteam_checklistsTitle {
-    color: var(--menuBackground);
-    padding: 25px 5px;
-    font-size: 20px;
-}
-
-.myteam {
-    display: flex;
-    justify-content: center;
-}
-
-.myteams_title h3 {
-    color: var(--mainColor);
-}
-
-.myteams_title__header {
+#myteams .myteams-title-header {
     display: inline-block;
     margin-left: 5px;
     font-size: 16px;
-
+    color: var(--mainColor);
 }
 
-.myteams_list {
+#myteams .myteams-list {
     background-color: #fff;
+    list-style-type: none;
+    width: 100%;
     border-radius: 5px;
-    list-style-type: none;
-    overflow-y: scroll;
 }
 
-.myteam_list {
-    list-style-type: none;
-    overflow-y: scroll;
-    height: 50%;
-    width: 95%;
-    border: 1px solid var(--border);
-}
-
-.myteams_team {
+#myteams .myteams-list > li {
+    width: 100%;
     border-bottom: 1px solid var(--mainViewChecklists);
     padding: 15px;
     cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
 }
 
-.myteams_team:hover {
+#myteams .teams-content .myteams-list>li:hover {
     background-color: #fffde7;
 }
 
-/* .myteam_author {
-    font-size: 0.75rem;
-    font-style: italic;
-} */
+#myteams .myteams-list>li:last-of-type {
+    border-bottom: none;
+}
+
+#myteams .add {
+    box-sizing: border-box;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--menuBackground);
+    border-radius: 0px 0px 5px 5px;
+}
+
+#myteams .add input {
+    width: 100%;
+    padding: 8px 15px;
+    color: var(--mainColor);
+    border-radius: 15px;
+
+}
+
+#myteams .add button {
+    padding: 8px 15px;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    border: 1px solid #fff;
+}
+
+#myteams .add button:first-of-type {
+    margin-right: 15px;
+}
+
+#myteams .add button:hover {
+    background-color: var(--menuCross);
+}
+
+#myteams .error {
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+#myteams .change {
+    box-sizing: border-box;
+    padding: 15px;
+    display: flex;
+    background-color: #fff;
+    border-radius: 5px 5px 0px 0px;
+    justify-content: space-between;
+}
+
+#myteams .change > div:first-of-type {
+    flex-grow: 1;
+    padding-right: 16px;
+}
+
+#myteams .change input {
+    color: var(--menuBackground);
+    background-color: #fff;
+    font-size: 18px;
+    width: 100%;
+}
+
+#myteams .change button { 
+    background-color: #fff;
+    color: var(--menuCross);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#myteams .change-name > span {
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+    color: var(--menuCross);
+}
+
+#myteams .change button:hover {
+    color: var(--menuBackground);
+}
+
+#myteams .team-content li svg {
+    width: 16px;
+    margin-right: 16px;
+} 
+
+div.width100 {
+    width: 100%;
+}
 
 .icon-color {
     color: var(--mainViewChecklistsIcons);
@@ -128,15 +208,18 @@
     color: var(--menuBackground);
 }
 
-
 .icon-float {
-    float: right;
-    margin-left: 20px;
+    margin-left: 16px;
+}
+
+.icon-member {
+    display: inline-block;
+    color: var(--menuBackground);
 }
 
 /* scrollbar */
 
-.myteams_list::-webkit-scrollbar,
+/* .myteams_list::-webkit-scrollbar,
 .myteam_list::-webkit-scrollbar {
     width: 8px;
     background-color: var(--mainViewChecklists);
@@ -149,27 +232,15 @@
             color-stop(.5, rgba(255, 255, 255, .2)),
             color-stop(.5, transparent), to(transparent));
 }
-
-
-.icon-member {
-    display: inline-block;
-    color: var(--menuBackground);
-}
+*/
 
 /* mobile */
+
 @media only screen and (max-width: 768px) {
-    .myteams_container {
-        height: auto;
-        width: 90%;
-    }
-
-    .myteams_list,
-    .myteam_list {
-        overflow-y: auto;
-    }
-
-    #myteam {
-        height: auto;
+    
+    #myteams .container {
+        display: flex;
+        flex-direction: column;
     }
 
 }
