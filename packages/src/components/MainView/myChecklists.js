@@ -2,10 +2,16 @@ import React, { Component } from "react";
 import "./myChecklists.css";
 
 export default class MyChecklists extends Component {
-  state = {
-    author: null,
-    data: []
-  };
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      author: null,
+      data: []
+    };
+
+    // this.deleteChecklist = this.deleteChecklist.bind(this);
+  }
 
   async componentDidMount() {
     const requestHeaders = {
@@ -18,14 +24,12 @@ export default class MyChecklists extends Component {
         headers: requestHeaders,
       })
       response = await response.json()
-      console.log(response)
       this.setState({
         author: response.name,
         data: response.checkLists
       })
-      console.log(this.state.data)
     } catch (err) { console.log(err) }
-  }
+  };
 
   componentDidUpdate(prevProps) {
     if (this.props.newChecklist !== prevProps.newChecklist) {
@@ -33,11 +37,9 @@ export default class MyChecklists extends Component {
         data: [...this.state.data, this.props.newChecklist]
       })
     }
-  }
+  };
 
-  async deleteChecklist() {
-    console.log(this)
-    // const that = this.state.data[0];
+  async deleteChecklist(listId) {
     const token = sessionStorage.getItem('x-auth-token');
     const requestHeaders = {
       'Content-Type': "application/json; charset=UTF-8",
@@ -45,11 +47,25 @@ export default class MyChecklists extends Component {
     };
 
     try {
-      const response = await fetch(`/checklist/:${this.state.data}`, {
+      const response = await fetch(`/checklist/${listId}`, {
         method: "delete",
         headers: requestHeaders
       })
       if (response.status !== 200) throw response;
+      try {
+        let response = await fetch(`/user`, {
+          method: 'get',
+          headers: requestHeaders,
+        })
+        if (response.status !== 200) throw response;
+        response = await response.json()
+        this.setState({
+          author: response.name,
+          data: response.checkLists
+        })
+        this.props.updateChecklistNumber()
+      } catch (err) { console.log(err) }
+
     } catch (error) {
       alert("Nie udało się połączyć z serwerem!");
       return
@@ -69,10 +85,10 @@ export default class MyChecklists extends Component {
           <ul className="mychecklists_list">
             {this.state.data ? this.state.data.map(el =>
               <li className="mychecklists_checklista" key={el.name}>
-                {el.name}
+                <p id={el.listId} onClick={this.props.editChecklistName}>{el.name}</p>
                 <i className="material-icons icon-float icon-color">link</i>
-                <i className="material-icons icon-float icon-color">book</i>
-                <i className="material-icons icon-float icon-color" onClick={() => this.deleteChecklist()}>delete</i>
+                <i className="material-icons icon-float icon-color">edit</i>
+                <i className="material-icons icon-float icon-color" onClick={() => this.deleteChecklist(el.listId)}>delete</i>
                 <div className="mychecklist_author">Autor: {this.state.author}</div>
               </li>) : null}
           </ul>
