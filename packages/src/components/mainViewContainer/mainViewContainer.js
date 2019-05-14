@@ -51,13 +51,15 @@ export default class MainViewContainer extends Component {
             activeEditor: true
         });
 
+        console.log(this.state.newChecklist)
+
         const token = sessionStorage.getItem('x-auth-token');
         const requestHeaders = {
             'Content-Type': "application/json; charset=UTF-8",
             "x-auth-token": token
         };
         const requestBody = {
-            'name': this.state.newChecklist.title,
+            'name': addInput.value,
             'content': null
         };
 
@@ -69,6 +71,7 @@ export default class MainViewContainer extends Component {
             })
             if (response.status !== 200) throw response;
             response = response = await response.json();
+            console.log(response)
             // this.setState({newChecklist.id: response[response.length - 1].listId });
             console.log(response[response.length - 1])
         } catch (error) {
@@ -96,7 +99,7 @@ export default class MainViewContainer extends Component {
             "x-token": token
         };
         const requestBody = {
-            'name': this.state.newChecklist.title,
+            'name': this.state.newChecklist.name,
             'content': content
         };
 
