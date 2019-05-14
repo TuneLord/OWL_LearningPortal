@@ -23,8 +23,7 @@ class Register extends React.Component {
     componentDidMount()
     {
         const token = sessionStorage.getItem("x-auth-token");
-        const id = sessionStorage.getItem("id");
-        if (id && token) this.props.history.push(`/me/${id}`);
+        if (token) this.props.history.push(`/me`);
     }
     
     onChangeName = (e) => {
@@ -37,7 +36,7 @@ class Register extends React.Component {
             error = 'Nazwa powinna posiadać min. 3 znaki';
         else if (e.target.value.length > 50)
             error = 'Dozwolona długość nazwy do 50 znaków';
-        else if (!(/^[a-zA-Z\d@$!%*#?&][a-zA-Z\d\s@$!%*#?&]+[a-zA-Z\d@$!%*#?&]$/.test(e.target.value)))
+        else if (!(/^[\S].+[\S]$/.test(e.target.value)))
             error = 'Nazwa zawiera niedozwolone znaki';
         else isDisable = false;
 
@@ -117,8 +116,7 @@ class Register extends React.Component {
             sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             this.props.loginStatus(true);
             response = await response.json();
-            sessionStorage.setItem("id", response);
-            this.props.history.push(`/me/${response}`);
+            this.props.history.push(`/me`);
             console.log('Konto zostało utworzone')
         } catch(err) {
             console.log(err);
