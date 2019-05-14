@@ -186,94 +186,53 @@ export default class MyChecklists extends Component {
 	//         </ul>
 	//       </div>
 
-	//       <div className="sharedchecklists_container">
-	//         <div className="mychecklists_title">
-	//           <i className="material-icons"> school</i>
-	//           <h3 className="mychecklists_title__header">Udostępnione checklisty</h3>
-	//         </div>
-	//         <ul className="mychecklists_list">
-	//           {this.state.data ? this.state.noMyLists.map(el =>
-	//             <li className="mychecklists_checklista" key={el.name}>
-	//               <p id={el.listId}>{el.name}</p>
-	//               <i className="material-icons icon-float icon-color">link</i>
-	//               {/* <i className="material-icons icon-float icon-color">edit</i> */}
-	//               <i className="material-icons icon-float icon-color" onClick={() => this.unsubCheckList(el.listId)}>delete</i>
-	//               <div className="mychecklist_author">Autor: {this.state.author}</div>
-	//             </li>) : null}
-	//         </ul>
-	//       </div>
-	//     </section>
-	//   );
-	// };
+  clickSharedList(e) {
+    this.props.chooseList(e);
+    this.props.changeEditorToReader();
+  }
 
-	StandardRender = () => (
-		<section id="mychecklists">
-			<div className="mychecklists_container">
-				<div className="mychecklists_title">
-					<i className="material-icons"> school </i>
-					<h3 className="mychecklists_title__header">Moje checklisty</h3>
-				</div>
-				<ul className="mychecklists_list">
-					{this.state.data
-						? this.state.myLists.map(el => (
-								<li className="mychecklists_checklista" key={el.name}>
-									<p id={el.listId} onClick={this.props.editChecklistName}>
-										{el.name}
-									</p>
-									<i className="material-icons icon-float icon-color">link</i>
-									<i className="material-icons icon-float icon-color">edit</i>
-									<i
-										className="material-icons icon-float icon-color"
-										onClick={() => this.deleteChecklist(el.listId)}
-									>
-										delete
-									</i>
-									<div className="mychecklist_author">
-										Autor: {this.state.author}
-									</div>
-								</li>
-						  ))
-						: null}
-				</ul>
-			</div>
+  StandardRender = () => (
+    <section id="mychecklists">
+      <div className="mychecklists_container">
+        <div className="mychecklists_title">
+          <i className="material-icons"> school </i>
+          <h3 className="mychecklists_title__header">Moje checklisty</h3>
+        </div>
+        <ul className="mychecklists_list">
+          {this.state.data ? this.state.myLists.map(el =>
+            <li id={el.name} className="mychecklists_checklista" key={el.name} onClick={this.props.chooseList}>
+              <p id={el.listId} >{el.name}</p>
+              <i className="material-icons icon-float icon-color">link</i>
+              <i className="material-icons icon-float icon-color">edit</i>
+              <i className="material-icons icon-float icon-color" onClick={this.props.editChecklistName}>title </i>
+              <i className="material-icons icon-float icon-color" onClick={() => this.deleteChecklist(el.listId)}>delete</i>
+              <div className="mychecklist_author">Autor: {this.state.author}</div>
+            </li>) : null}
+        </ul>
+      </div>
 
-			<div className="sharedchecklists_container">
-				<div className="mychecklists_title">
-					<i className="material-icons"> school</i>
-					<h3 className="mychecklists_title__header">
-						Udostępnione checklisty
-					</h3>
-				</div>
-				<ul className="mychecklists_list">
-					{this.state.data
-						? this.state.noMyLists.map(el => (
-								<li className="mychecklists_checklista" key={el.name}>
-									<p id={el.listId}>{el.name}</p>
-									<i className="material-icons icon-float icon-color">link</i>
-									{/* <i className="material-icons icon-float icon-color">edit</i> */}
-									<i
-										className="material-icons icon-float icon-color"
-										onClick={() => this.unsubCheckList(el.listId)}
-									>
-										delete
-									</i>
-									<div className="mychecklist_author">
-										Autor: {this.state.author}
-									</div>
-								</li>
-						  ))
-						: null}
-				</ul>
-			</div>
-		</section>
-	);
+      <div className="sharedchecklists_container" >
+        <div className="mychecklists_title">
+          <i className="material-icons"> school</i>
+          <h3 className="mychecklists_title__header">Udostępnione checklisty</h3>
+        </div>
+        <ul className="mychecklists_list">
+          {this.state.data ? this.state.noMyLists.map(el =>
+            <li id={el.name} className="mychecklists_checklista" key={el.name} onClick={(e) => this.clickSharedList(e)}>
+              <p id={el.listId}>{el.name}</p>
+              <i className="material-icons icon-float icon-color">link</i>
+              {/* <i className="material-icons icon-float icon-color">edit</i> */}
+              <i className="material-icons icon-float icon-color" onClick={() => this.unsubCheckList(el.listId)}>delete</i>
+              <div className="mychecklist_author">Autor: {this.state.author}</div>
+            </li>) : null}
+        </ul>
+      </div>
+    </section>
+  );
 
-	_createRender() {
-		const { StandardRender } = this;
-		return this.state.isLoaded ? <StandardRender /> : <Loader />;
-	}
 
-	render() {
-		return this._createRender();
-	}
-}
+
+  _createRender() {
+    const { StandardRender } = this;
+    return this.state.isLoaded ? <StandardRender /> : <Loader />;
+  }
