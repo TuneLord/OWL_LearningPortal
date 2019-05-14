@@ -92,7 +92,7 @@ html[data-theme="dark"] {
         --editorAlternativeBoxShadow: rgba(220,220,220,1);
         --editorLinkBackground: #EEF8FF;
         --editorBaloonBackground: rgba(17, 17, 17, 0.9);
-        --editorBaloonColor: rgb(9, 12, 41);
+        --editorBaloonColor: #fff;
         --checklistEditorContainer:  #030218;
         --checklistEditorButtons: #222423;
         --checklistEditorButtonOnHover: #3f3f3f;

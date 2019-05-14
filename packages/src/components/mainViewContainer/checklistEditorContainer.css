@@ -19,7 +19,7 @@
 .checklist__header {
     display: grid;
     grid-template-columns: 50% 25% 25%;
-    background-color: var(--editorBaloonColor);
+    background-color: var(--bgrSingIn);
     margin-bottom: 1vh;
     border-radius: 5px;
     height: 10%;
@@ -51,7 +51,7 @@
 }
 
 .checklistEditor {
-    background-color: var(--editorBaloonColor);
+    background-color: var(--bgrSingIn);
     border-radius: 5px;
     height: 88%;
 }
