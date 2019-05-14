@@ -41,8 +41,8 @@ export default class MyChecklists extends Component {
       });
       if (!response.ok) throw response;
       response = await response.json();
+      console.log(response.checkLists)
       this.setState({
-        author: response.name,
         data: response.checkLists,
         isLoaded: true
       });
@@ -74,25 +74,29 @@ export default class MyChecklists extends Component {
         headers: requestHeaders
       });
       if (response.status !== 200) throw response;
-      // try {
-      // 	this.setState({ isLoaded: false });
-      // 	let response = await fetch(`/user`, {
-      // 		method: "get",
-      // 		headers: requestHeaders
-      // 	});
-      // 	if (response.status !== 200) throw response;
-      //   response = await response.json();
-      //   console.log(response);
-      //   console.log(this.state);
-      // } catch (err) {
-      //   console.log(err);
-      // }
+      try {
+        this.setState({ isLoaded: false });
+        let response = await fetch(`/user`, {
+          method: "get",
+          headers: requestHeaders
+        });
+        if (response.status !== 200) throw response;
+        response = await response.json();
+        this.setState({
+          data: response.checkLists,
+          isLoaded: true
+        })
+        console.log(response);
+        // console.log(this.state);
+      } catch (err) {
+        console.log(err);
+      }
       // console.log(this.state.date)
-      this.setState({
-        // author: response.name,
-        data: this.state.data.filter(el => el.listId !== listId),
-        isLoaded: true
-      });
+      // this.setState({
+      //   // author: response.name,
+      //   data: this.state.data.filter(el => el.listId !== listId),
+      //   isLoaded: true
+      // });
       this.props.updateChecklistNumber();
     } catch (error) {
       alert("Nie udało się połączyć z serwerem!");
@@ -171,11 +175,6 @@ export default class MyChecklists extends Component {
     this.props.changeEditorToReader();
   }
 
-  clickSharedList(e) {
-    this.props.chooseList(e);
-    this.props.changeEditorToReader();
-  }
-
   StandardRender = () => (
     <section id="mychecklists">
       <div className="mychecklists_container">
@@ -191,7 +190,7 @@ export default class MyChecklists extends Component {
               <i className="material-icons icon-float icon-color">edit</i>
               <i className="material-icons icon-float icon-color" onClick={this.props.editChecklistName}>title </i>
               <i className="material-icons icon-float icon-color" onClick={() => this.deleteChecklist(el.listId)}>delete</i>
-              <div className="mychecklist_author">Autor: {this.state.author}</div>
+              <div className="mychecklist_author">Autor: {el.listAuthor}</div>
             </li>) : null}
         </ul>
       </div>
@@ -208,7 +207,7 @@ export default class MyChecklists extends Component {
               <i className="material-icons icon-float icon-color">link</i>
               {/* <i className="material-icons icon-float icon-color">edit</i> */}
               <i className="material-icons icon-float icon-color" onClick={() => this.unsubCheckList(el.listId)}>delete</i>
-              <div className="mychecklist_author">Autor: {this.state.author}</div>
+              <div className="mychecklist_author">Autor: {el.listAuthor}</div>
             </li>) : null}
         </ul>
       </div>
