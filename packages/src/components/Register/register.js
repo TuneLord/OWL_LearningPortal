@@ -28,7 +28,7 @@ class Register extends React.Component {
             error = 'Nazwa powinna posiadać min. 3 znaki';
         else if (e.target.value.length > 50)
             error = 'Dozwolona długość nazwy do 50 znaków';
-        else if (!(/^[a-zA-Z\d\s@$!%*#?&]+$/.test(e.target.value)))
+        else if (!(/^[a-zA-Z\d@$!%*#?&][a-zA-Z\d\s@$!%*#?&]+[a-zA-Z\d@$!%*#?&]$/.test(e.target.value)))
             error = 'Nazwa zawiera niedozwolone znaki';
         else isDisable = false;
 
