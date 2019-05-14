@@ -160,7 +160,7 @@ class Register extends React.Component {
         const windowWidth = window.innerWidth;
 
         return (
-            <div>
+            <div id="container">
         {windowWidth < 1025 ?
           <SplashScreenMenuMobile /> :
           <SplashScreenMenuDesktop />

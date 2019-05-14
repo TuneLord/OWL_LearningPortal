@@ -23,7 +23,11 @@
     justify-content: center;
     align-items: center;
     height: 60px;
+    display: grid;
+    grid-template-columns: 65% 35%;
+    text-align: center;
 }
+
 
 #myteams .state-container {
     box-sizing: border-box;
@@ -241,6 +245,10 @@ div.width100 {
     #myteams .container {
         display: flex;
         flex-direction: column;
+    }
+
+    #myteams .header {
+        display: flex;
     }
 
 }
