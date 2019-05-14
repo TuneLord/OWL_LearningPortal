@@ -105,10 +105,11 @@ export default class MainViewContainer extends Component {
 		this.setState({ dialogOpen: false });
 	}
 
-	editExistList() {
-		if (this.state.inputExist) return;
-		this.changeDisabled();
-	}
+    editExistList() {
+        if (this.state.inputExist) return
+        this.setState({ activeEditor: true });
+        this.changeDisabled();
+    }
 
 	async putChecklistOnServer(name) {
 		const token = localStorage.getItem("x-auth-token");

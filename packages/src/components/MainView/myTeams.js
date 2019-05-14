@@ -199,14 +199,14 @@ export default class MyTeams extends Component {
 
     render() {
         const windowWidth = window.innerWidth;
-        return ( 
+        return (
             <div id="myteams">
-                {this.state._id === null ? 
+                {this.state._id === null ?
                     <Loader /> :
-                    <section className = "container">
+                    <section className="container">
                         <div className="header">
                             <h2>Panel {this.state.type}a</h2>
-                             {windowWidth <= 1024 ? <div className="menu-burger" onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}    
+                            {windowWidth <= 1024 ? <div className="menu-burger" onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}
                         </div>
                         <div className="state-container">
                             <button className="state-button team">
@@ -218,60 +218,60 @@ export default class MyTeams extends Component {
                         <div>
                             <div className="teams-content">
                                 <div className="myteams-title">
-                                   <i class="fas fa-campground"></i>
+                                    <i class="fas fa-campground"></i>
                                     <h3 className="myteams-title-header">Moje teamy</h3>
                                 </div>
                                 <ul className="">
-                                    <div className = "myteams-list">
-                                    {this.state.data.map((el, index) =>
-                                        <li className={index === this.state.teamShowed ? 'active' : ''} key={index} id={index} onClick={e => this.onClickShowTeam(e)}>
-                                            {el.name}
-                                            {this.state._id === el.mentorId  && <i className="material-icons icon-float icon-color" onClick={(e) => this.onClickRemoveTeam(e)}>delete_forever</i>}
-                                        </li>)
-                                    }</div>
-                                    {this.state.addTeam.showInput && 
+                                    <div className="myteams-list">
+                                        {this.state.data.map((el, index) =>
+                                            <li className={index === this.state.teamShowed ? 'active' : ''} key={index} id={index} onClick={e => this.onClickShowTeam(e)}>
+                                                {el.name}
+                                                {this.state._id === el.mentorId && <i className="material-icons icon-float icon-color" onClick={(e) => this.onClickRemoveTeam(e)}>delete_forever</i>}
+                                            </li>)
+                                        }</div>
+                                    {this.state.addTeam.showInput &&
                                         <div className="add">
-                                            <input type='text' placeholder='wpisz nazwę teamu' value={this.state.addTeam.value} onChange={this.onChangeName}/>
+                                            <input type='text' placeholder='wpisz nazwę teamu' value={this.state.addTeam.value} onChange={this.onChangeName} />
                                             {this.state.addTeam.error && (<div className='error'>{this.state.addTeam.error}</div>)}
                                             <div>
                                                 <button className="" onClick={this.onClickAddTeam} disabled={this.state.addTeam.isDisable}>Dodaj</button>
                                                 <button className="" onClick={this.onClickAddTeamCancel}>Anuluj</button>
                                             </div>
-                                        </div> 
+                                        </div>
                                     }
                                 </ul>
                             </div>
 
                             <div className="checklists-content">
-                            <div className="myteams-title">
-                                <i class="fas fa-tasks"></i>
-                                <h3 className="myteams-title-header">Przypisane checklisty</h3>
-                            </div>
-                            <ul className="">
-                                <div className = "myteams-list">
+                                <div className="myteams-title">
+                                    <i class="fas fa-tasks"></i>
+                                    <h3 className="myteams-title-header">Przypisane checklisty</h3>
                                 </div>
+                                <ul className="">
+                                    <div className="myteams-list">
+                                    </div>
                                     <div className="add">
 
                                         <select name="nazwa">
                                             <option selected>Tu wpisz pierwszą możliwość</option>
                                             <option>Tu wpisz drugą możliwość</option>
-                                        </select>                                       
+                                        </select>
                                         <div>
                                             <button className="" onClick={this.onClickAddTeam} disabled={this.state.addTeam.isDisable}>Przypisz</button>
                                         </div>
-                                    </div>                            
-                            </ul>
-                        </div>
+                                    </div>
+                                </ul>
+                            </div>
 
                         </div>
-                        
+
                         <div className="team-content">
                             <div className="myteams-title">
                                 <i className="material-icons">people</i>
                                 <h3 className="myteams-title-header">Członkowie</h3>
                             </div>
-                            {this.state.teamShowed !== null && 
-                                <MyTeam data={this.state.teamShowedData} onChange={this.onChangeMyTeam}/>
+                            {this.state.teamShowed !== null &&
+                                <MyTeam data={this.state.teamShowedData} onChange={this.onChangeMyTeam} />
                             }
                         </div>
                     </section>
