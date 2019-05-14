@@ -22,20 +22,30 @@ export default class MyTeams extends Component {
 
     async componentDidMount() {
         try {
-            let response = await fetch(`/user`, {
+            let resUser = await fetch(`/user`, {
                 method: 'get',
                 headers: {
                     'Content-Type': "application/json",
                     'x-auth-token': sessionStorage.getItem("x-auth-token")
                 },
             })
-            response = await response.json()
+            resUser = await resUser.json()
+
+            let resChecklists = await fetch('/user/checklist', {
+                method: 'get',
+                headers: {
+                    'Content-Type': "application/json",
+                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                },
+            })
+            resChecklists = await resChecklists.json();
+
             this.setState({
-                _id: response._id,
-                type: response.type,
-                data: response.teams,
-                checklists: response.checklists,
-                teamsNumber: response.teams.length
+                _id: resUser._id,
+                type: resUser.type,
+                data: resUser.teams,
+                checklists: resChecklists,
+                teamsNumber: resUser.teams.length
             })
             console.log(this.state)
         } catch (err) {
@@ -214,7 +224,7 @@ export default class MyTeams extends Component {
                                 <ul className="">
                                     <div className = "myteams-list">
                                     {this.state.data.map((el, index) =>
-                                        <li key={index} id={index} onClick={e => this.onClickShowTeam(e)}>
+                                        <li className={index === this.state.teamShowed ? 'active' : ''} key={index} id={index} onClick={e => this.onClickShowTeam(e)}>
                                             {el.name}
                                             {this.state._id === el.mentorId  && <i className="material-icons icon-float icon-color" onClick={(e) => this.onClickRemoveTeam(e)}>delete_forever</i>}
                                         </li>)
@@ -239,12 +249,7 @@ export default class MyTeams extends Component {
                             </div>
                             <ul className="">
                                 <div className = "myteams-list">
-                                {this.state.data.map((el, index) =>
-                                    <li key={index} id={index} onClick={e => this.onClickShowTeam(e)}>
-                                        {el.name}
-                                        {this.state._id === el.mentorId  && <i className="material-icons icon-float icon-color" onClick={(e) => this.onClickRemoveTeam(e)}>delete_forever</i>}
-                                    </li>)
-                                }</div>
+                                </div>
                                     <div className="add">
 
                                         <select name="nazwa">
