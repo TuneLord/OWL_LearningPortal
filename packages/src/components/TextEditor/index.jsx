@@ -6,7 +6,7 @@ import {
 	INLINE_STYLE,
 	ENTITY_TYPE
 } from "draftail";
-import { EditorState } from "draft-js";
+import { EditorState, convertFromRaw } from "draft-js";
 import { composeDecorators } from "draft-js-plugins-editor";
 import createFocusPlugin from "draft-js-focus-plugin";
 import createBlockDndPlugin from "draft-js-drag-n-drop-plugin";
@@ -110,9 +110,15 @@ class TextEditor extends React.Component {
 		if (this.props.readOnly) this.editor.current.setState({ readOnly: true });
 	}
 
-	componentDidUpdate(prevProps) {
+	componentDidUpdate() {
 		if (this.props.value === null)
 			this.editor.current.setState({ editorState: EditorState.createEmpty() });
+		else
+			this.editor.current.setState({
+				editorState: EditorState.createWithContent(
+					convertFromRaw(this.props.value)
+				)
+			});
 	}
 
 	// Callbacks used for changing buttons' colors
@@ -410,7 +416,7 @@ class TextEditor extends React.Component {
 
 	render() {
 		this._createToolbar();
-		console.log(this.props);
+		console.log(this.props.value);
 		return (
 			<div className="textEditor__container">
 				<DraftailEditor
@@ -421,7 +427,7 @@ class TextEditor extends React.Component {
 					inlineStyles={this.inlineStyles}
 					entityTypes={this.entityTypes}
 					readOnly={true}
-					maxListNesteing={4}
+					maxListNesting={4}
 					ref={this.editor}
 					topToolbar={this.props.readOnly ? null : undefined}
 				/>
