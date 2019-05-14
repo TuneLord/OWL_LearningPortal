@@ -27,6 +27,8 @@
 
     --mainViewMenu: #fffde7;
 
+    --bgrSingIn: #fff;
+
     /* Loader */
     --loaderBackground: rgba(0, 0, 0, .8);
 
@@ -54,17 +56,19 @@ html[data-theme="dark"] {
 
     /* SplashScreen */
     --border: #e1e1e1;
-    --menuBackground: #373a66;
-    --menuCross: #384264;
+    --menuBackground: #487386;
+    --menuCross: #373a66;
     --menuAccents: rgb(242, 243, 248);
 
         /* MainView */
         --mainViewMenu: #f8f8ee;
         --mainViewChecklists:  #f0f0f5;
-        --mainViewChecklistsIcons: #487386;
+        --mainViewChecklistsIcons: #384264;
         --itemOnHover: #030218;
 
     --mainViewMenu: #030218;
+    
+    --bgrSingIn: #f0f0f5;
 
     /* Loader */
     --loaderBackground: rgba(0, 0, 0, .8);
