@@ -9,8 +9,7 @@ export default class SplashScreen extends Component {
   componentDidMount()
   {
     const token = sessionStorage.getItem("x-auth-token");
-    const id = sessionStorage.getItem("id");
-    if (id && token) this.props.history.push(`/me/${id}`);
+    if (token) this.props.history.push(`/me`);
   }
 
   render() {
