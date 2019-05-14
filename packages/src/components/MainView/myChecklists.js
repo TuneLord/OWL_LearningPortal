@@ -166,25 +166,10 @@ export default class MyChecklists extends Component {
     this.setState({ noMyLists: sharedLists });
   }
 
-  // render() {
-  //   return (
-  //     <section id="mychecklists">
-  //       <div className="mychecklists_container">
-  //         <div className="mychecklists_title">
-  //           <i className="material-icons"> school </i>
-  //           <h3 className="mychecklists_title__header">Moje checklisty</h3>
-  //         </div>
-  //         <ul className="mychecklists_list">
-  //           {this.state.data ? this.state.myLists.map(el =>
-  //             <li className="mychecklists_checklista" key={el.name}>
-  //               <p id={el.listId} onClick={this.props.editChecklistName}>{el.name}</p>
-  //               <i className="material-icons icon-float icon-color">link</i>
-  //               <i className="material-icons icon-float icon-color">edit</i>
-  //               <i className="material-icons icon-float icon-color" onClick={() => this.deleteChecklist(el.listId)}>delete</i>
-  //               <div className="mychecklist_author">Autor: {this.state.author}</div>
-  //             </li>) : null}
-  //         </ul>
-  //       </div>
+  clickSharedList(e) {
+    this.props.chooseList(e);
+    this.props.changeEditorToReader();
+  }
 
   clickSharedList(e) {
     this.props.chooseList(e);
