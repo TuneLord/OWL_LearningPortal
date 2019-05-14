@@ -1,12 +1,8 @@
 @import '../../styles/global.css';
 
-
 #myteams {
     width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
 }
 
 #myteam {
@@ -99,7 +95,6 @@
     border-radius: 5px;
     list-style-type: none;
     overflow-y: scroll;
-    height: 80%;
 }
 
 .myteam_list {
@@ -155,6 +150,11 @@
             color-stop(.5, transparent), to(transparent));
 }
 
+
+.icon-member {
+    display: inline-block;
+    color: var(--menuBackground);
+}
 
 /* mobile */
 @media only screen and (max-width: 768px) {

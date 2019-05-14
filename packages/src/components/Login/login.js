@@ -15,6 +15,12 @@ class Login extends React.Component {
         };
     }
 
+    componentDidMount()
+    {
+        const token = sessionStorage.getItem("x-auth-token");
+        if (token) this.props.history.push(`/me`);
+    }
+    
     onChangeEmail = (e) => {
         let error = '';
         let isDisable = true;
@@ -67,12 +73,9 @@ class Login extends React.Component {
             if (response.status !== 200) throw response;
             sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             response = await response.json();
-            console.log(response);
             this.props.loginStatus(true);
-            sessionStorage.setItem("id", response);
-            this.props.history.push(`/me/${response}`);
+            this.props.history.push(`/me`);
             console.log('Logowanie przebiegło pomyślnie');
-            console.log(response)
         } catch (err) {
             console.log(err);
             if ([404, 400].includes(err.status)) {
@@ -103,8 +106,7 @@ class Login extends React.Component {
             sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             response = await response.json();
             this.props.loginStatus(true);
-            sessionStorage.setItem("id", response);
-            this.props.history.push(`/me/${response}`);
+            this.props.history.push(`/me`);
             console.log('Logowanie przebiegło pomyślnie')
         } catch (err) {
             console.log(err);
@@ -157,10 +159,5 @@ class Login extends React.Component {
         );
     }
 }
-
-// const mapStateToProps = (state) => {
-//     console.log(state);
-//     return state;
-// }
 
 export default connect(null, { loginStatus })(Login);
