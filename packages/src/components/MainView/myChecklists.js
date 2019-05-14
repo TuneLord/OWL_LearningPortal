@@ -31,7 +31,7 @@ export default class MyChecklists extends Component {
   async getChecklistsFromServer() {
     const requestHeaders = {
       "Content-Type": "application/json",
-      "x-auth-token": sessionStorage.getItem("x-auth-token")
+      "x-auth-token": localStorage.getItem("x-auth-token")
     };
     try {
       let response = await fetch(`/user`, {
@@ -58,7 +58,7 @@ export default class MyChecklists extends Component {
   async deleteChecklist(listId) {
     if (this.props.activeEditor) return
     if (this.props.inputExist) return
-    const token = sessionStorage.getItem("x-auth-token");
+    const token = localStorage.getItem("x-auth-token");
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",
       "x-auth-token": token
@@ -83,7 +83,7 @@ export default class MyChecklists extends Component {
   }
 
   async unsubCheckList(listId) {
-    const token = sessionStorage.getItem("x-auth-token");
+    const token = localStorage.getItem("x-auth-token");
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",
       "x-auth-token": token

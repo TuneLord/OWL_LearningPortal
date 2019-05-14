@@ -416,7 +416,6 @@ class TextEditor extends React.Component {
 
 	render() {
 		this._createToolbar();
-		console.log(this.props.value);
 		return (
 			<div className="textEditor__container">
 				<DraftailEditor

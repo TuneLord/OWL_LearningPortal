@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 export default class Logout extends React.Component {
     componentDidMount()
     {
-        sessionStorage.removeItem("id");
-        sessionStorage.removeItem("x-auth-token");
+        localStorage.removeItem("id");
+        localStorage.removeItem("x-auth-token");
     }
 	render() {
 		const windowWidth = window.innerWidth;

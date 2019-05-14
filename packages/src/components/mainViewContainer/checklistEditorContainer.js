@@ -26,12 +26,12 @@ export default class ChecklistEditorContainer extends Component {
             this.setState({ disabled: this.props.disabled });
         }
 
-        if (this.props.showLoadedContent !== prevProps.showLoadedContent) {
-            this.setState({
-                initial: JSON.parse(sessionStorage.getItem("draftail:content"))
-            });
-        }
-    }
+		if (this.props.showLoadedContent !== prevProps.showLoadedContent) {
+			this.setState({
+				initial: JSON.parse(sessionStorage.getItem("draftail:content"))
+			});
+		}
+	}
 
     onSave = content => {
         sessionStorage.setItem("draftail:content", JSON.stringify(content));
