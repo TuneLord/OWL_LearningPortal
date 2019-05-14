@@ -8,6 +8,7 @@ export default class MyTeams extends Component {
         _id: null,
         type: 'użytkownik',
         data: [],
+        checklists: [],
         teamsNumber: 0,
         teamShowed: null,
         teamShowedData: {},
@@ -33,6 +34,7 @@ export default class MyTeams extends Component {
                 _id: response._id,
                 type: response.type,
                 data: response.teams,
+                checklists: response.checklists,
                 teamsNumber: response.teams.length
             })
             console.log(this.state)
@@ -203,34 +205,65 @@ export default class MyTeams extends Component {
                             </button>
                             <button className="state-button add-team-button" onClick={this.onClickShowInput}>Utwórz nowy team</button>
                         </div>
-                        <div className="teams-content">
-                            <div className="myteams-title">
-                                <i className="material-icons">people</i>
-                                <h3 className="myteams-title-header">Moje teamy</h3>
+                        <div>
+                            <div className="teams-content">
+                                <div className="myteams-title">
+                                   <i class="fas fa-campground"></i>
+                                    <h3 className="myteams-title-header">Moje teamy</h3>
+                                </div>
+                                <ul className="">
+                                    <div className = "myteams-list">
+                                    {this.state.data.map((el, index) =>
+                                        <li key={index} id={index} onClick={e => this.onClickShowTeam(e)}>
+                                            {el.name}
+                                            {this.state._id === el.mentorId  && <i className="material-icons icon-float icon-color" onClick={(e) => this.onClickRemoveTeam(e)}>delete_forever</i>}
+                                        </li>)
+                                    }</div>
+                                    {this.state.addTeam.showInput && 
+                                        <div className="add">
+                                            <input type='text' placeholder='wpisz nazwę teamu' value={this.state.addTeam.value} onChange={this.onChangeName}/>
+                                            {this.state.addTeam.error && (<div className='error'>{this.state.addTeam.error}</div>)}
+                                            <div>
+                                                <button className="" onClick={this.onClickAddTeam} disabled={this.state.addTeam.isDisable}>Dodaj</button>
+                                                <button className="" onClick={this.onClickAddTeamCancel}>Anuluj</button>
+                                            </div>
+                                        </div> 
+                                    }
+                                </ul>
                             </div>
-                            <ul className="myteams-list">
+
+                            <div className="checklists-content">
+                            <div className="myteams-title">
+                                <i class="fas fa-tasks"></i>
+                                <h3 className="myteams-title-header">Przypisane checklisty</h3>
+                            </div>
+                            <ul className="">
+                                <div className = "myteams-list">
                                 {this.state.data.map((el, index) =>
                                     <li key={index} id={index} onClick={e => this.onClickShowTeam(e)}>
                                         {el.name}
                                         {this.state._id === el.mentorId  && <i className="material-icons icon-float icon-color" onClick={(e) => this.onClickRemoveTeam(e)}>delete_forever</i>}
                                     </li>)
-                                }
-                                {this.state.addTeam.showInput && 
+                                }</div>
                                     <div className="add">
-                                        <input type='text' placeholder='wpisz nazwę teamu' value={this.state.addTeam.value} onChange={this.onChangeName}/>
-                                        {this.state.addTeam.error && (<div className='error'>{this.state.addTeam.error}</div>)}
+
+                                        <select name="nazwa">
+                                            <option selected>Tu wpisz pierwszą możliwość</option>
+                                            <option>Tu wpisz drugą możliwość</option>
+                                        </select>                                       
                                         <div>
-                                            <button className="" onClick={this.onClickAddTeam} disabled={this.state.addTeam.isDisable}>Dodaj</button>
-                                            <button className="" onClick={this.onClickAddTeamCancel}>Anuluj</button>
+                                            <button className="" onClick={this.onClickAddTeam} disabled={this.state.addTeam.isDisable}>Przypisz</button>
                                         </div>
-                                    </div> 
-                                }
+                                    </div>                            
                             </ul>
                         </div>
+
+                        </div>
+                        
                         <div className="team-content">
                             <div className="myteams-title">
                                 <i className="material-icons">people</i>
-                                <h3 className="myteams-title-header">Mój team</h3>
+                                <h3 className="myteams-title-header">Członkowie</h3>
                             </div>
                             {this.state.teamShowed !== null && 
                                 <MyTeam data={this.state.teamShowedData} onChange={this.onChangeMyTeam}/>
