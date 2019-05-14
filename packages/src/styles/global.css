@@ -29,8 +29,7 @@
     --mainViewContainer: #f0f3f3;
  /* Login & Register */
     --bgrSingIn: #fff;
-    --bgrSignInInput: #fffde7;
-    --checkedForm:#e65100;
+    --colorMenuButtom: #888;
 
     /* Loader */
     --loaderBackground: rgba(0, 0, 0, .8);

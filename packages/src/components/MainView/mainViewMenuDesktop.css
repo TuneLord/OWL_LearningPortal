@@ -2,7 +2,7 @@
 
 .mainViewMenuDesktop {
     height: 100%;
-    width: 20%;
+    width: 25%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -26,6 +26,11 @@
 
 .mainViewMenuDesktop a:hover {
     color: var(--menuBackground);
+}
+
+.mainViewMenuDesktop .splashScreenMenuDesktop__logo {
+    padding: 0 30px;
+    
 }
 
 @media (max-width : 1024px) {
