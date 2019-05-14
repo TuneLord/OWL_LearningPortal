@@ -51,7 +51,7 @@ export default class ChecklistEditorContainer extends Component {
         return (
             <section className="checklistEditor__container">
                 <div className="checklist__header">
-                    <h3>EDYTOR LISTY</h3>
+                    <h3>AKTUALNA LISTA: </h3>
                     <button className="checklist__header-change"
                         onClick={() => this.changeOnlyToRead()}
                         style={{ display: this.props.saveDisplay }}> Zmiana edytora
