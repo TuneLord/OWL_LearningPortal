@@ -78,7 +78,9 @@
     background-color: var(--menuBackground);
 }
 
-#myteams .teams-content, #myteams .team-content {
+#myteams .teams-content,
+#myteams .team-content,
+#myteams .checklists-content {
    margin: 16px;
    box-sizing: border-box;
 }
@@ -108,15 +110,15 @@
     list-style-type: none;
     width: 100%;
     border-radius: 5px;
-    max-height: 200px;
+    max-height: 159px;
     overflow: auto;
 }
 
 #myteam .myteams-list {
     border-radius: 0 0 5px 5px;
-    height: 200px;
+    max-height: none;
+    /* max-height: 156px; */
 }
-
 
 #myteams .myteams-list > li {
     width: 100%;
@@ -126,6 +128,15 @@
     position: relative;
     display: flex;
     justify-content: space-between;
+    height: 53px;
+}
+
+#myteams .team-content  li {
+    height: 52px;
+}
+
+#myteams .myteams-title svg {
+    font-size: 16px;
 }
 
 #myteams .teams-content .myteams-list>li:hover {
@@ -243,6 +254,37 @@ div.width100 {
 .icon-member {
     display: inline-block;
     color: var(--menuBackground);
+}
+
+#myteams .checklists-content {
+    margin-top: 31px;
+}
+
+#myteams .checklists-content select {
+    outline: none;
+    width: 100%;
+    padding: 8px 16px;
+    color: var(--mainColor);
+    border-radius: 16px;
+    border: none;
+}
+
+#myteams .checklists-content option {
+    background-color: #fff;
+    border: none;
+}
+
+#myteams .checklists-content option:active {
+    background-color: var(--colorMenuButtom);
+}
+
+#myteams li.active {
+    background-color: var(--menuCross);
+    color: #fff;
+}
+
+#myteams li.active:hover {
+    background-color: var(--menuCross) !important;
 }
 
 /* scrollbar */

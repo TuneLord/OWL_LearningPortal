@@ -12,6 +12,39 @@ const {
 
 const router = express.Router();
 
+router.put('/team/:id', auth, checkListExistance, isAuthor, async (req, res) => {
+    if(!req.body.team) return res.status(404).send('Provide team.');
+
+    for(let tMemEmail of req.body.team) {
+        const user = await User.findOne({email:tMemEmail});
+        //sprawdza czy User już ma udostępnioną checlistę, jeśli tak to pomija i przechodzi do następnego usera
+        const isAlreadyMember = req.checklist.members.filter(el => {
+            return String(el) === String(user._id);
+        })
+        if (!!isAlreadyMember[0]) continue;
+
+            //dodaje info o checkliście do obiektu usera
+        user.checkLists.push(
+            {
+                name: req.checklist.name,
+                listId: req.checklist._id,
+                listAuthor: req.checklist.authorName,
+                isChecked: false,
+                isOwner: false
+            }
+        );
+        const savedUser = await user.save();
+
+        //dodaje członka do checklisty
+        const checklist = await Checklist.findById(req.checklist._id);
+        checklist.members.push(savedUser._id);
+        await checklist.save();
+    }
+
+    res.status(200).send('Success');
+});
+
+
 router.put('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
     if(!req.body.email) return res.status(404).send('Provide user email.');
 
