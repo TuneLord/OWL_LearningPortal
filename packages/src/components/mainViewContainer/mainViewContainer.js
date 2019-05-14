@@ -88,8 +88,6 @@ export default class MainViewContainer extends Component {
         if (this.state.activeEditor) return
         const checklist = e.currentTarget.parentElement;
         const checklistTitle = checklist.firstElementChild;
-        // const parent = e.currentTarget.parentElement.parentElement;
-        // console.log(checklist, parent)
         const checklistNameContainer = document.createElement('div');
         const checklistNameInput = document.createElement('input');
         checklistNameInput.className = 'addInput';
@@ -156,8 +154,6 @@ export default class MainViewContainer extends Component {
             'content': content
         };
 
-        console.log(this.state)
-
         try {
             const response = await fetch(`/checklist/${that.state.activeChecklist.listId}`, {
                 method: "put",
@@ -191,7 +187,6 @@ export default class MainViewContainer extends Component {
             })
             if (response.status !== 200) throw response;
             response = await response.json();
-            console.log(response);
             const content = response.content;
             sessionStorage.setItem("draftail:content", content);
             this.setState({ loadedContent: this.state.loadedContent + 1 })
