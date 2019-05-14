@@ -3,7 +3,7 @@ import './mainViewMenuDesktop.css';
 import '../SplashScreen/splashScreenMenuDesktop.css';
 import  {Link} from 'react-router-dom';
 
-export const MainViewMenuDesktop = ({ id }) => {
+export const MainViewMenuDesktop = () => {
     return (
       <section className="mainViewMenuDesktop">
         <div className={"splashScreenMenuDesktop__logo"}>
@@ -12,13 +12,13 @@ export const MainViewMenuDesktop = ({ id }) => {
             <span>OWL</span>earning Portal
           </h1>
         </div>
-        <Link className="menu-item" to={`/me/${id}`}>
+        <Link className="menu-item" to={`/me`}>
           Moje checklisty
         </Link>
-        <Link className="menu-item" to={`/me/myteams/${id}`}>
+        <Link className="menu-item" to={`/me/myteams`}>
           Moje teamy
         </Link>
-        <Link className="menu-item" to={`/settings/${id}`}>
+        <Link className="menu-item" to={`/settings`}>
           Ustawienia
         </Link>
         <Link className="menu-item" to="/logout">
