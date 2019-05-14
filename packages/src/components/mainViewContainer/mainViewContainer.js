@@ -121,18 +121,19 @@ export default class MainViewContainer extends Component {
 		};
 
 		try {
-			const response = await fetch(`/checklist/${this.tempId}`, {
+			const response = await fetch(`/checklist/${this.tempElement.id}`, {
 				method: "put",
 				headers: requestHeaders,
 				body: JSON.stringify(requestBody)
 			});
             if (response.status !== 200) throw response;
             console.log(await response.json())
+            this.tempElement.innerText = name;
 		} catch (error) {
 			console.log(error);
 			alert("Nie udało się połączyć z serwerem!");
         }
-        this.tempId = undefined;
+        this.tempElement = undefined;
         this.setState({ dialogOpen: false });
 	}
 
@@ -145,7 +146,7 @@ export default class MainViewContainer extends Component {
 		// console.log(this.state.changeNameInputExist);
 		const checklist = e.currentTarget.parentElement;
         const checklistTitle = checklist.firstElementChild;
-        this.tempId = checklistTitle.id;
+        this.tempElement = checklistTitle;
 		// const checklistNameContainer = document.createElement("div");
 		// const checklistNameInput = document.createElement("input");
 		// checklistNameInput.className = "addInput";
