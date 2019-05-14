@@ -16,7 +16,8 @@ export default class MainViewContainer extends Component {
         updateNumber: 0,
         activeChecklist: 0,
         chosenList: '',
-        showReader: false
+        showReader: false,
+        loadedContent: 0
     };
 
     changeDisabled() {
@@ -141,7 +142,7 @@ export default class MainViewContainer extends Component {
         })
     };
 
-    async saveChecklist(e) {
+    async saveChecklist() {
         const that = this;
         this.setState({
             activeEditor: false,
@@ -150,7 +151,6 @@ export default class MainViewContainer extends Component {
             cleanEditor: true,
         });
 
-        sessionStorage.setItem("draftail:content", JSON.stringify(""))
         const token = sessionStorage.getItem('x-auth-token');
         const content = sessionStorage.getItem('draftail:content');
         const requestHeaders = {
@@ -160,6 +160,8 @@ export default class MainViewContainer extends Component {
         const requestBody = {
             'content': content
         };
+
+        console.log(this.state)
 
         try {
             const response = await fetch(`/checklist/${that.state.activeChecklist.listId}`, {
@@ -175,9 +177,33 @@ export default class MainViewContainer extends Component {
         };
     };
 
-    chooseList(e) {
+    async chooseList(e) {
         const that = e.currentTarget;
+        const thatlistId = that.firstElementChild.id;
+        this.setState({ activeChecklist: that });
         this.setState({ chosenList: that.id });
+
+        const token = sessionStorage.getItem('x-auth-token');
+        const requestHeaders = {
+            'Content-Type': 'application/json',
+            "x-auth-token": token
+        };
+        try {
+            let response = await fetch(`/checklist/${thatlistId}`, {
+                method: "get",
+                headers: requestHeaders,
+            })
+            if (response.status !== 200) throw response;
+            response = await response.json();
+            console.log(response);
+            const content = response.content;
+            sessionStorage.setItem("draftail:content", content);
+            this.setState({ loadedContent: this.state.loadedContent + 1 })
+        } catch (error) {
+            console.log(error);
+            alert("Nie udało się połączyć z serwerem!");
+            return
+        };
     }
 
     updateChecklistNumber() {
@@ -210,6 +236,7 @@ export default class MainViewContainer extends Component {
                 </div>
                 {windowWidth > 1025 ? <ChecklistEditorContainer
                     cleanEditor={this.state.cleanEditor}
+                    showLoadedContent={this.state.loadedContent}
                     onClick={() => this.saveChecklist()}
                     disabled={this.state.disabled}
                     chosenList={this.state.chosenList}

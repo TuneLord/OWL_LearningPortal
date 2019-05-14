@@ -15,16 +15,22 @@ export default class ChecklistEditorContainer extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.cleanEditor !== prevProps.cleanEditor) {
             this.setState({ initial: null });
-        }
+        };
 
         if (this.props.changeEditorToReader !== prevProps.changeEditorToReader) {
             this.changeOnlyToRead();
-            this.setState({ disabled: !this.props.disabled })
-        }
+            this.setState({ disabled: !this.props.disabled });
+        };
 
         if (this.props.disabled !== prevProps.disabled) {
             this.setState({ disabled: this.props.disabled });
-        }
+        };
+
+        if (this.props.showLoadedContent !== prevProps.showLoadedContent) {
+            this.setState({ initial: sessionStorage.getItem('draftail:content') });
+            console.log(this.state.initial)
+            console.log(sessionStorage.getItem('draftail:content'))
+        };
     };
 
 
