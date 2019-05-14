@@ -14,7 +14,9 @@ export default class MainViewContainer extends Component {
         activeEditor: false,
         cleanEditor: false,
         updateNumber: 0,
-        activeChecklist: 0
+        activeChecklist: 0,
+        chosenList: '',
+        showReader: false
     };
 
     changeDisabled() {
@@ -88,8 +90,10 @@ export default class MainViewContainer extends Component {
 
     editChecklistName(e) {
         if (this.state.activeEditor) return
-        const checklist = e.currentTarget;
-        const parent = e.currentTarget.parentElement;
+        const checklist = e.currentTarget.parentElement;
+        const checklistTitle = checklist.firstElementChild;
+        // const parent = e.currentTarget.parentElement.parentElement;
+        // console.log(checklist, parent)
         const checklistNameContainer = document.createElement('div');
         const checklistNameInput = document.createElement('input');
         checklistNameInput.className = 'addInput';
@@ -99,13 +103,13 @@ export default class MainViewContainer extends Component {
         const checklistNameCancel = document.createElement('div');
         checklistNameCancel.innerHTML = `<i class="fas fa-times"></i>`;
         const checklistsList = document.querySelector('.mychecklists_list');
-        checklistsList.insertBefore(checklistNameContainer, parent);
-        parent.hidden = true;
+        checklistsList.insertBefore(checklistNameContainer, checklist);
+        checklist.hidden = true;
         checklistNameContainer.appendChild(checklistNameInput);
         checklistNameContainer.appendChild(checklistNameButton);
         checklistNameContainer.appendChild(checklistNameCancel);
         checklistNameCancel.addEventListener('click', () => {
-            parent.hidden = false;
+            checklist.hidden = false;
             checklistNameContainer.remove();
         });
         checklistNameButton.addEventListener('click', async () => {
@@ -120,14 +124,14 @@ export default class MainViewContainer extends Component {
             };
 
             try {
-                const response = await fetch(`/checklist/${checklist.id}`, {
+                const response = await fetch(`/checklist/${checklistTitle.id}`, {
                     method: "put",
                     headers: requestHeaders,
                     body: JSON.stringify(requestBody)
                 })
                 if (response.status !== 200) throw response;
-                checklist.innerText = checklistNameInput.value;
-                parent.hidden = false;
+                checklistTitle.innerText = checklistNameInput.value;
+                checklist.hidden = false;
                 checklistNameContainer.remove();
             } catch (error) {
                 console.log(error)
@@ -171,11 +175,20 @@ export default class MainViewContainer extends Component {
         };
     };
 
+    chooseList(e) {
+        const that = e.currentTarget;
+        this.setState({ chosenList: that.id });
+    }
+
     updateChecklistNumber() {
-        this.setState({ updateNumber: this.state.updateNumber + 1 })
+        this.setState({ updateNumber: this.state.updateNumber + 1 });
     };
 
     selectChecklist() { }
+
+    changeEditorToReader() {
+        this.setState({ showReader: true })
+    };
 
     render() {
         const windowWidth = window.innerWidth;
@@ -199,11 +212,16 @@ export default class MainViewContainer extends Component {
                     cleanEditor={this.state.cleanEditor}
                     onClick={() => this.saveChecklist()}
                     disabled={this.state.disabled}
+                    chosenList={this.state.chosenList}
+                    changeEditorToReader={this.state.showReader}
                     saveDisplay={this.state.saveDisplay} /> : null}
                 <MyChecklists
                     editChecklistName={(e, listId) => this.editChecklistName(e, listId)}
                     updateChecklistNumber={() => this.updateChecklistNumber()}
-                    newChecklist={this.state.newChecklist} />
+                    newChecklist={this.state.newChecklist}
+                    chooseList={(e) => this.chooseList(e)}
+                    changeEditorToReader={() => this.changeEditorToReader()}
+                />
             </section>
         )
     };

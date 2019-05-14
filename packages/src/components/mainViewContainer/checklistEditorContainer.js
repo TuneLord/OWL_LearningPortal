@@ -8,12 +8,22 @@ export default class ChecklistEditorContainer extends Component {
     state = {
         isContentLoaded: true,
         initial: "",
-        onlyToRead: false
+        onlyToRead: false,
+        disabled: this.props.disabled
     };
 
     componentDidUpdate(prevProps) {
         if (this.props.cleanEditor !== prevProps.cleanEditor) {
-            this.setState({ initial: "" });
+            this.setState({ initial: null });
+        }
+
+        if (this.props.changeEditorToReader !== prevProps.changeEditorToReader) {
+            this.changeOnlyToRead();
+            this.setState({ disabled: !this.props.disabled })
+        }
+
+        if (this.props.disabled !== prevProps.disabled) {
+            this.setState({ disabled: this.props.disabled });
         }
     };
 
@@ -23,15 +33,15 @@ export default class ChecklistEditorContainer extends Component {
     };
 
     changeOnlyToRead() {
-        if (!this.state.onlyToRead) this.setState({ onlyToRead: true })
-        if (this.state.onlyToRead) this.setState({ onlyToRead: false })
+        if (!this.state.onlyToRead) this.setState({ onlyToRead: true });
+        if (this.state.onlyToRead) this.setState({ onlyToRead: false });
     };
 
     render() {
         return (
             <section className="checklistEditor__container">
                 <div className="checklist__header">
-                    <h3>AKTUALNA LISTA: </h3>
+                    <h3>AKTUALNA LISTA: {this.props.chosenList}</h3>
                     <button className="checklist__header-change"
                         onClick={() => this.changeOnlyToRead()}
                         style={{ display: this.props.saveDisplay }}> Zmiana edytora
@@ -42,8 +52,9 @@ export default class ChecklistEditorContainer extends Component {
                     </button>
                 </div>
                 <div className="checklistEditor" >
-                    <div className={this.props.disabled}></div>
-                    {this.state.onlyToRead ? <TextReader value={this.state.initial} /> : <TextEditor value={this.state.initial} onSave={this.onSave} />}
+                    <div className={this.state.disabled}></div>
+                    {this._createRender()}
+                    {/* {this.state.isContentLoaded ? this.state.onlyToRead ? <TextReader value={this.state.initial} /> : <TextEditor value={this.state.initial} onSave={this.onSave} /> : <ClipLoader />} */}
                 </div>
             </section>
         );
