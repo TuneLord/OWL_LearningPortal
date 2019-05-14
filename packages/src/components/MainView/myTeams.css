@@ -108,7 +108,15 @@
     list-style-type: none;
     width: 100%;
     border-radius: 5px;
+    max-height: 200px;
+    overflow: auto;
 }
+
+#myteam .myteams-list {
+    border-radius: 0 0 5px 5px;
+    height: 200px;
+}
+
 
 #myteams .myteams-list > li {
     width: 100%;
@@ -239,20 +247,19 @@ div.width100 {
 
 /* scrollbar */
 
-/* .myteams_list::-webkit-scrollbar,
-.myteam_list::-webkit-scrollbar {
+.myteams-list::-webkit-scrollbar,
+.myteam-list::-webkit-scrollbar {
     width: 8px;
     background-color: var(--mainViewChecklists);
 }
 
-.myteams_list::-webkit-scrollbar-thumb,
-.myteam_list::-webkit-scrollbar-thumb {
+.myteams-list::-webkit-scrollbar-thumb,
+.myteam-list::-webkit-scrollbar-thumb {
     background-color: var(--mainViewChecklistsIcons);
     background-image: -webkit-gradient(linear, 0 0, 0 100%,
             color-stop(.5, rgba(255, 255, 255, .2)),
             color-stop(.5, transparent), to(transparent));
 }
-*/
 
 /* mobile */
 
