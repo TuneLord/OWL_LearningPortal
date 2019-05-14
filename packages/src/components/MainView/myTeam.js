@@ -163,37 +163,42 @@ export default class MyTeam extends Component {
     render() {
         return (
             <div id="myteam">
-                <div className="myteam_header">
-                    <div onClick={this.onClickInputName}>
+                <div className="change">  
                     { this.props.data.isMentor === true ?
-                        <input type="text" className="myteam_title" value={this.state.changeName.value} onChange={(e) => this.onChangeName(e)} disabled={!this.state.changeName.showInput} />
-                        : <input type="text" className="myteam_title" value={this.state.changeName.value} disabled />
-                    }
+                        <div onClick={this.onClickInputName}>
+                            <input type="text" className="editable" value={this.state.changeName.value} onChange={(e) => this.onChangeName(e)} disabled={!this.state.changeName.showInput} />
+                        </div>
+                        : <div>
+                            <input type="text" value={this.state.changeName.value} disabled />
+                        </div>
+                    }               
                     {this.state.changeName.showInput && 
-                        <div>
-                            <button className="" onClick={this.onClickChangeName} disabled={this.state.changeName.isDisable}>Zmień</button>
-                            <button className="" onClick={(e) => this.onClickChangeNameCancel(e)} >Anuluj</button> 
+                        <div className='change-name'>
+                            <button onClick={this.onClickChangeName} disabled={this.state.changeName.isDisable}>Zmień</button>
+                            <span>|</span>
+                            <button onClick={(e) => this.onClickChangeNameCancel(e)} >Anuluj</button> 
                         </div>
                     }
-                    </div>
                 </div>
-                <ul className="myteam_list">
+                <ul className="myteams-list">
                     {this.props.data.members.map((el, index) =>
-                        <li className="myteams_team" key={index} id={index}>
+                        <li key={index} id={index}><div>
                             {el._id === this.props.data.mentorId ? 
                                 <i className="fas fa-chalkboard-teacher icon-member"></i>
                                 : <i className="fas fa-user-graduate icon-member"></i>
                             }
-                            {el.email}
+                            {el.email}</div>
                             {this.props.data.isMentor && el._id !== this.props.data.mentorId && <i className="material-icons icon-float icon-color" onClick={(e) => this.onClickRemoveMember(e)}>delete_forever</i>}
                         </li>)
                     }
                 </ul>
                 {this.props.data.isMentor &&
-                    (<div className="add-member">
+                    (<div className="add">
                         <input type='text' placeholder='wpisz email użytkownika' value={this.state.addMember.value} onChange={this.onChangeEmail}/>
                         {this.state.addMember.error && (<div className='error'>{this.state.addMember.error}</div>)}
-                        <button className="" onClick={this.onClickAddMember} disabled={this.state.addMember.isDisable}>Dodaj</button>
+                        <div className="width100">
+                            <button className="" onClick={this.onClickAddMember} disabled={this.state.addMember.isDisable}>Dodaj</button>
+                        </div>
                     </div>)
                 }
             </div>

@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import "./myTeams.css";
-import '../mainViewContainer/mainViewContainer.css';
-import '../mainViewContainer/checklistCounter.css';
-import '../mainViewContainer/checklistEditorContainer.css';
 import MyTeam from './myTeam';
 import { Loader } from '../Loader/loader.js';
 
@@ -194,44 +191,46 @@ export default class MyTeams extends Component {
             <div id="myteams">
                 {this.state._id === null ? 
                     <Loader /> :
-                    <section className = "mainView__container">
-                        <div className="mainView__header">
+                    <section className = "container">
+                        <div className="header">
                             {windowWidth < 1025 ? <div onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}
                             <h2>Panel {this.state.type}a</h2>
                         </div>
-                        <div className="stateContainter ">
-                            <button className="state checklistCounter">
-                                <span className="checklistNumber">{this.state.teamsNumber}</span>
+                        <div className="state-container">
+                            <button className="state-button team">
+                                <span>{this.state.teamsNumber}</span>
                                 Liczba zespołów
                             </button>
-                            <button className="state checklistCounter" onClick={this.onClickShowInput}>Utwórz nowy team</button>
+                            <button className="state-button add-team-button" onClick={this.onClickShowInput}>Utwórz nowy team</button>
                         </div>
-                        <div className="#myteam">
-                            <div className="myteams_title">
+                        <div className="teams-content">
+                            <div className="myteams-title">
                                 <i className="material-icons">people</i>
-                                <h3 className="myteams_title__header">Moje teamy</h3>
+                                <h3 className="myteams-title-header">Moje teamy</h3>
                             </div>
-                            <ul className="myteams_list">
+                            <ul className="myteams-list">
                                 {this.state.data.map((el, index) =>
-                                    <li className="myteams_team" key={index} id={index} onClick={e => this.onClickShowTeam(e)}>
+                                    <li key={index} id={index} onClick={e => this.onClickShowTeam(e)}>
                                         {el.name}
                                         {this.state._id === el.mentorId  && <i className="material-icons icon-float icon-color" onClick={(e) => this.onClickRemoveTeam(e)}>delete_forever</i>}
                                     </li>)
                                 }
                                 {this.state.addTeam.showInput && 
-                                    <div className="add-team">
+                                    <div className="add">
                                         <input type='text' placeholder='wpisz nazwę teamu' value={this.state.addTeam.value} onChange={this.onChangeName}/>
                                         {this.state.addTeam.error && (<div className='error'>{this.state.addTeam.error}</div>)}
-                                        <button className="" onClick={this.onClickAddTeam} disabled={this.state.addTeam.isDisable}>Dodaj</button>
-                                        <button className="" onClick={this.onClickAddTeamCancel}>Anuluj</button>
+                                        <div>
+                                            <button className="" onClick={this.onClickAddTeam} disabled={this.state.addTeam.isDisable}>Dodaj</button>
+                                            <button className="" onClick={this.onClickAddTeamCancel}>Anuluj</button>
+                                        </div>
                                     </div> 
                                 }
                             </ul>
                         </div>
-                        <div className="checklistEditor__container">
-                            <div className="myteams_title">
+                        <div className="team-content">
+                            <div className="myteams-title">
                                 <i className="material-icons">people</i>
-                                <h3 className="myteams_title__header">Mój team</h3>
+                                <h3 className="myteams-title-header">Mój team</h3>
                             </div>
                             {this.state.teamShowed !== null && 
                                 <MyTeam data={this.state.teamShowedData} onChange={this.onChangeMyTeam}/>
