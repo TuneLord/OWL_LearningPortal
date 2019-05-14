@@ -6,20 +6,9 @@ import TextReader from '../TextReader/index';
 
 export default class ChecklistEditorContainer extends Component {
     state = {
-        isContentLoaded: false,
+        isContentLoaded: true,
         initial: "",
         onlyToRead: false
-    };
-
-    componentDidMount() {
-        setTimeout(() => {
-            this.setState(
-                {
-                    initial: JSON.parse(sessionStorage.getItem("draftail:content")),
-                    isContentLoaded: true
-                }
-            );
-        }, 0);
     };
 
     componentDidUpdate(prevProps) {
@@ -28,18 +17,9 @@ export default class ChecklistEditorContainer extends Component {
         }
     };
 
+
     onSave = (content) => {
         sessionStorage.setItem("draftail:content", JSON.stringify(content))
-    };
-
-    _createRender() {
-        if (this.state.isContentLoaded) {
-            return (
-                this.state.onlyToRead ? <TextReader value={this.state.initial} /> : <TextEditor value={this.state.initial} onSave={this.onSave} />
-            );
-        } else {
-            return <ClipLoader />;
-        };
     };
 
     changeOnlyToRead() {
@@ -63,8 +43,7 @@ export default class ChecklistEditorContainer extends Component {
                 </div>
                 <div className="checklistEditor" >
                     <div className={this.props.disabled}></div>
-                    {/* {this._createRender()} */}
-                    {this.state.isContentLoaded ? this.state.onlyToRead ? <TextReader value={this.state.initial} /> : <TextEditor value={this.state.initial} onSave={this.onSave} /> : <ClipLoader />}
+                    {this.state.onlyToRead ? <TextReader value={this.state.initial} /> : <TextEditor value={this.state.initial} onSave={this.onSave} />}
                 </div>
             </section>
         );
