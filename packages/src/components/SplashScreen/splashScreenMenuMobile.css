@@ -114,11 +114,11 @@
     border: none;
 }
 
-.bm-item:last-child, .bm-item:nth-child(5) {
+.bm-item:last-child, .bm-item:nth-child(6) {
     color: var(--menuCross);
 }
 
-.bm-item:last-child:hover, .bm-item:nth-child(5):hover {
+.bm-item:last-child:hover, .bm-item:nth-child(6):hover {
     color: var(--menuAccents);
 }
 

@@ -3,6 +3,8 @@ import './form.css';
 import { connect } from 'react-redux';
 import { loginStatus } from '../../actions/loginStatus';
 import { GoogleLogin } from 'react-google-login';
+import SplashScreenMenuMobile from '../SplashScreen/splashScreenMenuMobile';
+import SplashScreenMenuDesktop from '../SplashScreen/splashScreenMenuDesktop';
 
 class Login extends React.Component {
     constructor(props) {
@@ -129,7 +131,14 @@ class Login extends React.Component {
     }
 
     render() {
+        const windowWidth = window.innerWidth;
+
         return (
+            <div>
+        {windowWidth < 1025 ?
+          <SplashScreenMenuMobile /> :
+          <SplashScreenMenuDesktop />
+        }
             <div className='form login'>
                 <h2>Zaloguj się</h2>
                 <form onSubmit={this.onSubmitForm}>
@@ -160,6 +169,7 @@ class Login extends React.Component {
                     />
                 </form>
             </div>
+        </div>
         );
     }
 }

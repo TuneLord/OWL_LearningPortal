@@ -4,6 +4,8 @@ import './register.css';
 import { connect } from 'react-redux';
 import { loginStatus } from '../../actions/loginStatus'
 import { GoogleLogin } from 'react-google-login';
+import SplashScreenMenuMobile from '../SplashScreen/splashScreenMenuMobile';
+import SplashScreenMenuDesktop from '../SplashScreen/splashScreenMenuDesktop';
 
 class Register extends React.Component {
     constructor(props) {
@@ -155,7 +157,14 @@ class Register extends React.Component {
     }
 
     render() {
+        const windowWidth = window.innerWidth;
+
         return (
+            <div>
+        {windowWidth < 1025 ?
+          <SplashScreenMenuMobile /> :
+          <SplashScreenMenuDesktop />
+        }
             <div className='form register'>
                 <h2>Załóż konto</h2>
                 <form onSubmit={this.onSubmitForm}>
@@ -200,6 +209,7 @@ class Register extends React.Component {
                         cookiePolicy={'single_host_origin'}
                     />                   
                 </form>
+            </div>
             </div>
         );
     }
