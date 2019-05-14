@@ -53,8 +53,7 @@ export default class ChecklistEditorContainer extends Component {
                 </div>
                 <div className="checklistEditor" >
                     <div className={this.state.disabled}></div>
-                    {this._createRender()}
-                    {/* {this.state.isContentLoaded ? this.state.onlyToRead ? <TextReader value={this.state.initial} /> : <TextEditor value={this.state.initial} onSave={this.onSave} /> : <ClipLoader />} */}
+                    {this.state.isContentLoaded ? this.state.onlyToRead ? <TextReader value={this.state.initial} /> : <TextEditor value={this.state.initial} onSave={this.onSave} /> : <ClipLoader />}
                 </div>
             </section>
         );
