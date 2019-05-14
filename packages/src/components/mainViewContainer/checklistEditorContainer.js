@@ -26,12 +26,12 @@ export default class ChecklistEditorContainer extends Component {
             this.setState({ disabled: this.props.disabled });
         }
 
-		if (this.props.showLoadedContent !== prevProps.showLoadedContent) {
-			this.setState({
-				initial: JSON.parse(sessionStorage.getItem("draftail:content"))
-			});
-		}
-	}
+        if (this.props.showLoadedContent !== prevProps.showLoadedContent) {
+            this.setState({
+                initial: JSON.parse(sessionStorage.getItem("draftail:content"))
+            });
+        }
+    }
 
     onSave = content => {
         sessionStorage.setItem("draftail:content", JSON.stringify(content));
@@ -47,14 +47,14 @@ export default class ChecklistEditorContainer extends Component {
             <section className="checklistEditor__container">
                 <div className="checklist__header">
                     <h3>AKTUALNA LISTA: {this.props.chosenList}</h3>
-                    <button
+                    {/* <button
                         className="checklist__header-change"
                         onClick={() => this.changeOnlyToRead()}
                         style={{ display: this.props.saveDisplay }}
                     >
                         {" "}
                         Zmiana edytora
-					</button>
+					</button> */}
                     <button
                         className="checklist__header-save"
                         onClick={this.props.onClick}
