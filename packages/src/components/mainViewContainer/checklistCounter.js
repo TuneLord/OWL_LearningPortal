@@ -20,7 +20,11 @@ export class ChecklistCounter extends React.Component {
             this.setState({
                 number: response.checkLists.length
             })
-        } catch (err) { console.log(err) }
+        } catch (err) {
+            alert("Nie udało się połączyć z serwerem!");
+            console.log(err);
+            return
+        }
     };
 
     async componentDidUpdate(prevProps) {
@@ -38,7 +42,11 @@ export class ChecklistCounter extends React.Component {
                 this.setState({
                     number: response.checkLists.length
                 })
-            } catch (err) { console.log(err) }
+            } catch (err) {
+                alert("Nie udało się połączyć z serwerem!");
+                console.log(err);
+                return
+            }
         }
     }
 

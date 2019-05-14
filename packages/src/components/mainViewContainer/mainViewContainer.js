@@ -186,7 +186,7 @@ export default class MainViewContainer extends Component {
                     {windowWidth < 1025 ? <div
                         onClick={this.props.onClick}>
                         <i className="fas fa-bars"></i></div> : null}
-                    <h2>Panel mentora</h2>
+                    <h2>Panel użytkownika</h2>
                 </div>
                 <div className="stateContainter">
                     <ChecklistCounter
