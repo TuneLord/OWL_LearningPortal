@@ -21,7 +21,7 @@
     color: var(--menuBackground);
 }
 
-.splashScreenMenuDesktop a:last-child, .splashScreenMenuDesktop a:nth-child(4) {
+.splashScreenMenuDesktop a:last-child, .splashScreenMenuDesktop a:nth-child(5) {
     color: var(--menuCross);
 }
 
