@@ -17,4 +17,20 @@ router.get('/', auth, async (req,res) => {
     res.status(200).send(objUser);
 })
 
+router.get('/checklists', auth, async (req, res) => {
+    const user = await User.findById(req.user._id)
+    res.status(200).send(user.checkLists);
+})
+
+router.put('/checklists', auth, async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    const newCheck = user.checkCheckList(req.body.listId);
+    user.checkLists = []; //z niewiadomych powodów muszę najpierw przypisać pustą tablicę do user.checkLists, inaczej nie przypisze nowych wartości
+    user.checkLists = newCheck;
+    const result = await user.save();
+
+    res.status(200).send(result.checkLists);
+})
+
 module.exports = router;
