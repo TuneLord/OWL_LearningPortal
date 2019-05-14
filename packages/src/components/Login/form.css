@@ -1,16 +1,19 @@
+@import '../../styles/global.css';
+
 * { margin: 0; padding: 0; }
-input, button { outline: none; border: none;}
+input, button { outline: none; border: none; color: var(--mainColor)}
+
+#container { position: relative; min-height: 100vh; display: flex; flex-direction: column;  }
 
 .form {
-    --input-bg-color: #fff8e1;
     --error-bg-color: #ffece8;
-    --main-color: #e65100;
-    --second-color: #ffa726;
-
+    box-sizing: border-box;
     text-align: center;
     font-family: sans-serif;
-
-    margin: 30px 0; 
+    padding: 30px 0; 
+    background-image: url('../../images/background2.png');
+    height: 100%;
+    flex-grow: 1;
 }   
 
 .form h2 {
@@ -25,7 +28,8 @@ input, button { outline: none; border: none;}
     max-width: 420px;
     padding: 30px;      
     margin: 0 auto;
-    box-shadow: 0 2px 8px 0 #E3E3E3;
+    border: 1px solid var(--border);
+    background-color: var(--bgrSingIn);
 }
 
 .form form > div.form-el {
@@ -42,7 +46,7 @@ input, button { outline: none; border: none;}
     font-size: 18px;
     text-align: left;
     width: 28px !important;
-    color: var(--main-color);
+    color: var(--menuCross);
 }
 
 .form input:not([type=submit]) {
@@ -50,7 +54,7 @@ input, button { outline: none; border: none;}
     padding: 0 0 0 10px;
     font-size: 14px;
     line-height: 30px;
-    background-color: var(--input-bg-color);
+    background-color: var(--bgrSignInInput);
 }
 
 .form form .error {
@@ -68,11 +72,11 @@ input, button { outline: none; border: none;}
     border-radius: 18px;
     font-size: 16px;
     cursor: pointer;
-    background-color: var(--main-color);
+    background-color: var(--menuCross);
 }
 
 .form #submit:hover {
-    background-color: var(--second-color);
+    background-color: var(--menuBackground);
 }
 
 .form .or {
@@ -87,7 +91,7 @@ input, button { outline: none; border: none;}
     position: absolute;
     display: block;
     padding: 0 10px;
-    background-color: #fff;
+    background-color: var(--bgrSingIn);
     font-size: 14px;
     color: #666;
     top: -7px;
@@ -99,17 +103,17 @@ input, button { outline: none; border: none;}
     margin: 0 auto;
     margin-top: 30px;
     padding: 10px 20px;
-    color: var(--main-color);
+    color: var(--menuCross);
     border-radius: 14px;
     font-size: 14px;
     cursor: pointer;
     background-color: #fff;
-    border: 1px solid var(--main-color);
+    border: 1px solid var(--menuCross);
 }
 
 .form button.gplus:hover {
-    border-color: var(--second-color);
-    color: var(--second-color);
+    border-color: var(--menuBackground);
+    color: var(--menuBackground);
 }
 
 .form button.gplus svg {
@@ -117,5 +121,5 @@ input, button { outline: none; border: none;}
 }
 
 .form button.gplus:hover svg {
-    color: var(--second-color);
+    color: var(--menuBackground);
 }

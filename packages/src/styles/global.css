@@ -26,6 +26,11 @@
         --itemOnHover: #fffde7;
 
     --mainViewMenu: #fffde7;
+    --mainViewContainer: #f0f3f3;
+ /* Login & Register */
+    --bgrSingIn: #fff;
+    --bgrSignInInput: #fffde7;
+    --checkedForm:#e65100;
 
     /* Loader */
     --loaderBackground: rgba(0, 0, 0, .8);
@@ -40,7 +45,10 @@
         --editorLinkBackground: #EEF8FF;
         --editorBaloonBackground: rgba(17, 17, 17, 0.9);
         --editorBaloonColor: #fff;
-
+        --checklistEditorContainer:  #f0f3f3;
+        --checklistEditorButtons: #00c853;
+        --checklistEditorButtonOnHover: #00e676;
+        --checklistEditorButtonsText: #eee;
     /* Fonts */
     --mainFont: 'Roboto', sans-serif;
     --logoFont: 'Fredoka One', cursive;
@@ -53,32 +61,42 @@ html[data-theme="dark"] {
     --mainColor: #9d9da3;
 
     /* SplashScreen */
-    --border: #e1e1e1;
-    --menuBackground: #373a66;
-    --menuCross: #384264;
+    --border: #0c0b1a;
+    --menuBackground: #487386;
+    --menuCross: #373a66;
     --menuAccents: rgb(242, 243, 248);
 
         /* MainView */
         --mainViewMenu: #f8f8ee;
-        --mainViewChecklists:  #f0f0f5;
-        --mainViewChecklistsIcons: #487386;
-        --itemOnHover: #030218;
+        --mainViewChecklists:  #2e2e44;
+        --mainViewChecklistsIcons: #384264;
+        --itemOnHover: #4e4e5f;
 
     --mainViewMenu: #030218;
+    --mainViewContainer: #030218;
+    
+    /* Login & Register */
+    --bgrSingIn: #12122e;
+    --bgrSignInInput:#2b2b47;
+    --checkedForm: #d9d9e2;
 
     /* Loader */
     --loaderBackground: rgba(0, 0, 0, .8);
 
         /* Editor */
         --editorMainColor: #000;
-        --editorBackground: #fff;
+        --editorBackground: rgb(75, 73, 73);
         --editorBorder: #ddd;
         --editorToolbarBackground: #464341;
         --editorBoxShadow: rgba(0, 0, 0, 0.1);
         --editorAlternativeBoxShadow: rgba(220,220,220,1);
         --editorLinkBackground: #EEF8FF;
         --editorBaloonBackground: rgba(17, 17, 17, 0.9);
-        --editorBaloonColor: #fff;
+        --editorBaloonColor: rgb(9, 12, 41);
+        --checklistEditorContainer:  #030218;
+        --checklistEditorButtons: #222423;
+        --checklistEditorButtonOnHover: #3f3f3f;
+        --checklistEditorButtonsText: rgb(206, 200, 200);
 
     /* Fonts */
     --mainFont: 'Roboto', sans-serif;
