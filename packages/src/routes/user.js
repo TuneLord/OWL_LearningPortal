@@ -17,6 +17,11 @@ router.get('/', auth, async (req,res) => {
     res.status(200).send(objUser);
 })
 
+router.get('/checklists', auth, async (req, res) => {
+    const user = await User.findById(req.user._id)
+    res.status(200).send(user.checkLists);
+})
+
 router.put('/checklists', auth, async (req, res) => {
     const user = await User.findById(req.user._id);
 
