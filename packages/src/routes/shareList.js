@@ -28,6 +28,7 @@ router.put('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
         {
             name: req.checklist.name,
             listId: req.checklist._id,
+            listAuthor: req.checklist.authorName,
             isChecked: false,
             isOwner: false
         }
