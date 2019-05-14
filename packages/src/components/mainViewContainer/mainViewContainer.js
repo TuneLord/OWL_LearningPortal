@@ -17,7 +17,9 @@ export default class MainViewContainer extends Component {
         activeChecklist: 0,
         chosenList: '',
         showReader: false,
-        loadedContent: 0
+        loadedContent: 0,
+        inputExist: false,
+        changeNameInputExist: false
     };
 
     changeDisabled() {
@@ -29,6 +31,9 @@ export default class MainViewContainer extends Component {
 
     createChecklistNameInput() {
         if (this.state.activeEditor) return
+        if (this.state.inputExist) return
+        if (this.state.changeNameinputExist) return
+        this.setState({ inputExist: true });
         const checklistNameContainer = document.createElement('div');
         const checklistNameInput = document.createElement('input');
         checklistNameInput.className = 'addInput';
@@ -82,14 +87,21 @@ export default class MainViewContainer extends Component {
 
         addInput.parentElement.remove();
         this.changeDisabled();
+        this.setState({ inputExist: false })
     };
 
     editExistList() {
+        if (this.state.inputExist) return
         this.changeDisabled();
     }
 
     editChecklistName(e) {
         if (this.state.activeEditor) return
+        if (this.state.inputExist) return
+        if (this.state.changeNameinputExist) return
+        console.log(this.state.changeNameInputExist)
+        this.setState({ changeNameInputExist: true });
+        console.log(this.state.changeNameInputExist)
         const checklist = e.currentTarget.parentElement;
         const checklistTitle = checklist.firstElementChild;
         const checklistNameContainer = document.createElement('div');
@@ -131,6 +143,7 @@ export default class MainViewContainer extends Component {
                 checklistTitle.innerText = checklistNameInput.value;
                 checklist.hidden = false;
                 checklistNameContainer.remove();
+                this.setState({ changeNameinputExist: false });
             } catch (error) {
                 console.log(error)
                 alert("Nie udało się połączyć z serwerem!");
@@ -178,6 +191,7 @@ export default class MainViewContainer extends Component {
 
     async chooseList(e) {
         if (this.state.activeEditor) return
+        if (this.state.inputExist) return
         const that = e.currentTarget;
         const thatlistId = that.firstElementChild.id;
         this.setState({ activeChecklist: that });
@@ -249,6 +263,7 @@ export default class MainViewContainer extends Component {
                     chooseList={(e) => this.chooseList(e)}
                     changeEditorToReader={() => this.changeEditorToReader()}
                     activeEditor={this.state.activeEditor}
+                    inputExist={this.state.inputExist}
                 />
             </section>
         )
