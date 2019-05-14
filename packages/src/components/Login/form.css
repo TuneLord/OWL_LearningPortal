@@ -54,7 +54,7 @@ input, button { outline: none; border: none; color: var(--mainColor)}
     padding: 0 0 0 10px;
     font-size: 14px;
     line-height: 30px;
-    background-color: var(--mainViewMenu);
+    background-color: var(--bgrSignInInput);
 }
 
 .form form .error {
