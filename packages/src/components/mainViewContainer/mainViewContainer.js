@@ -49,16 +49,6 @@ export default class MainViewContainer extends Component {
     async createNewChecklist() {
         const addInput = document.querySelector('.addInput');
         const newChecklistNumber = this.state.checklistNumber + 1;
-        this.setState({
-            checklistNumber: newChecklistNumber,
-            newChecklist: {
-                name: addInput.value,
-                author: 'Próba',
-                isDone: false,
-                id: 0
-            },
-            activeEditor: true
-        });
 
         const token = sessionStorage.getItem('x-auth-token');
         const requestHeaders = {
@@ -78,7 +68,12 @@ export default class MainViewContainer extends Component {
             })
             if (response.status !== 200) throw response;
             response = await response.json();
-            this.setState({ activeChecklist: response[response.length - 1] });
+            this.setState({
+                activeChecklist: response[response.length - 1],
+                checklistNumber: newChecklistNumber,
+                newChecklist: response[response.length - 1],
+                activeEditor: true
+            });
             this.updateChecklistNumber();
         } catch (error) {
             alert("Nie udało się połączyć z serwerem!");
@@ -178,6 +173,7 @@ export default class MainViewContainer extends Component {
     };
 
     async chooseList(e) {
+        if (this.state.activeEditor) return
         const that = e.currentTarget;
         const thatlistId = that.firstElementChild.id;
         this.setState({ activeChecklist: that });
@@ -248,6 +244,7 @@ export default class MainViewContainer extends Component {
                     newChecklist={this.state.newChecklist}
                     chooseList={(e) => this.chooseList(e)}
                     changeEditorToReader={() => this.changeEditorToReader()}
+                    activeEditor={this.state.activeEditor}
                 />
             </section>
         )
