@@ -29,4 +29,15 @@ userSchema.methods.modifyCheckList = function (checkListId, newName) {
     });
 }
 
+userSchema.methods.checkCheckList = function (checkListId) {
+    return this.checkLists.map(el => {
+        if (String(el.listId) == String(checkListId)) {
+            el.isChecked = !el.isChecked;
+            return el;
+        } else {
+            return el
+        }
+    });
+}
+
 module.exports = userSchema;
