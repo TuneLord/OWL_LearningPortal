@@ -31,7 +31,7 @@ export default class MyTeams extends Component {
             })
             resUser = await resUser.json()
 
-            let resChecklists = await fetch('/user/checklist', {
+            let resChecklists = await fetch('/user/checklists', {
                 method: 'get',
                 headers: {
                     'Content-Type': "application/json",
