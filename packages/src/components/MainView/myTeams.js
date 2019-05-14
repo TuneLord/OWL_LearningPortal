@@ -193,13 +193,13 @@ export default class MyTeams extends Component {
                     <Loader /> :
                     <section className = "container">
                         <div className="header">
-                            {windowWidth < 1025 ? <div onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}
                             <h2>Panel {this.state.type}a</h2>
+                             {windowWidth <= 1024 ? <div className="menu-burger" onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}    
                         </div>
                         <div className="state-container">
                             <button className="state-button team">
                                 <span>{this.state.teamsNumber}</span>
-                                Liczba zespołów
+                                liczba temów
                             </button>
                             <button className="state-button add-team-button" onClick={this.onClickShowInput}>Utwórz nowy team</button>
                         </div>
