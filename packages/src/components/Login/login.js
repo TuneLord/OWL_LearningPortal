@@ -18,7 +18,7 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        const token = sessionStorage.getItem("x-auth-token");
+        const token = localStorage.getItem("x-auth-token");
         if (token) this.props.history.push(`/me`);
     }
 
@@ -72,11 +72,10 @@ class Login extends React.Component {
                 body: JSON.stringify(requestBody)
             });
             if (response.status !== 200) throw response;
-            sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
+            localStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             response = await response.json();
             this.props.loginStatus(true);
             this.props.history.push(`/me`);
-            console.log('Logowanie przebiegło pomyślnie');
         } catch (err) {
             console.log(err);
             if ([404, 400].includes(err.status)) {
@@ -104,11 +103,10 @@ class Login extends React.Component {
                 }
             });
             if (response.status !== 200) throw response;
-            sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
+            localStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             response = await response.json();
             this.props.loginStatus(true);
             this.props.history.push(`/me`);
-            console.log('Logowanie przebiegło pomyślnie')
         } catch (err) {
             console.log(err);
             if ([404, 400].includes(err.status)) {

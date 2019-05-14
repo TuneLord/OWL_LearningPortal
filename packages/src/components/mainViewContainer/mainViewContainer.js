@@ -55,7 +55,7 @@ export default class MainViewContainer extends Component {
         const addInput = document.querySelector('.addInput');
         const newChecklistNumber = this.state.checklistNumber + 1;
 
-        const token = sessionStorage.getItem('x-auth-token');
+        const token = localStorage.getItem('x-auth-token');
         const requestHeaders = {
             'Content-Type': "application/json; charset=UTF-8",
             "x-auth-token": token
@@ -124,7 +124,7 @@ export default class MainViewContainer extends Component {
         });
         checklistNameButton.addEventListener('click', async () => {
 
-            const token = sessionStorage.getItem('x-auth-token');
+            const token = localStorage.getItem('x-auth-token');
             const requestHeaders = {
                 'Content-Type': "application/json",
                 "x-auth-token": token
@@ -165,8 +165,8 @@ export default class MainViewContainer extends Component {
             cleanEditor: true,
         });
 
-        const token = sessionStorage.getItem('x-auth-token');
-        const content = sessionStorage.getItem('draftail:content');
+        const token = localStorage.getItem('x-auth-token');
+        const content = localStorage.getItem('draftail:content');
         const requestHeaders = {
             'Content-Type': 'application/json',
             "x-auth-token": token
@@ -197,7 +197,7 @@ export default class MainViewContainer extends Component {
         this.setState({ activeChecklist: that });
         this.setState({ chosenList: that.id });
 
-        const token = sessionStorage.getItem('x-auth-token');
+        const token = localStorage.getItem('x-auth-token');
         const requestHeaders = {
             'Content-Type': 'application/json',
             "x-auth-token": token
@@ -210,7 +210,7 @@ export default class MainViewContainer extends Component {
             if (response.status !== 200) throw response;
             response = await response.json();
             const content = response.content;
-            sessionStorage.setItem("draftail:content", content);
+            localStorage.setItem("draftail:content", content);
             this.setState({ loadedContent: this.state.loadedContent + 1 })
         } catch (error) {
             console.log(error);

@@ -9,7 +9,7 @@ export class ChecklistCounter extends React.Component {
     async componentDidMount() {
         const requestHeaders = {
             'Content-Type': "application/json",
-            "x-auth-token": sessionStorage.getItem("x-auth-token")
+            "x-auth-token": localStorage.getItem("x-auth-token")
         };
         try {
             let response = await fetch(`/user`, {
@@ -31,7 +31,7 @@ export class ChecklistCounter extends React.Component {
         if (this.props.updateNumber !== prevProps.updateNumber) {
             const requestHeaders = {
                 'Content-Type': "application/json",
-                "x-auth-token": sessionStorage.getItem("x-auth-token")
+                "x-auth-token": localStorage.getItem("x-auth-token")
             };
             try {
                 let response = await fetch(`/user`, {
