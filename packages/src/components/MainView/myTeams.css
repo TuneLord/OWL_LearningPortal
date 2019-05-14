@@ -114,10 +114,6 @@
     overflow: auto;
 }
 
-#myteams .teams-content li {
-    background-color: var(--colorMenuButtom);
-}
-
 #myteam .myteams-list {
     border-radius: 0 0 5px 5px;
     max-height: none;
@@ -280,6 +276,15 @@ div.width100 {
 
 #myteams .checklists-content option:active {
     background-color: var(--colorMenuButtom);
+}
+
+#myteams li.active {
+    background-color: var(--menuCross);
+    color: #fff;
+}
+
+#myteams li.active:hover {
+    background-color: var(--menuCross) !important;
 }
 
 /* scrollbar */
