@@ -78,6 +78,7 @@ router.delete('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
 
     //zwraca listy usuwającego usera
     const ownerChecklists = await User.findById(req.user._id)
+    console.log(ownerChecklists.checkLists);
     res.status(200).send(ownerChecklists.checkLists);
 });
 
