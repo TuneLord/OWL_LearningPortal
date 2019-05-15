@@ -63,8 +63,8 @@ router.put('/:id', auth, async (req, res) => {
                 await user.save();
             })
 
-            team.name = req.query.name;
-            await Team.findByIdAndUpdate(team._id, team);           
+            team.name = req.query.name;   
+            await team.save();      
        }
 
        return res.status(200).send(team);
@@ -101,7 +101,7 @@ router.put('/:id', auth, async (req, res) => {
         await user.save();
 
         team.members = team.members.filter((member) => String(member._id) !== String(user._id));
-        await Team.findByIdAndUpdate(team._id, team);
+        await team.save();
         return res.status(200).send(team);
     }
 
