@@ -125,30 +125,30 @@ export default class MyChecklists extends Component {
     }
   }
 
- async toggleCheck(listId) {
-        const token = localStorage.getItem('x-auth-token');
-        const requestHeaders = {
-          'Content-Type': "application/json; charset=UTF-8",
-          "x-auth-token": token
-        };
-        try {
-          let response = await fetch(`/user/checklists`, {
-            method: "PUT",
-            headers: requestHeaders,
-            body: JSON.stringify({
-              listId
-            }),
-          })
-          if (response.status !== 200) throw response;
-          response = await response.json();
-          this.setState({
-            data: response
-          })
-        } catch (error) {
-          alert("Nie udało się połączyć z serwerem!");
-          return
-        };
-      }
+  async toggleCheck(listId) {
+    const token = localStorage.getItem('x-auth-token');
+    const requestHeaders = {
+      'Content-Type': "application/json; charset=UTF-8",
+      "x-auth-token": token
+    };
+    try {
+      let response = await fetch(`/user/checklists`, {
+        method: "PUT",
+        headers: requestHeaders,
+        body: JSON.stringify({
+          listId
+        }),
+      })
+      if (response.status !== 200) throw response;
+      response = await response.json();
+      this.setState({
+        data: response
+      })
+    } catch (error) {
+      alert("Nie udało się połączyć z serwerem!");
+      return
+    };
+  }
 
   filterOwned = el => el.isOwner === true;
 
@@ -157,7 +157,12 @@ export default class MyChecklists extends Component {
   clickSharedList(e) {
     this.props.chooseList(e);
     this.props.changeEditorToReader();
-  }
+  };
+
+  clickMyList(e) {
+    this.props.chooseList(e);
+    this.props.changeReaderToEditor();
+  };
 
   editName(e, listId) {
     this.props.editChecklistName(e, listId);
@@ -168,7 +173,7 @@ export default class MyChecklists extends Component {
       id={el.name}
       className="mychecklists_checklista"
       key={el.listId}
-      onClick={this.props.chooseList}
+      onClick={e => this.clickMyList(e)}
     >
       <p id={el.listId}>{el.name}</p>
       <i
@@ -200,15 +205,16 @@ export default class MyChecklists extends Component {
       key={el.listId}
       onClick={e => this.clickSharedList(e)}
     >
-     <p id={el.listId}> <i className="material-icons icon-check icon-color" onClick={() => this.toggleCheck(el.listId)}>check_circle_outline</i>
-      <span style={{ textDecoration: el.isChecked ? 'line-through' : 'inherit', 
-                fontStyle: el.isChecked ? 'italic' : 'inherit'}}>{el.name}</span></p>
-      <i className="material-icons icon-float icon-color">link</i>
+      <p id={el.listId}> <i className="material-icons icon-check icon-color" onClick={() => this.toggleCheck(el.listId)}>check_circle_outline</i>
+        <span style={{
+          textDecoration: el.isChecked ? 'line-through' : 'inherit',
+          fontStyle: el.isChecked ? 'italic' : 'inherit'
+        }}>{el.name}</span></p>
       <i
         className="material-icons icon-float icon-color"
         onClick={() => this.unsubCheckList(el.listId)}
       >
-        {/* {" "} */}
+        {" "}
         delete
 			</i>
       <div className="mychecklist_author">Autor: {el.listAuthor}</div>
