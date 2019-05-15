@@ -11,8 +11,8 @@ const teams = require('./routes/teams');
 const share = require('./routes/shareList');
 const config = require('./config');
 
-
-app.listen('3001', () => console.log('Listening on PORT 3001.'));
+var port = process.env.PORT || 3001;
+app.listen(port, () => console.log(`Listening on PORT ${port}`));
 
 mongoose.connect(`mongodb+srv://${config.username}:${config.password}@owlportal-mqpuu.gcp.mongodb.net/test?retryWrites=true`, {useNewUrlParser:true})
     .then(()=> console.log("Connected to MongoDB Atlas!"))
