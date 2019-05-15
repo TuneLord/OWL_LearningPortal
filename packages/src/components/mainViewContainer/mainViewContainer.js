@@ -262,16 +262,12 @@ export default class MainViewContainer extends Component {
         const windowWidth = window.innerWidth;
 
         return (
-            <section className="mainView__container">
-                <div className="mainView__header">
-                    {windowWidth <= 1024 ? (
-                        <div onClick={this.props.onClick}>
-                            <i className="fas fa-bars" />
-                        </div>
-                    ) : null}
+            <section className="container">
+                <div className="header">
                     <h2>Panel użytkownika</h2>
+                    {windowWidth <= 1024 ? <div className="menu-burger" onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}
                 </div>
-                <div className="stateContainter">
+                <div className="state-container">
                     <ChecklistCounter
                         number={this.state.checklistNumber}
                         updateNumber={this.state.updateNumber}
@@ -280,7 +276,6 @@ export default class MainViewContainer extends Component {
                         onClick={() => this.createChecklistNameInput()}
                     />
                 </div>
-                {/* {windowWidth > 1024 ? ( */}
                 <ChecklistEditorContainer
                     cleanEditor={this.state.cleanEditor}
                     showLoadedContent={this.state.loadedContent}
