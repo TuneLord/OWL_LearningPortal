@@ -67,9 +67,10 @@ export default class MainViewContainer extends Component {
             dialogCallback: this.createNewChecklist.bind(this)
         });
     }
-
+	
     async createNewChecklist(name) {
-        // const addInput = document.querySelector(".addInput");
+		if(!name) return;
+		// const addInput = document.querySelector(".addInput");
         const newChecklistNumber = this.state.checklistNumber + 1;
 
         const token = localStorage.getItem("x-auth-token");
@@ -112,6 +113,7 @@ export default class MainViewContainer extends Component {
     }
 
     async putChecklistOnServer(name) {
+		if(!name) return;
         const token = localStorage.getItem("x-auth-token");
         const requestHeaders = {
             "Content-Type": "application/json",
