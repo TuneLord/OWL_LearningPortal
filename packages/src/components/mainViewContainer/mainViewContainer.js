@@ -127,15 +127,23 @@ export default class MainViewContainer extends Component {
 				headers: requestHeaders,
 				body: JSON.stringify(requestBody)
 			});
-            if (response.status !== 200) throw response;
-            console.log(await response.json())
-            this.tempElement.innerText = name;
+			if (response.status !== 200) throw response;
+			const json = await response.json();
+			const changedList = {
+				listId: json._id,
+				name: json.name,
+				isOwner: true,
+				listAuthor: json.authorName,
+				isChecked: false
+			};
+			this.setState({ newChecklist: changedList });
+			this.tempElement.innerText = name;
 		} catch (error) {
 			console.log(error);
 			alert("Nie udało się połączyć z serwerem!");
-        }
-        this.tempElement = undefined;
-        this.setState({ dialogOpen: false });
+		}
+		this.tempElement = undefined;
+		this.setState({ dialogOpen: false });
 	}
 
 	editChecklistName(e) {
@@ -146,8 +154,8 @@ export default class MainViewContainer extends Component {
 		// this.setState({ changeNameInputExist: true });
 		// console.log(this.state.changeNameInputExist);
 		const checklist = e.currentTarget.parentElement;
-        const checklistTitle = checklist.firstElementChild;
-        this.tempElement = checklistTitle;
+		const checklistTitle = checklist.firstElementChild;
+		this.tempElement = checklistTitle;
 		// const checklistNameContainer = document.createElement("div");
 		// const checklistNameInput = document.createElement("input");
 		// checklistNameInput.className = "addInput";
