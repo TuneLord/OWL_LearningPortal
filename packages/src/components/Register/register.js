@@ -113,7 +113,7 @@ class Register extends React.Component {
                 body: JSON.stringify(requestBody)
             });
             if (response.status !== 200) throw response;
-            sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
+            localStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             this.props.loginStatus(true);
             response = await response.json();
             this.props.history.push(`/me`);

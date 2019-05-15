@@ -66,7 +66,7 @@ export default class MyTeam extends Component {
                 method: 'put',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;
@@ -93,7 +93,7 @@ export default class MyTeam extends Component {
                 method: 'put',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;
@@ -131,7 +131,7 @@ export default class MyTeam extends Component {
                 method: 'put',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;

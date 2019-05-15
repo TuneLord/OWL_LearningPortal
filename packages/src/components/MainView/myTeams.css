@@ -8,7 +8,7 @@
 #myteams .container {
     width: 100%;
     min-height: 100vh;
-    background-color: #f0f3f3;
+    background-color: var(--mainViewContainer);
     display: grid;
     grid-template-columns: 65% 35%;
     grid-template-rows: 90px 100px;
@@ -95,7 +95,7 @@
     align-items: center;
     border-radius: 5px;
     font-size: 20px;
-    background-color: #fff;
+    background-color: var(--bgrSingIn);
 }
 
 #myteams .myteams-title-header {
@@ -106,7 +106,7 @@
 }
 
 #myteams .myteams-list {
-    background-color: #fff;
+    background-color:var(--bgrSingIn);
     list-style-type: none;
     width: 100%;
     border-radius: 5px;
@@ -140,7 +140,7 @@
 }
 
 #myteams .teams-content .myteams-list>li:hover {
-    background-color: #fffde7;
+    background-color: var(--bgrSignInInput);
 }
 
 #myteams .myteams-list>li:last-of-type {
@@ -167,12 +167,12 @@
 #myteams .add button {
     padding: 8px 16px;
     background-color: transparent;
-    color: #fff;
+    color: var(--bgrSingIn);
     border-radius: 12px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 16px;
-    border: 1px solid #fff;
+    margin-top: 15px;
+    border: 1px solid var(--bgrSingIn);
 }
 
 #myteams .add button:first-of-type {
@@ -192,7 +192,7 @@
     box-sizing: border-box;
     padding: 16px;
     display: flex;
-    background-color: #fff;
+    background-color: var(--bgrSingIn);
     border-radius: 5px 5px 0px 0px;
     justify-content: space-between;
 }
@@ -204,13 +204,13 @@
 
 #myteams .change input {
     color: var(--menuBackground);
-    background-color: #fff;
+    background-color: var(--bgrSingIn);
     font-size: 18px;
     width: 100%;
 }
 
 #myteams .change button { 
-    background-color: #fff;
+    background-color: var(--bgrSingIn);
     color: var(--menuCross);
     font-size: 16px;
     cursor: pointer;

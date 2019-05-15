@@ -26,7 +26,7 @@ export default class MyTeams extends Component {
                 method: 'get',
                 headers: {
                     'Content-Type': "application/json",
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 },
             });
             response = await response.json();
@@ -51,7 +51,7 @@ export default class MyTeams extends Component {
                 method: 'get',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;
@@ -124,7 +124,7 @@ export default class MyTeams extends Component {
                 }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;
@@ -153,7 +153,7 @@ export default class MyTeams extends Component {
                 method: 'delete',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;
@@ -207,14 +207,14 @@ export default class MyTeams extends Component {
 
     render() {
         const windowWidth = window.innerWidth;
-        return ( 
+        return (
             <div id="myteams">
-                {this.state._id === null ? 
+                {this.state._id === null ?
                     <Loader /> :
-                    <section className = "container">
+                    <section className="container">
                         <div className="header">
                             <h2>Panel {this.state.type}a</h2>
-                             {windowWidth <= 1024 ? <div className="menu-burger" onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}    
+                            {windowWidth <= 1024 ? <div className="menu-burger" onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}
                         </div>
                         <div className="state-container">
                             <button className="state-button team">
@@ -239,13 +239,13 @@ export default class MyTeams extends Component {
                                     }</div>
                                     {this.state.addTeam.showInput && 
                                         <div className="add">
-                                            <input type='text' placeholder='wpisz nazwę teamu' value={this.state.addTeam.value} onChange={this.onChangeName}/>
+                                            <input type='text' placeholder='wpisz nazwę teamu' value={this.state.addTeam.value} onChange={this.onChangeName} />
                                             {this.state.addTeam.error && (<div className='error'>{this.state.addTeam.error}</div>)}
                                             <div>
                                                 <button className="" onClick={this.onClickAddTeam} disabled={this.state.addTeam.isDisable}>Dodaj</button>
                                                 <button className="" onClick={this.onClickAddTeamCancel}>Anuluj</button>
                                             </div>
-                                        </div> 
+                                        </div>
                                     }
                                 </ul>
                             </div>
