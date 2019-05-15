@@ -117,7 +117,6 @@ class Register extends React.Component {
             this.props.loginStatus(true);
             response = await response.json();
             this.props.history.push(`/me`);
-            console.log('Konto zostało utworzone')
         } catch(err) {
             console.log(err);
             if ([404, 400].includes(err.status)) {

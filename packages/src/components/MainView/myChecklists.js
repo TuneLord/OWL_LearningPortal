@@ -47,7 +47,6 @@ export default class MyChecklists extends Component {
       });
       if (!response.ok) throw response;
       response = await response.json();
-      console.log(response.checkLists)
       this.setState({
         data: response.checkLists,
         isLoaded: true
