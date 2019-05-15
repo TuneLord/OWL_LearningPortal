@@ -9,27 +9,6 @@
     border-left: none;
 }
 
-.mainView__header {
-    grid-column: 1 / 3;
-    grid-row: 1 / span 1;
-    position: relative;
-    padding: 20px 30px;
-    border-bottom: 1px solid var(--border);
-    text-align: center;
-}
-
-.mainView__header h2 {
-    font-size: 24px;
-}
-
-/* .fa-bars {
-    font-size: 2.2em;
-    position: absolute !important;
-    top: 50%;
-    left: 7%;
-    transform: translateY(-50%)
-} */
-
 .stateContainter {
     display: flex;
     justify-content: space-around;
@@ -60,40 +39,16 @@
     background-color: var(--menuBackground);
 }
 
-@media (min-width: 1024px) {
-    .mainView__container {
-        display: grid;
-        grid-template-columns: 65% 35%;
-        grid-template-rows: 10% 17% 73%;
-    }
-
-    .mainView__header {
-        grid-column: 1 / 3;
-        grid-row: 1 / span 1;
-        padding: 20px 30px;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .mainView__header h2 {
-        font-size: 24px;
-    }
-
-    .stateContainter {
-        grid-column: 1 / span 1;
-        grid-row: 2 / span 1;
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-    }
-
-    .mainView__header h2 {
-        font-size: 28px;
-    }
-
+.checklistCounter {
+    background-color: var(--menuCross);
 }
 
-@media (min-width: 1440px) {
-    .mainView__header h2 {
-        font-size: 36px;
-    }
+.createNewChecklist {
+    color: var(--checklistEditorButtonsText);
+    background-color: var(--checklistEditorButtons);
+    cursor: pointer;
+}
+
+.createNewChecklist:hover {
+    background: var(--checklistEditorButtonOnHover);
 }
