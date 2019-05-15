@@ -184,6 +184,7 @@ html {
     border-radius: 5px;
     padding: 0 16px;
     width: 40%;
+    max-height: 100%;
 }
 
 .mainView .state-container .state-button>span {
