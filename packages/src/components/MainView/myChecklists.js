@@ -221,7 +221,7 @@ export default class MyChecklists extends Component {
     </li>
   );
 
-  StandardRender = () => (
+  StandardRender = () => (  
     <section id="mychecklists">
       <div className="content">
         <div className="title-content">
