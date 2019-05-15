@@ -25,7 +25,8 @@ export default class MainViewContainer extends Component {
         dialogId: "",
         dialogTitle: "",
         dialogLabel: "",
-        dialogCallback: () => null
+		dialogCallback: () => null,
+		dialogOpen: false,
     };
 
     changeDisabled() {
