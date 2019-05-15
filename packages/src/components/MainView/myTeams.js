@@ -17,6 +17,10 @@ export default class MyTeams extends Component {
             isDidable: true,
             value: '',
             error: ''
+        },
+        isLoaded: {
+            content: false,
+            myTeam: false
         }
     };
 
@@ -36,15 +40,25 @@ export default class MyTeams extends Component {
                 type: response.type,
                 teams: response.teams,
                 checkLists: response.checkLists,
-                teamsNumber: response.teams.length
+                teamsNumber: response.teams.length,
+                isLoaded: {
+                    ...this.state.isLoaded,
+                    content: true
+                }
             })
         } catch (err) {
-            console.log(err)
+            console.log(err)                    
         }
         if (this.state.teamsNumber > 0) this.showTeam(0);
     }
 
     async showTeam(index) {
+        this.setState({
+            isLoaded: {
+                ...this.state.isLoaded,
+                myTeam: false
+            }
+        })
         const id = this.state.teams[index].teamId;
         try {
             let response = await fetch(`/teams/${id}`, {
@@ -59,13 +73,21 @@ export default class MyTeams extends Component {
             this.setState({
                 teamShowedData: {
                     ...response,
-                    isOwner: (response.mentorId === this.state._id ? true : false)
+                    isOwner: (response.mentorId === this.state._id ? true : false),
                 },
-                teamShowed: index
+                teamShowed: index,
+                isLoaded: {
+                    ...this.state.isLoaded,
+                    myTeam: true
+                }
             })
         } catch (err) {
             console.log(err)
         }
+
+        this.setState({
+
+        })
     }
 
     onClickShowTeam = async (e) => {
@@ -226,11 +248,20 @@ export default class MyTeams extends Component {
             )         
     }
 
+    loadMyTeam = () => {
+        if (this.state.teamShowed !== null)
+            return ( 
+                !this.state.isLoaded.myTeam ?
+                    <Loader />
+                    : <MyTeam team={this.state.teamShowedData} onChange={this.onChangeMyTeam}/> 
+            )                          
+    }
+
     render() {
         const windowWidth = window.innerWidth;
         return (
             <div id="myteams">
-                {this.state._id === null ?
+                {!this.state.isLoaded.content ?
                     <Loader /> :
                     <section className="container">
                         <div className="header">
@@ -270,7 +301,7 @@ export default class MyTeams extends Component {
                                     }
                                 </ul>
                             </div>
-                            {this.state.checkLists.length > 0 && this.state.teamShowed !== null && this.state.teams[this.state.teamShowed].isOwner === true &&
+                            {this.state.isLoaded.myTeam && this.state.checkLists.length > 0 && this.state.teamShowed !== null && this.state.teams[this.state.teamShowed].isOwner === true &&
                             <div className="checklists-content">
                                 <div className="myteams-title">
                                     <i className="fas fa-tasks"></i>
@@ -294,9 +325,7 @@ export default class MyTeams extends Component {
                                 <i className="material-icons">people</i>
                                 <h3 className="myteams-title-header">Członkowie</h3>
                             </div>
-                            {this.state.teamShowed !== null && 
-                                <MyTeam team={this.state.teamShowedData} onChange={this.onChangeMyTeam}/>
-                            }
+                            {this.loadMyTeam()}
                         </div>
                     </section>
                 }

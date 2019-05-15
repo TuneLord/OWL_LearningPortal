@@ -120,6 +120,15 @@ html {
     position: relative;
 }
 
+.mainView .menu-burger {
+    position: absolute;
+    right: 16px;
+    font-size: 32px;
+    justify-self: center;
+    color: var(--colorMenuButtom);
+    cursor: pointer
+}
+
 @media (min-width: 1024px) {
     .state {
         width: 18vw;

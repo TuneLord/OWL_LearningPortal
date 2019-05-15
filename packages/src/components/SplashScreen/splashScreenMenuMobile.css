@@ -50,7 +50,7 @@
 
 /* Paski przycisku menu BURGER ****************************************************************************************/
 .bm-burger-bars {
-    background: var(--border);
+    background: var(--menuCross);
 }
 
 .bm-burger-bars-hover {
