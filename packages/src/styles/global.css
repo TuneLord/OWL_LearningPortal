@@ -219,6 +219,50 @@ html {
     box-sizing: border-box;
 }
 
+/* mainView - main content */
+
+.mainView .content .change {
+    box-sizing: border-box;
+    padding: 16px;
+    display: flex;
+    background-color: var(--bgrSingIn);
+    border-radius: 5px 5px 0px 0px;
+    justify-content: space-between;
+}
+
+.mainView .content .change>div:first-of-type {
+    flex-grow: 1;
+    padding-right: 16px;
+}
+
+.mainView .content .change .change-title {
+    color: var(--menuBackground);
+    background-color: var(--bgrSingIn);
+    font-size: 18px;
+}
+
+.mainView .content .change .change-button {
+    display: flex;
+}
+
+.mainView .content .change .change-button button {
+    background-color: var(--bgrSingIn);
+    color: var(--menuCross);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.mainView .content .change .change-button>span {
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+    color: var(--menuCross);
+}
+
+.mainView .content .change button:hover {
+    color: var(--menuBackground);
+}
+
 @media only screen and (max-width: 768px) {
     .mainView .header {
         display: flex;

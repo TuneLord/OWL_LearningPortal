@@ -52,7 +52,18 @@
     cursor: pointer;
     width: 100%;
     line-height: 20px;
-    
+    display: flex;
+    align-items: center;
+}
+
+.mychecklists_checklista .desc {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.mychecklists_checklista .to-right {
+    justify-self: right;
 }
 
 .mychecklists_checklista:hover {

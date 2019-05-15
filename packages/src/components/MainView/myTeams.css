@@ -118,46 +118,8 @@
     margin-top: 8px;
 }
 
-#myteams .change {
-    box-sizing: border-box;
-    padding: 16px;
-    display: flex;
-    background-color: var(--bgrSingIn);
-    border-radius: 5px 5px 0px 0px;
-    justify-content: space-between;
-}
-
-#myteams .change > div:first-of-type {
-    flex-grow: 1;
-    padding-right: 16px;
-}
-
-#myteams .change input {
-    color: var(--menuBackground);
-    background-color: var(--bgrSingIn);
-    font-size: 18px;
+#myteams input.change-title {
     width: 100%;
-}
-
-#myteams .change button { 
-    background-color: var(--bgrSingIn);
-    color: var(--menuCross);
-    font-size: 16px;
-    cursor: pointer;
-}
-#myteams .change-name {
-    display: flex;
-}
-
-#myteams .change-name > span {
-    display: inline-block;
-    width: 16px;
-    text-align: center;
-    color: var(--menuCross);
-}
-
-#myteams .change button:hover {
-    color: var(--menuBackground);
 }
 
 #myteams .team-content li svg {

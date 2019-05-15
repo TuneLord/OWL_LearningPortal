@@ -166,14 +166,14 @@ export default class MyTeam extends Component {
                 <div className="change">  
                     { this.props.team.isOwner === true ?
                         <div onClick={this.onClickInputName}>
-                            <input type="text" className="editable" value={this.state.changeName.value} onChange={(e) => this.onChangeName(e)} disabled={!this.state.changeName.showInput} />
+                            <input type="text" className="change-title editable" value={this.state.changeName.value} onChange={(e) => this.onChangeName(e)} disabled={!this.state.changeName.showInput} />
                         </div>
                         : <div>
                             <input type="text" value={this.state.changeName.value} disabled />
                         </div>
                     }               
                     {this.state.changeName.showInput && 
-                        <div className='change-name'>
+                        <div className='change-button'>
                             <button onClick={this.onClickChangeName} disabled={this.state.changeName.isDisable}>Zmień</button>
                             <span>|</span>
                             <button onClick={(e) => this.onClickChangeNameCancel(e)} >Anuluj</button> 
