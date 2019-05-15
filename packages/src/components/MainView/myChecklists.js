@@ -56,7 +56,6 @@ export default class MyChecklists extends Component {
     } catch (err) {
       if (!this.interval) {
         const callback = this.getChecklistsFromServer.bind(this);
-        alert("Nie udało się połączyć z serwerem!");
         this.interval = setInterval(callback, 5000);
       }
       console.log(err);
@@ -85,7 +84,6 @@ export default class MyChecklists extends Component {
       });
       this.props.updateChecklistNumber();
     } catch (error) {
-      alert("Nie udało się połączyć z serwerem!");
       this.setState({ isLoaded: false });
     }
   }
@@ -119,7 +117,6 @@ export default class MyChecklists extends Component {
         console.log(err);
       }
     } catch (err) {
-      alert("Nie udało się połączyć z serwerem!");
       console.log(err);
       return;
     }
@@ -145,7 +142,6 @@ export default class MyChecklists extends Component {
             data: response
           })
         } catch (error) {
-          alert("Nie udało się połączyć z serwerem!");
           return
         };
       }
@@ -166,11 +162,16 @@ export default class MyChecklists extends Component {
   createMyChecklist = el => (
     <li
       id={el.name}
+      data-id={el.listId}
       className="mychecklists_checklista"
       key={el.listId}
       onClick={this.props.chooseList}
     >
-      <p id={el.listId}>{el.name}</p>
+      <div className="desc">
+        <span>{el.name}</span>
+        <span className="mychecklist_author">Autor: {el.listAuthor}</span>
+      </div>
+      <div className="to-right">
       <i
         className="material-icons icon-float icon-color"
         onClick={this.props.editChecklist}
@@ -189,7 +190,7 @@ export default class MyChecklists extends Component {
       >
         delete
 			</i>
-      <div className="mychecklist_author">Autor: {el.listAuthor}</div>
+      </div>
     </li>
   );
 
@@ -200,22 +201,25 @@ export default class MyChecklists extends Component {
       key={el.listId}
       onClick={e => this.clickSharedList(e)}
     >
-     <p id={el.listId}> <i className="material-icons icon-check icon-color" onClick={() => this.toggleCheck(el.listId)}>check_circle_outline</i>
-      <span style={{ textDecoration: el.isChecked ? 'line-through' : 'inherit', 
-                fontStyle: el.isChecked ? 'italic' : 'inherit'}}>{el.name}</span></p>
-      <i className="material-icons icon-float icon-color">link</i>
+     <p id={el.listId}> 
+      <i className="material-icons icon-check icon-color" onClick={() => this.toggleCheck(el.listId)}>check_circle_outline</i>
+    </p>
+      <div className="desc">
+        <span style={{ textDecoration: el.isChecked ? 'line-through' : 'inherit', 
+                  fontStyle: el.isChecked ? 'italic' : 'inherit'}}>{el.name}</span>
+        <span className="mychecklist_author">Autor: {el.listAuthor}</span>
+      </div>
       <i
-        className="material-icons icon-float icon-color"
+        className="material-icons icon-float icon-color to-right"
         onClick={() => this.unsubCheckList(el.listId)}
       >
-        {/* {" "} */}
         delete
 			</i>
-      <div className="mychecklist_author">Autor: {el.listAuthor}</div>
+     
     </li>
   );
 
-  StandardRender = () => (  
+  StandardRender = () => (
     <section id="mychecklists">
       <div className="content">
         <div className="title-content">

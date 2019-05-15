@@ -24,7 +24,11 @@ export default class MyTeams extends Component {
         }
     };
 
-    async componentDidMount() {
+    componentDidMount() {
+        this.getTeamsFromServer()
+    }
+
+    async getTeamsFromServer() {
         try {
             let response = await fetch(`/user`, {
                 method: 'get',
@@ -45,9 +49,15 @@ export default class MyTeams extends Component {
                     ...this.state.isLoaded,
                     content: true
                 }
-            })
+            });
+            if (this.interval) clearInterval(this.interval);
         } catch (err) {
-            console.log(err)                    
+            if (!this.interval) {
+                const callback = this.getTeamsFromServer.bind(this);
+                this.interval = setInterval(callback, 5000);
+            }
+            console.log(err)  
+            return;                  
         }
         if (this.state.teamsNumber > 0) this.showTeam(0);
     }

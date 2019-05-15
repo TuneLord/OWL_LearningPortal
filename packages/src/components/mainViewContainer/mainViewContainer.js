@@ -98,7 +98,6 @@ export default class MainViewContainer extends Component {
             });
             this.updateChecklistNumber();
         } catch (error) {
-            alert("Nie udało się połączyć z serwerem!");
             return;
         }
 
@@ -121,7 +120,6 @@ export default class MainViewContainer extends Component {
         const requestBody = {
             name
         };
-
         try {
             const response = await fetch(`/checklist/${this.tempElement.id}`, {
                 method: "put",
@@ -141,7 +139,6 @@ export default class MainViewContainer extends Component {
             this.tempElement.innerText = name;
         } catch (error) {
             console.log(error);
-            alert("Nie udało się połączyć z serwerem!");
         }
         this.tempElement = undefined;
         this.setState({ dialogOpen: false });
@@ -181,7 +178,17 @@ export default class MainViewContainer extends Component {
         });
     }
 
-    async saveChecklist() {
+    async saveChecklist(isChange = true) {
+        if (isChange === false) {
+            this.setState({
+                activeEditor: false,
+                disabled: "disabled",
+                saveDisplay: "none",
+                cleanEditor: true
+            });
+            return;
+        }
+
         const that = this;
         let listId = null;
         const newList = that.state.activeChecklist.listId;
@@ -215,7 +222,6 @@ export default class MainViewContainer extends Component {
             });
         } catch (error) {
             console.log(error);
-            alert("Nie udało się połączyć z serwerem!");
             return;
         }
     }
@@ -224,7 +230,7 @@ export default class MainViewContainer extends Component {
         if (this.state.activeEditor) return;
         if (this.state.inputExist) return;
         const that = e.currentTarget;
-        const thatlistId = that.firstElementChild.id;
+        const thatlistId = that.getAttribute('data-id');
         this.setState({ activeChecklist: that });
         this.setState({ chosenList: that.id });
 
@@ -245,7 +251,6 @@ export default class MainViewContainer extends Component {
             this.setState({ loadedContent: this.state.loadedContent + 1 });
         } catch (error) {
             console.log(error);
-            alert("Nie udało się połączyć z serwerem!");
             return;
         }
     }

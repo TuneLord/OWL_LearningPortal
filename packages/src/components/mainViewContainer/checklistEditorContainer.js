@@ -49,24 +49,13 @@ export default class ChecklistEditorContainer extends Component {
                     <i className="fas fa-tasks"></i>
                     <h3>Aktualna lista</h3>                 
                 </div>
-                <div>
-                    {this.props.chosenList}
-                    {/* <button
-                        className="checklist__header-change"
-                        onClick={() => this.changeOnlyToRead()}
-                        style={{ display: this.props.saveDisplay }}
-                    >
-                        {" "}
-                        Zmiana edytora
-					</button> */}  
-                    <button
-                        className="checklist__header-save"
-                        onClick={this.props.onClick}
-                        style={{ display: this.props.saveDisplay }}
-                    >
-                        {" "}
-                        Zapisz listę
-					</button>
+                <div className="change">
+                    <div className="change-title">{this.props.chosenList}</div>
+                    <div className = "change-button" style={{ display: this.props.saveDisplay }}>
+                        <button onClick={this.props.onClick}>Zapisz listę</button>
+                        <span>|</span>
+                        <button onClick={() => this.props.onClick(false)}>Anuluj</button>
+                    </div>
                 </div>
                 <div className="checklistEditor">
                     <div className={this.state.disabled} />
