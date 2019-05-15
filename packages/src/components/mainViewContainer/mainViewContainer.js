@@ -265,11 +265,11 @@ export default class MainViewContainer extends Component {
 
         return (
             <section className="container">
-                <div className="header">
+                <header className="header">
                     <h2>Panel użytkownika</h2>
                     {windowWidth <= 1024 ? <div className="menu-burger" onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}
-                </div>
-                <div className="state-container">
+                </header>
+                <aside className="state-container">
                     <ChecklistCounter
                         number={this.state.checklistNumber}
                         updateNumber={this.state.updateNumber}
@@ -277,8 +277,8 @@ export default class MainViewContainer extends Component {
                     <CreateNewChecklistButton
                         onClick={() => this.createChecklistNameInput()}
                     />
-                </div>
-                
+                </aside>
+                <div className = "aside">
                 <MyChecklists
                     editChecklist={() => this.editExistList()}
                     editChecklistName={(e, listId) => this.editChecklistName(e, listId)}
@@ -289,7 +289,7 @@ export default class MainViewContainer extends Component {
                     activeEditor={this.state.activeEditor}
                     inputExist={this.state.inputExist}
                 />
-
+                </div>
                 <ChecklistEditorContainer
                     cleanEditor={this.state.cleanEditor}
                     showLoadedContent={this.state.loadedContent}

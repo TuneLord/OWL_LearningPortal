@@ -26,21 +26,29 @@
     background-color: var(--menuBackground);
 }
 
-#myteams .myteams-list {
+#myteams .list {
     background-color:var(--bgrSingIn);
     list-style-type: none;
     width: 100%;
     border-radius: 5px;
-    max-height: 156px;
+    max-height: 168px;
     overflow: auto;
 }
 
-#myteam .myteams-list {
-    border-radius: 0 0 5px 5px;
-    /* max-height: 156px; */
+#myteams .myteams-list {
+    max-height: calc(54px * 4);
 }
 
-#myteams .myteams-list > li {
+#myteams .myteam-list {
+    max-height: calc(54px * 8);
+}
+
+#myteams .checklists-list {
+   max-height: calc(54px * 4);
+   ;
+}
+
+#myteams .list > li {
     width: 100%;
     border-bottom: 1px solid var(--mainViewChecklists);
     padding: 16px;
@@ -48,24 +56,24 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    line-height: 20px;
+    line-height: 24px;
 }
 
-#myteams .myteams-list > li i {
+#myteams .list > li i {
     cursor: pointer;
 }
 
-#myteams .teams-content .myteams-list > li {
+#myteams .teams-content .list > li {
     cursor: pointer;
-    padding: 14px 16px;
-    padding-bottom: 13px;
+    padding: 16px 16px;
+    padding-bottom: 15px;
 }
 
-#myteams .teams-content .myteams-list>li:hover {
+#myteams .teams-content .list>li:hover {
     background-color: var(--itemOnHover);
 }
 
-#myteams .myteams-list>li:last-of-type {
+#myteams .list>li:last-of-type {
     border-bottom: none;
 }
 
@@ -206,14 +214,12 @@ li:last-of-type.active {
 
 /* scrollbar */
 
-.myteams-list::-webkit-scrollbar,
-.myteam-list::-webkit-scrollbar {
+.list::-webkit-scrollbar {
     width: 8px;
     background-color: var(--mainViewChecklists);
 }
 
-.myteams-list::-webkit-scrollbar-thumb,
-.myteam-list::-webkit-scrollbar-thumb {
+.list::-webkit-scrollbar-thumb {
     background-color: var(--mainViewChecklistsIcons);
     background-image: -webkit-gradient(linear, 0 0, 0 100%,
             color-stop(.5, rgba(255, 255, 255, .2)),

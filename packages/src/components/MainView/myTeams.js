@@ -263,26 +263,26 @@ export default class MyTeams extends Component {
             <div id="myteams">
                 {!this.state.isLoaded.content ?
                     <Loader /> :
-                    <section className="container">
-                        <div className="header">
+                    <div className="container">
+                        <header className="header">
                             <h2>Panel użytkownika</h2>
                             {windowWidth <= 1024 ? <div className="menu-burger" onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}
-                        </div>
-                        <div className="state-container">
+                        </header>
+                        <aside className="state-container">
                             <button className="state-button team team-count-button">
                                 <span>{this.state.teamsNumber}</span>
                                 liczba temów
                             </button>
                             <button className="state-button add-team-button" onClick={this.onClickShowInput}>Utwórz nowy team</button>
-                        </div>
-                        <div>
-                            <div className="teams-content content">
+                        </aside>
+                        <div className="aside">
+                            <section className="teams-content content">
                                 <div className="title-content">
                                    <i className="fas fa-campground"></i>
                                     <h3>Moje teamy</h3>
                                 </div>
                                 <ul className="">
-                                    <div className = "myteams-list">
+                                    <div className = "myteams-list list">
                                     {this.state.teams.map((el, index) =>
                                         <li className={index === this.state.teamShowed ? 'active' : ''} key={index} id={index} onClick={e => this.onClickShowTeam(e)}>
                                             {el.name}
@@ -300,15 +300,15 @@ export default class MyTeams extends Component {
                                         </div>
                                     }
                                 </ul>
-                            </div>
-                            <div className="checklists-content content">
+                            </section>
+                            <section className="checklists-content content">
                                 <div className="title-content">
                                     <i className="fas fa-tasks"></i>
                                     <h3>Przypisane checklisty</h3>
                                 </div>
                                 {this.state.isLoaded.myTeam && this.state.checkLists.length > 0 && this.state.teamShowed !== null && this.state.teams[this.state.teamShowed].isOwner === true &&
                                 <ul className="">
-                                    <div className = "myteams-list">
+                                    <div className = "checklists-list list">
                                     {!!this.state.teamShowedData.checkLists && this.state.teamShowedData.checkLists.map((el, index) =>
                                         <li key={index} id={el.listId}>
                                             {el.name}
@@ -318,10 +318,10 @@ export default class MyTeams extends Component {
                                     {this.generateShareSelect()}                                                                 
                                 </ul>
                                 }
-                            </div>
+                            </section>
                             
                         </div>
-                        <div className="team-content content">
+                        <section className="team-content content">
                             <div className="title-content">
                                 <i className="material-icons">people</i>
                                 <h3>Członkowie</h3>
@@ -329,8 +329,8 @@ export default class MyTeams extends Component {
                             <div className="myteams-content">
                             {this.loadMyTeam()}
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 }
             </div>
         );
