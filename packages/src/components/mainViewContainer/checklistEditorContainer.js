@@ -21,7 +21,6 @@ export default class ChecklistEditorContainer extends Component {
             this.changeOnlyToRead();
             if (this.state.disabled === 'disabled') this.setState({ disabled: '' });
             if (this.state.disabled === '') this.setState({ disabled: 'disabled' });
-            console.log(this.state.disabled)
         }
 
         // if (this.props.changeReaderToEditor !== prevProps.changeReaderToEditor) {
