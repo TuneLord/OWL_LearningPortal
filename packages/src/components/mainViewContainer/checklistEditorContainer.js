@@ -61,7 +61,7 @@ export default class ChecklistEditorContainer extends Component {
                 <div className="change">
                     <div className="change-title">{this.props.chosenList}</div>
                     <div className = "change-button" style={{ display: this.props.saveDisplay }}>
-                        <button onClick={this.props.onClick}>Zapisz listę</button>
+                        <button onClick={() => this.props.onClick(true)}>Zapisz listę</button>
                         <span>|</span>
                         <button onClick={() => this.props.onClick(false)}>Anuluj</button>
                     </div>
