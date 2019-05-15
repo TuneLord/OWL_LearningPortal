@@ -178,7 +178,7 @@ export default class MainViewContainer extends Component {
         });
     }
 
-    async saveChecklist(isChange = true) {
+    async saveChecklist(isChange) {
         if (isChange === false) {
             this.setState({
                 activeEditor: false,
@@ -193,7 +193,7 @@ export default class MainViewContainer extends Component {
         let listId = null;
         const newList = that.state.activeChecklist.listId;
         if (newList) listId = newList;
-        else listId = that.state.activeChecklist.firstElementChild.id;
+        else listId = that.state.activeChecklist.getAttribute('data-id');
 
         const token = localStorage.getItem("x-auth-token");
         const content = sessionStorage.getItem("draftail:content");
@@ -204,7 +204,7 @@ export default class MainViewContainer extends Component {
         const requestBody = {
             content: content
         };
-
+       
         try {
             let response = await fetch(`/checklist/${listId}`, {
                 method: "put",
@@ -301,7 +301,7 @@ export default class MainViewContainer extends Component {
                 <ChecklistEditorContainer
                     cleanEditor={this.state.cleanEditor}
                     showLoadedContent={this.state.loadedContent}
-                    onClick={() => this.saveChecklist()}
+                    onClick={(isChange) => this.saveChecklist(isChange)}
                     disabled={this.state.disabled}
                     chosenList={this.state.chosenList}
                     changeEditorToReader={this.state.showReader}
