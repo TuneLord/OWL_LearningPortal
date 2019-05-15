@@ -9,7 +9,7 @@ import { Dialog } from "@material-ui/core";
 
 export default class MainViewContainer extends Component {
     state = {
-        checklistNumber: 2,
+        checklistNumber: 0,
         disabled: "disabled",
         saveDisplay: "none",
         newChecklist: {},
@@ -264,16 +264,12 @@ export default class MainViewContainer extends Component {
         const windowWidth = window.innerWidth;
 
         return (
-            <section className="mainView__container">
-                <div className="mainView__header">
-                    {windowWidth <= 1024 ? (
-                        <div onClick={this.props.onClick}>
-                            <i className="fas fa-bars" />
-                        </div>
-                    ) : null}
+            <section className="container">
+                <div className="header">
                     <h2>Panel użytkownika</h2>
+                    {windowWidth <= 1024 ? <div className="menu-burger" onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}
                 </div>
-                <div className="stateContainter">
+                <div className="state-container">
                     <ChecklistCounter
                         number={this.state.checklistNumber}
                         updateNumber={this.state.updateNumber}
@@ -282,17 +278,7 @@ export default class MainViewContainer extends Component {
                         onClick={() => this.createChecklistNameInput()}
                     />
                 </div>
-                {/* {windowWidth > 1024 ? ( */}
-                <ChecklistEditorContainer
-                    cleanEditor={this.state.cleanEditor}
-                    showLoadedContent={this.state.loadedContent}
-                    onClick={() => this.saveChecklist()}
-                    disabled={this.state.disabled}
-                    chosenList={this.state.chosenList}
-                    changeEditorToReader={this.state.showReader}
-                    saveDisplay={this.state.saveDisplay}
-                />
-                {/* ) : null} */}
+                
                 <MyChecklists
                     editChecklist={() => this.editExistList()}
                     editChecklistName={(e, listId) => this.editChecklistName(e, listId)}
@@ -303,6 +289,17 @@ export default class MainViewContainer extends Component {
                     activeEditor={this.state.activeEditor}
                     inputExist={this.state.inputExist}
                 />
+
+                <ChecklistEditorContainer
+                    cleanEditor={this.state.cleanEditor}
+                    showLoadedContent={this.state.loadedContent}
+                    onClick={() => this.saveChecklist()}
+                    disabled={this.state.disabled}
+                    chosenList={this.state.chosenList}
+                    changeEditorToReader={this.state.showReader}
+                    saveDisplay={this.state.saveDisplay}
+                />
+
                 <Dialog open={this.state.dialogOpen}>
                     <UserInputDialogContent
                         title={this.state.dialogTitle}

@@ -217,8 +217,8 @@ export default class MyChecklists extends Component {
 
   StandardRender = () => (
     <section id="mychecklists">
-      <div className="mychecklists_container">
-        <div className="mychecklists_title">
+      <div className="content">
+        <div className="title-content">
           <i className="material-icons"> school </i>
           <h3 className="mychecklists_title__header">Moje checklisty</h3>
         </div>
@@ -231,8 +231,8 @@ export default class MyChecklists extends Component {
         </ul>
       </div>
 
-      <div className="sharedchecklists_container">
-        <div className="mychecklists_title">
+      <div className="content">
+        <div className="title-content">
           <i className="material-icons"> school</i>
           <h3 className="mychecklists_title__header">
             Udostępnione checklisty

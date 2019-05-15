@@ -265,21 +265,21 @@ export default class MyTeams extends Component {
                     <Loader /> :
                     <section className="container">
                         <div className="header">
-                            <h2>Panel {this.state.type}a</h2>
+                            <h2>Panel użytkownika</h2>
                             {windowWidth <= 1024 ? <div className="menu-burger" onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}
                         </div>
                         <div className="state-container">
-                            <button className="state-button team">
+                            <button className="state-button team team-count-button">
                                 <span>{this.state.teamsNumber}</span>
                                 liczba temów
                             </button>
                             <button className="state-button add-team-button" onClick={this.onClickShowInput}>Utwórz nowy team</button>
                         </div>
                         <div>
-                            <div className="teams-content">
-                                <div className="myteams-title">
+                            <div className="teams-content content">
+                                <div className="title-content">
                                    <i className="fas fa-campground"></i>
-                                    <h3 className="myteams-title-header">Moje teamy</h3>
+                                    <h3>Moje teamy</h3>
                                 </div>
                                 <ul className="">
                                     <div className = "myteams-list">
@@ -301,12 +301,12 @@ export default class MyTeams extends Component {
                                     }
                                 </ul>
                             </div>
-                            {this.state.isLoaded.myTeam && this.state.checkLists.length > 0 && this.state.teamShowed !== null && this.state.teams[this.state.teamShowed].isOwner === true &&
-                            <div className="checklists-content">
-                                <div className="myteams-title">
+                            <div className="checklists-content content">
+                                <div className="title-content">
                                     <i className="fas fa-tasks"></i>
-                                    <h3 className="myteams-title-header">Przypisane checklisty</h3>
+                                    <h3>Przypisane checklisty</h3>
                                 </div>
+                                {this.state.isLoaded.myTeam && this.state.checkLists.length > 0 && this.state.teamShowed !== null && this.state.teams[this.state.teamShowed].isOwner === true &&
                                 <ul className="">
                                     <div className = "myteams-list">
                                     {!!this.state.teamShowedData.checkLists && this.state.teamShowedData.checkLists.map((el, index) =>
@@ -317,15 +317,18 @@ export default class MyTeams extends Component {
                                     </div>
                                     {this.generateShareSelect()}                                                                 
                                 </ul>
+                                }
                             </div>
-                            }
+                            
                         </div>
-                        <div className="team-content">
-                            <div className="myteams-title">
+                        <div className="team-content content">
+                            <div className="title-content">
                                 <i className="material-icons">people</i>
-                                <h3 className="myteams-title-header">Członkowie</h3>
+                                <h3>Członkowie</h3>
                             </div>
+                            <div className="myteams-content">
                             {this.loadMyTeam()}
+                            </div>
                         </div>
                     </section>
                 }
