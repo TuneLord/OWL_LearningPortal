@@ -17,6 +17,7 @@ router.put('/team/:id', auth, checkListExistance, isAuthor, async (req, res) => 
     if(!req.body.members) return res.status(404).send('Provide team.');
     
     const team = await Team.findById(req.body._id);
+    
     if (!team) return res.status(400).send("Team does not exist.");
     if ((team.members.filter((member) => String(member._id) === String(req.user._id))).length === 0)
         return res.status(400).send("Access denied.");

@@ -194,7 +194,7 @@ export default class MyTeams extends Component {
                 body: JSON.stringify(this.state.teamShowedData),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;           
@@ -203,6 +203,27 @@ export default class MyTeams extends Component {
         } catch (err) {
             console.log(err)
         }
+    }
+
+    generateShareSelect= () => {
+        const options = this.state.checkLists
+            .filter((el) => el.isOwner && !this.state.teamShowedData.checkLists
+                .map(el => el.listId)
+                .includes(el.listId)
+            );
+        if (options.length > 0)
+            return (
+                <div className="add">    
+                    <select id="share" name="nazwa">
+                        {options.map((el, index) =>
+                            <option key={index} value={el.listId}>{el.name}</option>
+                        )}
+                    </select>                                                                        
+                    <div>
+                        <button className="" onClick={this.onClickShareList}>Przypisz</button>
+                    </div>
+                </div>  
+            )         
     }
 
     render() {
@@ -263,16 +284,7 @@ export default class MyTeams extends Component {
                                         </li>)
                                     }
                                     </div>
-                                        <div className="add">
-                                            <select id="share" name="nazwa">
-                                                {this.state.checkLists.map((el, index) => 
-                                                    <option key={index} value={el.listId}>{el.name}</option>
-                                                )}
-                                            </select>                                       
-                                        <div>
-                                            <button className="" onClick={this.onClickShareList}>Przypisz</button>
-                                        </div>
-                                    </div>                            
+                                    {this.generateShareSelect()}                                                                 
                                 </ul>
                             </div>
                             }
