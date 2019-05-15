@@ -19,15 +19,16 @@ export default class ChecklistEditorContainer extends Component {
 
         if (this.props.changeEditorToReader !== prevProps.changeEditorToReader) {
             this.changeOnlyToRead();
-            this.setState({ disabled: !this.props.disabled });
-            console.log('kupa')
+            if (this.state.disabled === 'disabled') this.setState({ disabled: '' });
+            if (this.state.disabled === '') this.setState({ disabled: 'disabled' });
+            console.log(this.state.disabled)
         }
 
-        if (this.props.changeReaderToEditor !== prevProps.changeReaderToEditor) {
-            this.changeOnlyToRead();
-            this.setState({ disabled: !this.props.disabled });
-            console.log('dupa')
-        }
+        // if (this.props.changeReaderToEditor !== prevProps.changeReaderToEditor) {
+        //     this.changeOnlyToRead();
+        //     this.setState({ disabled: !this.props.disabled });
+        //     console.log('dupa')
+        // }
 
         if (this.props.disabled !== prevProps.disabled) {
             this.setState({ disabled: this.props.disabled });
