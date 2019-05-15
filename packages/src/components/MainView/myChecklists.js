@@ -47,6 +47,7 @@ export default class MyChecklists extends Component {
       });
       if (!response.ok) throw response;
       response = await response.json();
+      console.log(response.checkLists)
       this.setState({
         data: response.checkLists,
         isLoaded: true
@@ -145,7 +146,6 @@ export default class MyChecklists extends Component {
       onClick={this.props.chooseList}
     >
       <p id={el.listId}>{el.name}</p>
-      <i className="material-icons icon-float icon-color">link</i>
       <i
         className="material-icons icon-float icon-color"
         onClick={this.props.editChecklist}
@@ -176,12 +176,11 @@ export default class MyChecklists extends Component {
       onClick={e => this.clickSharedList(e)}
     >
       <p id={el.listId}>{el.name}</p>
-      <i className="material-icons icon-float icon-color">link</i>
       <i
         className="material-icons icon-float icon-color"
         onClick={() => this.unsubCheckList(el.listId)}
       >
-        {" "}
+        {/* {" "} */}
         delete
 			</i>
       <div className="mychecklist_author">Autor: {el.listAuthor}</div>
@@ -213,7 +212,7 @@ export default class MyChecklists extends Component {
         </div>
         <ul className="mychecklists_list">
           {this.state.data
-            ? this.state.noMyLists
+            ? this.state.data
               .filter(this.filterShared)
               .map(this.createSharedChecklist)
             : null}

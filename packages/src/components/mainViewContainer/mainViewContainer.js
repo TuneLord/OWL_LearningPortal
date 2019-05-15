@@ -25,8 +25,8 @@ export default class MainViewContainer extends Component {
         dialogId: "",
         dialogTitle: "",
         dialogLabel: "",
-		dialogCallback: () => null,
-		dialogOpen: false,
+        dialogCallback: () => null,
+        dialogOpen: false,
     };
 
     changeDisabled() {
@@ -122,64 +122,64 @@ export default class MainViewContainer extends Component {
             name
         };
 
-		try {
-			const response = await fetch(`/checklist/${this.tempElement.id}`, {
-				method: "put",
-				headers: requestHeaders,
-				body: JSON.stringify(requestBody)
-			});
-			if (response.status !== 200) throw response;
-			const json = await response.json();
-			const changedList = {
-				listId: json._id,
-				name: json.name,
-				isOwner: true,
-				listAuthor: json.authorName,
-				isChecked: false
-			};
-			this.setState({ newChecklist: changedList });
-			this.tempElement.innerText = name;
-		} catch (error) {
-			console.log(error);
-			alert("Nie udało się połączyć z serwerem!");
-		}
-		this.tempElement = undefined;
-		this.setState({ dialogOpen: false });
-	}
+        try {
+            const response = await fetch(`/checklist/${this.tempElement.id}`, {
+                method: "put",
+                headers: requestHeaders,
+                body: JSON.stringify(requestBody)
+            });
+            if (response.status !== 200) throw response;
+            const json = await response.json();
+            const changedList = {
+                listId: json._id,
+                name: json.name,
+                isOwner: true,
+                listAuthor: json.authorName,
+                isChecked: false
+            };
+            this.setState({ newChecklist: changedList });
+            this.tempElement.innerText = name;
+        } catch (error) {
+            console.log(error);
+            alert("Nie udało się połączyć z serwerem!");
+        }
+        this.tempElement = undefined;
+        this.setState({ dialogOpen: false });
+    }
 
-	editChecklistName(e) {
-		if (this.state.activeEditor) return;
-		if (this.state.inputExist) return;
-		if (this.state.changeNameinputExist) return;
-		// console.log(this.state.changeNameInputExist);
-		// this.setState({ changeNameInputExist: true });
-		// console.log(this.state.changeNameInputExist);
-		const checklist = e.currentTarget.parentElement;
-		const checklistTitle = checklist.firstElementChild;
-		this.tempElement = checklistTitle;
-		// const checklistNameContainer = document.createElement("div");
-		// const checklistNameInput = document.createElement("input");
-		// checklistNameInput.className = "addInput";
-		// const checklistNameButton = document.createElement("button");
-		// checklistNameButton.className = "addButton";
-		// checklistNameButton.innerText = "Zmień nazwę";
-		// const checklistNameCancel = document.createElement("div");
-		// checklistNameCancel.innerHTML = `<i class="fas fa-times"></i>`;
-		// const checklistsList = document.querySelector(".mychecklists_list");
-		// checklistsList.insertBefore(checklistNameContainer, checklist);
-		// checklist.hidden = true;
-		// checklistNameContainer.appendChild(checklistNameInput);
-		// checklistNameContainer.appendChild(checklistNameButton);
-		// checklistNameContainer.appendChild(checklistNameCancel);
-		// checklistNameCancel.addEventListener("click",
-		this.setState({
-			dialogOpen: true,
-			dialogTitle: "Wpisz nową nazwę listy",
-			dialogId: "newListDialog",
-			dialogLabel: "Nazwa",
-			dialogCallback: this.putChecklistOnServer.bind(this)
-		});
-	}
+    editChecklistName(e) {
+        if (this.state.activeEditor) return;
+        if (this.state.inputExist) return;
+        if (this.state.changeNameinputExist) return;
+        // console.log(this.state.changeNameInputExist);
+        // this.setState({ changeNameInputExist: true });
+        // console.log(this.state.changeNameInputExist);
+        const checklist = e.currentTarget.parentElement;
+        const checklistTitle = checklist.firstElementChild;
+        this.tempElement = checklistTitle;
+        // const checklistNameContainer = document.createElement("div");
+        // const checklistNameInput = document.createElement("input");
+        // checklistNameInput.className = "addInput";
+        // const checklistNameButton = document.createElement("button");
+        // checklistNameButton.className = "addButton";
+        // checklistNameButton.innerText = "Zmień nazwę";
+        // const checklistNameCancel = document.createElement("div");
+        // checklistNameCancel.innerHTML = `<i class="fas fa-times"></i>`;
+        // const checklistsList = document.querySelector(".mychecklists_list");
+        // checklistsList.insertBefore(checklistNameContainer, checklist);
+        // checklist.hidden = true;
+        // checklistNameContainer.appendChild(checklistNameInput);
+        // checklistNameContainer.appendChild(checklistNameButton);
+        // checklistNameContainer.appendChild(checklistNameCancel);
+        // checklistNameCancel.addEventListener("click",
+        this.setState({
+            dialogOpen: true,
+            dialogTitle: "Wpisz nową nazwę listy",
+            dialogId: "newListDialog",
+            dialogLabel: "Nazwa",
+            dialogCallback: this.putChecklistOnServer.bind(this)
+        });
+    }
 
     async saveChecklist() {
         const that = this;
@@ -187,15 +187,9 @@ export default class MainViewContainer extends Component {
         const newList = that.state.activeChecklist.listId;
         if (newList) listId = newList;
         else listId = that.state.activeChecklist.firstElementChild.id;
-        this.setState({
-            activeEditor: false,
-            disabled: "disabled",
-            saveDisplay: "none",
-            cleanEditor: true
-        });
 
         const token = localStorage.getItem("x-auth-token");
-        const content = localStorage.getItem("draftail:content");
+        const content = sessionStorage.getItem("draftail:content");
         const requestHeaders = {
             "Content-Type": "application/json",
             "x-auth-token": token
@@ -205,12 +199,20 @@ export default class MainViewContainer extends Component {
         };
 
         try {
-            const response = await fetch(`/checklist/${listId}`, {
+            let response = await fetch(`/checklist/${listId}`, {
                 method: "put",
                 headers: requestHeaders,
                 body: JSON.stringify(requestBody)
             });
             if (response.status !== 200) throw response;
+            response = await response.json();
+            console.log(response)
+            this.setState({
+                activeEditor: false,
+                disabled: "disabled",
+                saveDisplay: "none",
+                cleanEditor: true
+            });
         } catch (error) {
             console.log(error);
             alert("Nie udało się połączyć z serwerem!");
@@ -239,7 +241,7 @@ export default class MainViewContainer extends Component {
             if (response.status !== 200) throw response;
             response = await response.json();
             const content = response.content;
-            localStorage.setItem("draftail:content", content);
+            sessionStorage.setItem("draftail:content", content);
             this.setState({ loadedContent: this.state.loadedContent + 1 });
         } catch (error) {
             console.log(error);
