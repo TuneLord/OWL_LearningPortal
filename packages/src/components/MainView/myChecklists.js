@@ -153,7 +153,12 @@ export default class MyChecklists extends Component {
   clickSharedList(e) {
     this.props.chooseList(e);
     this.props.changeEditorToReader();
-  }
+  };
+
+  clickMyList(e) {
+    this.props.chooseList(e);
+    this.props.changeReaderToEditor();
+  };
 
   editName(e, listId) {
     this.props.editChecklistName(e, listId);
@@ -165,7 +170,7 @@ export default class MyChecklists extends Component {
       data-id={el.listId}
       className="mychecklists_checklista"
       key={el.listId}
-      onClick={this.props.chooseList}
+      onClick={e => this.clickMyList(e)}
     >
       <div className="desc">
         <span>{el.name}</span>
