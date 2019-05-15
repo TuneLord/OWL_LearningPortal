@@ -188,7 +188,6 @@ export default class MyTeams extends Component {
 
     onClickShareList = async () => {
         const id = document.getElementById('share').value;
-        console.log(JSON.stringify(this.state.teamShowedData));
         try {
             let response = await fetch(`/share/team/${id}`, {
                 method: 'put',
