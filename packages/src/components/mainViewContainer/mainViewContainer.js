@@ -215,7 +215,6 @@ export default class MainViewContainer extends Component {
             });
             if (response.status !== 200) throw response;
             response = await response.json();
-            console.log(response)
             this.setState({
                 activeEditor: false,
                 disabled: "disabled",
