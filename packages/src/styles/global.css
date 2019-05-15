@@ -19,36 +19,37 @@
     --menuCross: #e65100;
     --menuAccents: #fff;
 
-        /* MainView */
-        --mainViewMenu: #fffde7;
-        --mainViewChecklists:  #f5f3f0;
-        --mainViewChecklistsIcons: #ffe082;
-        --itemOnHover: #fffde7;
+    /* MainView */
+    --mainViewMenu: #fffde7;
+    --mainViewChecklists: #f5f3f0;
+    --mainViewChecklistsIcons: #ffe082;
+    --itemOnHover: #fffde7;
 
     --mainViewMenu: #fffde7;
     --mainViewContainer: #f0f3f3;
- /* Login & Register */
+    
+    /* Login & Register */
     --bgrSingIn: #fff;
-    --bgrSignInInput: #fffde7;
-    --checkedForm:#e65100;
+    --colorMenuButtom: #888;
+    --checkedForm: #e65100;
 
     /* Loader */
     --loaderBackground: rgba(0, 0, 0, .8);
 
-        /* Editor */
-        --editorMainColor: #000;
-        --editorBackground: #fff;
-        --editorBorder: #ddd;
-        --editorToolbarBackground: #e65100;
-        --editorBoxShadow: rgba(0, 0, 0, 0.1);
-        --editorAlternativeBoxShadow: rgba(220,220,220,1);
-        --editorLinkBackground: #EEF8FF;
-        --editorBaloonBackground: rgba(17, 17, 17, 0.9);
-        --editorBaloonColor: #fff;
-        --checklistEditorContainer:  #f0f3f3;
-        --checklistEditorButtons: #00c853;
-        --checklistEditorButtonOnHover: #00e676;
-        --checklistEditorButtonsText: #eee;
+    /* Editor */
+    --editorMainColor: #000;
+    --editorBackground: #fff;
+    --editorBorder: #ddd;
+    --editorToolbarBackground: #e65100;
+    --editorBoxShadow: rgba(0, 0, 0, 0.1);
+    --editorAlternativeBoxShadow: rgba(220, 220, 220, 1);
+    --editorLinkBackground: #EEF8FF;
+    --editorBaloonBackground: rgba(17, 17, 17, 0.9);
+    --editorBaloonColor: #fff;
+    --checklistEditorContainer: #f0f3f3;
+    --checklistEditorButtons: #00c853;
+    --checklistEditorButtonOnHover: #00e676;
+    --checklistEditorButtonsText: #eee;
     /* Fonts */
     --mainFont: 'Roboto', sans-serif;
     --logoFont: 'Fredoka One', cursive;
@@ -56,7 +57,7 @@
 }
 
 html[data-theme="dark"] {
-       /* Colors */
+    /* Colors */
     /*  Font color  */
     --mainColor: #9d9da3;
 
@@ -66,18 +67,18 @@ html[data-theme="dark"] {
     --menuCross: #373a66;
     --menuAccents: rgb(242, 243, 248);
 
-        /* MainView */
-        --mainViewMenu: #f8f8ee;
-        --mainViewChecklists:  #2e2e44;
-        --mainViewChecklistsIcons: #384264;
-        --itemOnHover: #4e4e5f;
+    /* MainView */
+    --mainViewMenu: #f8f8ee;
+    --mainViewChecklists: #2e2e44;
+    --mainViewChecklistsIcons: #384264;
+    --itemOnHover: #4e4e5f;
 
     --mainViewMenu: #030218;
     --mainViewContainer: #030218;
-    
+
     /* Login & Register */
     --bgrSingIn: #12122e;
-    --bgrSignInInput:#2b2b47;
+    --bgrSignInInput: #2b2b47;
     --checkedForm: #d9d9e2;
 
     /* Loader */

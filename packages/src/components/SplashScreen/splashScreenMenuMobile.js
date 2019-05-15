@@ -13,7 +13,7 @@ export default class SplashScreenMenuMobile extends Component {
           <i className="fab fa-earlybirds" />
           <h1><span>OWL</span>earning Portal</h1>
         </div>
-        <Menu right width={'60vw'} noOverlay disableOverlayClick>
+        <Menu right width={'100vw'} noOverlay disableOverlayClick>
           <Link className="menu-item" to="/"><i className="fab fa-earlybirds" /></Link>
           <Link className="menu-item" to="/howtouse">Jak używać aplikacji?</Link>
           <Link className="menu-item" to="/faq">Pytania i odpowiedzi</Link>

@@ -19,13 +19,13 @@ export default class MyTeam extends Component {
         this.setState({
             changeName: {
                 ...this.state.changeName,
-                value: this.props.data.name
+                value: this.props.team.name
             }
         });
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.data !== prevProps.data) {
+        if (this.props.team !== prevProps.team) {
             this.setState({
                 addMember: {
                     isDisable: true,
@@ -35,7 +35,7 @@ export default class MyTeam extends Component {
                 changeName: {
                     showInput: false,
                     isDisable: true,
-                    value: this.props.data.name
+                    value: this.props.team.name
                 }
             });
         }
@@ -62,11 +62,11 @@ export default class MyTeam extends Component {
 
     onClickAddMember = async () => {
         try {
-            let response = await fetch(`/teams/${this.props.data._id}?add=${this.state.addMember.value}`, {
+            let response = await fetch(`/teams/${this.props.team._id}?add=${this.state.addMember.value}`, {
                 method: 'put',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;
@@ -87,13 +87,13 @@ export default class MyTeam extends Component {
 
     onClickRemoveMember = async (e) => {
         const index = Number(e.target.parentElement.id);
-        const id = this.props.data.members[index]._id;
+        const email = this.props.team.members[index].email;
         try {
-            let response = await fetch(`/teams/${this.props.data._id}?remove=${id}`, {
+            let response = await fetch(`/teams/${this.props.team._id}?remove=${email}`, {
                 method: 'put',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;
@@ -114,7 +114,7 @@ export default class MyTeam extends Component {
 
     onChangeName = (e) => {
         let isDisable = true;
-        if (/^[a-zA-Z\d@$!%*#?&][a-zA-Z\d\s@$!%*#?&]{1,48}[a-zA-Z\d@$!%*#?&]$/.test(e.target.value))
+        if (/^[\S].+[\S]$/.test(e.target.value))
             isDisable = false;
         this.setState({
             changeName: {
@@ -127,11 +127,11 @@ export default class MyTeam extends Component {
 
     onClickChangeName = async () => {
         try {
-            let response = await fetch(`/teams/${this.props.data._id}?name=${this.state.changeName.value}`, {
+            let response = await fetch(`/teams/${this.props.team._id}?name=${this.state.changeName.value}`, {
                 method: 'put',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                    'x-auth-token': localStorage.getItem("x-auth-token")
                 }
             })
             if (response.status !== 200) throw response;
@@ -154,7 +154,7 @@ export default class MyTeam extends Component {
             changeName: {
                 showInput: false,
                 isDisable: true,
-                value: this.props.data.name
+                value: this.props.team.name
             }
         })
     }
@@ -164,7 +164,7 @@ export default class MyTeam extends Component {
         return (
             <div id="myteam">
                 <div className="change">  
-                    { this.props.data.isMentor === true ?
+                    { this.props.team.isOwner === true ?
                         <div onClick={this.onClickInputName}>
                             <input type="text" className="editable" value={this.state.changeName.value} onChange={(e) => this.onChangeName(e)} disabled={!this.state.changeName.showInput} />
                         </div>
@@ -181,18 +181,18 @@ export default class MyTeam extends Component {
                     }
                 </div>
                 <ul className="myteams-list">
-                    {this.props.data.members.map((el, index) =>
+                    {this.props.team.members.map((el, index) =>
                         <li key={index} id={index}><div>
-                            {el._id === this.props.data.mentorId ? 
+                            {el._id === this.props.team.mentorId ? 
                                 <i className="fas fa-chalkboard-teacher icon-member"></i>
                                 : <i className="fas fa-user-graduate icon-member"></i>
                             }
                             {el.email}</div>
-                            {this.props.data.isMentor && el._id !== this.props.data.mentorId && <i className="material-icons icon-float icon-color" onClick={(e) => this.onClickRemoveMember(e)}>delete_forever</i>}
+                            {this.props.team.isOwner && el._id !== this.props.team.mentorId && <i className="material-icons icon-float icon-color" onClick={(e) => this.onClickRemoveMember(e)}>delete_forever</i>}
                         </li>)
                     }
                 </ul>
-                {this.props.data.isMentor &&
+                {this.props.team.isOwner &&
                     (<div className="add">
                         <input type='text' placeholder='wpisz email użytkownika' value={this.state.addMember.value} onChange={this.onChangeEmail}/>
                         {this.state.addMember.error && (<div className='error'>{this.state.addMember.error}</div>)}

@@ -9,21 +9,33 @@ const Checklist = require('../models/checkListModel');
 const {
     User
 } = require('../models/userModel');
+const Team = require('../models/teamModel');
 
 const router = express.Router();
 
 router.put('/team/:id', auth, checkListExistance, isAuthor, async (req, res) => {
-    if(!req.body.team) return res.status(404).send('Provide team.');
+    if(!req.body.members) return res.status(404).send('Provide team.');
+    
+    const team = await Team.findById(req.body._id);
+    if (!team) return res.status(400).send("Team does not exist.");
+    if ((team.members.filter((member) => String(member._id) === String(req.user._id))).length === 0)
+        return res.status(400).send("Access denied.");
+    
+    const checklist = await Checklist.findById(req.checklist._id);
+    if ((team.checkLists.filter((checkList) => String(checkList.listId) === String(checklist._id))).length > 0)
+        return res.status(400).send("Checklista jest już przypisana do teamu");
+  
+    for(let tMemEmail of req.body.members) {
+        const user = await User.findOne({email:tMemEmail.email});
 
-    for(let tMemEmail of req.body.team) {
-        const user = await User.findOne({email:tMemEmail});
         //sprawdza czy User już ma udostępnioną checlistę, jeśli tak to pomija i przechodzi do następnego usera
         const isAlreadyMember = req.checklist.members.filter(el => {
             return String(el) === String(user._id);
+            
         })
         if (!!isAlreadyMember[0]) continue;
 
-            //dodaje info o checkliście do obiektu usera
+        //dodaje info o checkliście do obiektu usera
         user.checkLists.push(
             {
                 name: req.checklist.name,
@@ -36,10 +48,14 @@ router.put('/team/:id', auth, checkListExistance, isAuthor, async (req, res) => 
         const savedUser = await user.save();
 
         //dodaje członka do checklisty
-        const checklist = await Checklist.findById(req.checklist._id);
         checklist.members.push(savedUser._id);
         await checklist.save();
     }
+
+    //przypisuje chechkliste do teama
+    const { _id, name } = checklist;
+    team.checkLists.push({ listId:  _id, name });
+    await team.save();
 
     res.status(200).send('Success');
 });

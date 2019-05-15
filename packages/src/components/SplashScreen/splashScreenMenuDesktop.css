@@ -14,7 +14,7 @@
 .splashScreenMenuDesktop a {
     text-decoration: none;
     color: var(--mainColor);
-    padding: 15px 15px;
+    padding: 12px;
 }
 
 .splashScreenMenuDesktop a:hover {
@@ -41,32 +41,44 @@
 }
 
 /* Kontener logo ******************************************************************************************************/
-.splashScreenMenuDesktop__logo {
+.splashScreenMenuDesktop .splashScreenMenuDesktop__logo {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-a.splashScreenMenuDesktop__logo:hover
+ a.splashScreenMenuDesktop__logo:hover
 {
     color: var(--mainColor);
 }
 
 .splashScreenMenuDesktop__logo h1 {
-    font-size: 12px;
+    padding-left: 10px;
+    font-size: 14px;
     font-family: var(--logoFont);
 }
 
-.splashScreenMenuDesktop__logo h1 > span {
+.splashScreenMenuDesktop__logo h1>span {
     font-size: 16px;
-    padding-left: 10px;
     font-family: var(--logoFont);
     color: var(--mainColor);
 }
 
+.splashScreenMenuDesktop .splashScreenMenuDesktop__logo svg {
+     font-size: 40px;
+     color: var(--menuBackground);
+}
+
 .splashScreenMenuDesktop__logo svg {
-    font-size: 40px;
     color: var(--menuBackground);
+}
+
+.splashScreenMenuDesktop__logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
