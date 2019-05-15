@@ -27,9 +27,12 @@
 
     --mainViewMenu: #fffde7;
     --mainViewContainer: #f0f3f3;
+    
     /* Login & Register */
     --bgrSingIn: #fff;
     --colorMenuButtom: #888;
+    --checkedForm: #e65100;
+
     /* Loader */
     --loaderBackground: rgba(0, 0, 0, .8);
 
