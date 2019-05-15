@@ -9,7 +9,7 @@ import { Dialog } from "@material-ui/core";
 
 export default class MainViewContainer extends Component {
     state = {
-        checklistNumber: 2,
+        checklistNumber: 0,
         disabled: "disabled",
         saveDisplay: "none",
         newChecklist: {},
@@ -276,16 +276,7 @@ export default class MainViewContainer extends Component {
                         onClick={() => this.createChecklistNameInput()}
                     />
                 </div>
-                <ChecklistEditorContainer
-                    cleanEditor={this.state.cleanEditor}
-                    showLoadedContent={this.state.loadedContent}
-                    onClick={() => this.saveChecklist()}
-                    disabled={this.state.disabled}
-                    chosenList={this.state.chosenList}
-                    changeEditorToReader={this.state.showReader}
-                    saveDisplay={this.state.saveDisplay}
-                />
-                {/* ) : null} */}
+                
                 <MyChecklists
                     editChecklist={() => this.editExistList()}
                     editChecklistName={(e, listId) => this.editChecklistName(e, listId)}
@@ -296,6 +287,17 @@ export default class MainViewContainer extends Component {
                     activeEditor={this.state.activeEditor}
                     inputExist={this.state.inputExist}
                 />
+
+                <ChecklistEditorContainer
+                    cleanEditor={this.state.cleanEditor}
+                    showLoadedContent={this.state.loadedContent}
+                    onClick={() => this.saveChecklist()}
+                    disabled={this.state.disabled}
+                    chosenList={this.state.chosenList}
+                    changeEditorToReader={this.state.showReader}
+                    saveDisplay={this.state.saveDisplay}
+                />
+
                 <Dialog open={this.state.dialogOpen}>
                     <UserInputDialogContent
                         title={this.state.dialogTitle}

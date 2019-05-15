@@ -9,15 +9,6 @@
     border-left: none;
 }
 
-
-/* .fa-bars {
-    font-size: 2.2em;
-    position: absolute !important;
-    top: 50%;
-    left: 7%;
-    transform: translateY(-50%)
-} */
-
 .stateContainter {
     display: flex;
     justify-content: space-around;
@@ -60,22 +51,4 @@
 
 .createNewChecklist:hover {
     background: var(--checklistEditorButtonOnHover);
-}
-
-@media (min-width: 1024px) {
-    .mainView__container {
-        display: grid;
-        grid-template-columns: 65% 35%;
-        grid-template-rows: 10% 17% 73%;
-    }
-
-    .stateContainter {
-        grid-column: 1 / span 1;
-        grid-row: 2 / span 1;
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-    }
-
-
 }
