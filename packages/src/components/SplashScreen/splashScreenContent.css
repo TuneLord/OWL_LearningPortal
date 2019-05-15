@@ -2,7 +2,7 @@
 
 /* Kontener ekranu powitalnego ****************************************************************************************/
 .splashScreenContent {
-    width: 100%;
+    width: 100vw;
     height: auto;
     background-image: url('../../images/background2.png');
     background-size: contain;

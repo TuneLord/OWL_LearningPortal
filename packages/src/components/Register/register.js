@@ -19,13 +19,6 @@ class Register extends React.Component {
             isDisable: true
         };
     }
-
-    componentDidMount()
-    {
-        const token = localStorage.getItem("x-auth-token");
-        const id = localStorage.getItem("id");
-        if (id && token) this.props.history.push(`/me/${id}`);
-    }
     
     onChangeName = (e) => {
         let error = '';
@@ -37,7 +30,7 @@ class Register extends React.Component {
             error = 'Nazwa powinna posiadać min. 3 znaki';
         else if (e.target.value.length > 50)
             error = 'Dozwolona długość nazwy do 50 znaków';
-        else if (!(/^[a-zA-Z\d@$!%*#?&][a-zA-Z\d\s@$!%*#?&]+[a-zA-Z\d@$!%*#?&]$/.test(e.target.value)))
+        else if (!(/^[a-zA-Z\d\s@$!%*#?&]+$/.test(e.target.value)))
             error = 'Nazwa zawiera niedozwolone znaki';
         else isDisable = false;
 
@@ -114,11 +107,12 @@ class Register extends React.Component {
                 body: JSON.stringify(requestBody)
             });
             if (response.status !== 200) throw response;
-            localStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
+            sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             this.props.loginStatus(true);
             response = await response.json();
-            localStorage.setItem("id", response);
+            sessionStorage.setItem("id", response);
             this.props.history.push(`/me/${response}`);
+            console.log('Konto zostało utworzone')
         } catch(err) {
             console.log(err);
             if ([404, 400].includes(err.status)) {
@@ -159,7 +153,7 @@ class Register extends React.Component {
         const windowWidth = window.innerWidth;
 
         return (
-            <div id="container">
+            <div>
         {windowWidth < 1025 ?
           <SplashScreenMenuMobile /> :
           <SplashScreenMenuDesktop />

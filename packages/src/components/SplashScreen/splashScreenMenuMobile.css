@@ -2,7 +2,7 @@
 
 /* Kontener menu w wersji mobile **************************************************************************************/
 .splashScreenMenuMobile {
-    width: 100%;
+    width: 100vw;
     height: 90px;
     border-bottom: 1px solid var(--border);
     display: flex;
@@ -16,10 +16,6 @@
     justify-content: center;
     align-items: center;
     padding-left: 26px;
-}
-
-.splashScreenMenuMobile a {
-    outline: none;
 }
 
 .splashScreenMenuMobile__logo h1 {
@@ -60,13 +56,12 @@
 
 /* Przycisk zamknięcia X **********************************************************************************************/
 .bm-cross-button {
-    margin: 20px !important;
+    height: 24px;
+    width: 24px;
 }
 
 /* Kształt przycisku zamknięcia X *************************************************************************************/
-.bm-cross { 
-    height: 21px !important;
-    width: 6px !important;
+.bm-cross {
     background: var(--menuCross);
 }
 
@@ -79,10 +74,10 @@
 /* Pasek boczny, który wyjeżdża ***************************************************************************************/
 .bm-menu {
     background: var(--menuBackground);
-    padding: 30px;
-    font-size: 18px;
-    width: 100%;
-    height: 100%;
+    padding: 3.5em 0.5em 0;
+    font-size: 1.15em;
+    width: 60vw;
+    height: 50%;
 }
 
 /* Wrapper dla listy elementów menu ***********************************************************************************/
@@ -98,12 +93,12 @@
     color: var(--mainColor);
     padding: 10px 0;
     text-align: center;
-    font-size: 18px;
-    font-weight: normal;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .menu-item svg {
-    font-size: 62px;
+    font-size: 30px;
 }
 
 .menu-item:first-child {

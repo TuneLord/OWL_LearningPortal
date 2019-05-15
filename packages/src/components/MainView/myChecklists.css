@@ -6,8 +6,7 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: space-around;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
@@ -32,17 +31,7 @@
 
 .mychecklists_container {
     width: 95%;
-    height: 45%;
-    -webkit-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    -moz-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    border: 1px solid var(--border);
-    border-top: none;
-}
-
-.sharedchecklists_container {
-    width: 95%;
-    height: 45%;
+    height: 100%;
     -webkit-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
     -moz-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
     box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);

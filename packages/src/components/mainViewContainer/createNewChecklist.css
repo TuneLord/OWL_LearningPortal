@@ -1,9 +1,9 @@
 @import '../../styles/global.css';
 
 .createNewChecklist {
-    color: var(--checklistEditorButtonsText);
+    color: white;
     display: none;
-    background-color: var(--checklistEditorButtons);
+    background-color: #00c853;
     font-size: 14px;
     line-height: 140%;
     cursor: pointer;
@@ -18,7 +18,7 @@
 }
 
 .createNewChecklist:hover {
-    background: var(--checklistEditorButtonOnHover);
+    background: #00e676;
     box-shadow: 0 0 2px grey;
 }
 

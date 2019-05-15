@@ -11,7 +11,7 @@ router.get('/', auth, async (req,res) => {
     const objUser = {
         ...user._doc
     };
-    const teams = await Team.find({ members: `${user._id}` }).select('mentorId name');
+    const teams = await Team.find({ members: `${user._id}` }).select('mentorId name members');
     objUser.teams = teams;
 
     res.status(200).send(objUser);

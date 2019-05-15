@@ -1,7 +1,7 @@
 @import '../../styles/global.css';
 
 .mainViewMenuMobile {
-    
+    height: 60%;
     width: 100%;
     position: absolute;
     display: flex;
@@ -9,22 +9,21 @@
     justify-content: flex-start;
     align-items: center;
     padding: 50px 0;
-    border-bottom: 1px solid var(--border);
-    background-color: var(--mainViewMenu);
+    border: 1px solid var(--border);
+    background-color: #fffde7;
     z-index: 10;
     transition: 0.4s;
-    min-height: 100%;
 }
 
-.cancel {
-    font-size: 24px;
+.fa-times {
+    font-size: 2.2em;
     position: absolute;
-    top: 16px;
-    right: 16px;
-} 
+    top: 5%;
+    right: 10%;
+}
 
 .mainViewMenuMobile a {
-    font-size: 18px;
+    font-size: 1.4em;
     padding: 12px 0;
     text-decoration: none;
     color: var(--mainColor);
@@ -42,17 +41,7 @@
     color: var(--menuBackground);
 }
 
-.splashScreenMenuDesktop__logo {
-    display: flex;
-    flex-direction: column; 
-    padding-bottom: 15px;
-}
-
-.splashScreenMenuDesktop__logo svg {
-    font-size: 72px;
-}
-
-@media (min-width : 1025px) {
+@media (min-width : 1024px) {
     .mainViewMenuMobile {
         display: none;
     }

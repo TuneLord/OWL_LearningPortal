@@ -7,19 +7,19 @@ const router = express.Router();
 
 router.post('/', auth, async (req, res) => {
 
-    // if(req.user.type !== "mentor") {
-    //     return res.status(403).send("Access denied - not a mentor.");
-    // }
+    if(req.user.type !== "mentor") {
+        return res.status(403).send("Access denied - not a mentor.");
+    }
 
     const team = new Team({
         mentorId: req.user._id,
         name: req.body.name,
-        members: [req.user._id]
+        members: [...req.body.members, req.user._id]
     });
 
     const result = await team.save()
 
-    return res.status(200).send({ _id: result._id, name: result.name, mentorId: result.mentorId, members: result.members });
+    return res.status(200).send(result);
 });
 
 router.get('/:id', auth, async (req, res) => {
@@ -32,6 +32,7 @@ router.get('/:id', auth, async (req, res) => {
     if (!(team.members.includes(req.user._id))) return res.status(403).send('Access denied - not a team member or mentor.');
 
     const objTeam = JSON.parse(JSON.stringify(team));
+    console.log(objTeam.members);
 
     for (let i in objTeam.members) {
         const user = await User.findOne({
@@ -63,13 +64,19 @@ router.put('/:id', auth, async (req, res) => {
     }
 
     if (req.query.add) {
-        const user = await  User.findOne({email: req.query.add});
-        
+
+        if (!ObjectId.isValid(req.query.add)) {
+            return res.status(400).send("Invalid object ID");
+        }
+
+        console.log(req.query.add);
+
+        const user = await User.findById(req.query.add);
         if (!user) return res.status(400).send("User does not exist.");
 
-        if (team.members.includes(user._id)) return res.status(400).send("User already in team.");
+        if(team.members.includes(req.query.add)) return res.status(400).send("User already in team.");
 
-        team.members = [...team.members, user._id];
+        team.members = [...team.members, req.query.add];
         await Team.findByIdAndUpdate(team._id, team);
         return res.status(200).send(team);
     }
@@ -107,7 +114,7 @@ router.delete('/:id', auth, async (req, res) => {
 
     await Team.findByIdAndDelete(team._id);
 
-    return res.status(200).send();
+    return res.status(200).send(req.params.id);
 });
 
 module.exports = router;

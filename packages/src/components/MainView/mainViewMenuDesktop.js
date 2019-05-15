@@ -4,7 +4,7 @@ import '../SplashScreen/splashScreenMenuDesktop.css';
 import  {Link} from 'react-router-dom';
 import ThemeChanger from '../App/ThemeChanger';
 
-export const MainViewMenuDesktop = () => {
+export const MainViewMenuDesktop = ({ id }) => {
     return (
       <section className="mainViewMenuDesktop">
         <div className={"splashScreenMenuDesktop__logo"}>
@@ -13,13 +13,13 @@ export const MainViewMenuDesktop = () => {
             <span>OWL</span>earning Portal
           </h1>
         </div>
-        <Link className="menu-item" to={`/me`}>
+        <Link className="menu-item" to={`/me/${id}`}>
           Moje checklisty
         </Link>
-        <Link className="menu-item" to={`/me/myteams`}>
+        <Link className="menu-item" to={`/me/myteams/${id}`}>
           Moje teamy
         </Link>
-        <Link className="menu-item" to={`/settings`}>
+        <Link className="menu-item" to={`/settings/${id}`}>
           Ustawienia
         </Link>
         <Link className="menu-item" to={window.location}><ThemeChanger /></Link>
