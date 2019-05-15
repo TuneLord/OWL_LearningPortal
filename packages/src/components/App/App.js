@@ -25,12 +25,11 @@ const Routes = (
 );
 
 
+
 const App = () => {
-    return (
-        <Router>
-            {Routes}
-        </Router>
-    );
+    const theme = localStorage.getItem("theme");
+	if (theme) document.documentElement.setAttribute("data-theme", theme);
+	return <Router>{Routes}</Router>;
 };
 
 export default App;
