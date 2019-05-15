@@ -139,7 +139,7 @@ export default class MyChecklists extends Component {
     >
       <p id={el.listId}>{el.name}</p>
       <i className="material-icons icon-float icon-color">link</i>
-      <i className="material-icons icon-float icon-color"
+      <i className="material-icons icon-float icon-color noMobile"
         onClick={this.props.editChecklist}>edit</i>
       <i
         className="material-icons icon-float icon-color"
