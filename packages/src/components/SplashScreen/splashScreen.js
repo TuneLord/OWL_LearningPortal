@@ -6,19 +6,24 @@ import SplashScreenMenuDesktop from './splashScreenMenuDesktop';
 import { SplashScreenContent } from "./splashScreenContent";
 
 export default class SplashScreen extends Component {
-  // componentDidMount()
-  // {
-  //   const token = sessionStorage.getItem("x-auth-token");
-  //   const id = sessionStorage.getItem("id");
-  //   if (id && token) this.props.history.push(`/me/${id}`);
-  // }
+  state = {
+    windowWidth: window.innerWidth
+  }
+  componentDidMount()
+  {
+    const token = localStorage.getItem("x-auth-token");
+    if (token) this.props.history.push(`/me`);
+    window.addEventListener("resize", () => {
+      this.setState({
+        windowWidth: window.innerWidth
+      })
+    });
+  }
 
   render() {
-    const windowWidth = window.innerWidth;
-
     return (
       <section className={'splashScreen'}>
-        {windowWidth < 1025 ?
+        {this.state.windowWidth <= 1024 ?
           <SplashScreenMenuMobile /> :
           <SplashScreenMenuDesktop />
         }
