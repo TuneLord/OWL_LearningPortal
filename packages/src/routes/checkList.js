@@ -1,3 +1,4 @@
+
 const express = require('express');
 
 const auth = require('../middleware/auth');
@@ -14,7 +15,6 @@ router.post('/',auth, async (req, res) => {
     //tworzy nowy obiekt checklisty
     const checklist = new Checklist ({
         authorId: req.user._id, //tutaj id zalogowanego użytkownika tworzącego checklistę wyciągnięte z tokena
-        authorName: req.user.name,
         name: req.body.name,
         content: req.body.content,
         members: [req.user._id]
@@ -26,7 +26,7 @@ router.post('/',auth, async (req, res) => {
     //znajduję autora
     const user = await User.findById(req.user._id);
     user.checkLists.push(
-        {name:result.name, listId:result._id, listAuthor:result.authorName, isChecked:false, isOwner: true}
+        {name:result.name, listId:result._id, isChecked:false, isOwner: true}
     );
     await user.save();
 
