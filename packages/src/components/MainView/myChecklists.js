@@ -160,7 +160,7 @@ export default class MyChecklists extends Component {
       </i>
       <i
         className="material-icons icon-float icon-color"
-        onClick={() => this.deleteChecklist(el.listId).bind}
+        onClick={() => this.deleteChecklist(el.listId)}
       >
         delete
 			</i>
