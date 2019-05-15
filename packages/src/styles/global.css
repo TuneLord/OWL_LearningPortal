@@ -185,14 +185,41 @@ html {
     width: 100%;
 }
 
-@media (min-width: 1024px) {
-    .state {
-        width: 18vw;
-    }
+/* mainView - content */
+.mainView .title-content {
+    margin-bottom: 16px;
+    color: var(--menuBackground);
+    padding: 16px 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: var(--bgrSingIn);
+}
+
+.mainView .title-content h3 {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 16px;
+    color: var(--mainColor);
+}
+
+.mainView .content {
+    display: flex;
+    flex-direction: column;
+    margin: 16px;
+    box-sizing: border-box;
 }
 
 @media only screen and (max-width: 768px) {
-    #myteams .header {
+    .mainView .header {
         display: flex;
+    }
+
+    .mainView .container {
+        display: flex;
+        flex-direction: column;
     }
 }

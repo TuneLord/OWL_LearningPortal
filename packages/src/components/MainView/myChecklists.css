@@ -1,16 +1,5 @@
 @import '../../styles/global.css';
 
-#mychecklists {
-    grid-column: 2 / span 1;
-    grid-row: 2 / span 2;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-}
-
 .mychecklists_content {
     width: 100%;
     height: 100%;
@@ -28,26 +17,6 @@
 .textEditor {
     display: flex;
     justify-content: center;
-}
-
-.mychecklists_container {
-    width: 95%;
-    height: 45%;
-    -webkit-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    -moz-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    border: 1px solid var(--border);
-    border-top: none;
-}
-
-.sharedchecklists_container {
-    width: 95%;
-    height: 45%;
-    -webkit-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    -moz-box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    box-shadow: 7px 13px 32px -28px rgba(122, 118, 122, 0.68);
-    border: 1px solid var(--border);
-    border-top: none;
 }
 
 .mychecklists_title {
@@ -72,16 +41,18 @@
 
 .mychecklists_list {
     list-style-type: none;
-    overflow-y: scroll;
-    margin-left: 15px;
-    margin-right: 15px;
-    height: 80%;
+    overflow-y: auto;
+    border-radius: 5px;
+    background-color:var(--bgrSingIn);
 }
 
 .mychecklists_checklista {
     border-bottom: 1px solid var(--mainViewChecklists);
-    padding: 15px;
+    padding: 16px;
     cursor: pointer;
+    width: 100%;
+    line-height: 20px;
+    
 }
 
 .mychecklists_checklista:hover {

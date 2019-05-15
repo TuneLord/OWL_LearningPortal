@@ -6,34 +6,15 @@
     display: flex;
 }
 
-#myteams .team-content {
-    display: flex;
-    flex-direction: column;
-}
-
 .myteams-content {
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-#myteams .state-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: var(--colorMenuButtom);
-    font-size: 16px;
-    height: 100%;
-    color: var(--menuAccents);
-    border-radius: 5px;
-    padding: 0 16px;
-    width: 40%;
-}
-
-#myteams .state-button > span {
-    font-size: 26px;
-    width: 100%;
+#myteams .team-count-button {
+    cursor: pointer;
+    background-color: var(--colorMenuButtom)
 }
 
 #myteams .add-team-button {
@@ -43,33 +24,6 @@
 
 #myteams .add-team-button:hover {
     background-color: var(--menuBackground);
-}
-
-#myteams .teams-content,
-#myteams .team-content,
-#myteams .checklists-content {
-   margin: 16px;
-   box-sizing: border-box;
-}
-
-#myteams .myteams-title {
-    margin-bottom: 16px;
-    color: var(--menuBackground);
-    padding: 16px 5px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    font-size: 20px;
-    background-color: var(--bgrSingIn);
-}
-
-#myteams .myteams-title-header {
-    display: inline-block;
-    margin-left: 5px;
-    font-size: 16px;
-    color: var(--mainColor);
 }
 
 #myteams .myteams-list {
@@ -83,7 +37,6 @@
 
 #myteam .myteams-list {
     border-radius: 0 0 5px 5px;
-    max-height: none;
     /* max-height: 156px; */
 }
 
@@ -109,7 +62,7 @@
 }
 
 #myteams .teams-content .myteams-list>li:hover {
-    background-color: var(--bgrSignInInput);
+    background-color: var(--itemOnHover);
 }
 
 #myteams .myteams-list>li:last-of-type {
@@ -265,15 +218,4 @@ li:last-of-type.active {
     background-image: -webkit-gradient(linear, 0 0, 0 100%,
             color-stop(.5, rgba(255, 255, 255, .2)),
             color-stop(.5, transparent), to(transparent));
-}
-
-/* mobile */
-
-@media only screen and (max-width: 768px) {
-   
-    #myteams .container {
-        display: flex;
-        flex-direction: column;
-    }
-
 }
