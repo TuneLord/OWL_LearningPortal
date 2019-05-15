@@ -90,6 +90,10 @@
     color: var(--menuBackground);
 }
 
+.icon-check {
+    margin-right: 8px;
+}
+
 
 .icon-float {
     float: right;

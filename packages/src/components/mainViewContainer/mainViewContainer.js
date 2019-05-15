@@ -45,8 +45,8 @@ export default class MainViewContainer extends Component {
             newChecklist: {
                 name: addInput.value,
                 author: 'Próba',
-                isDone: false,
-                id: 0
+                // isDone: false,
+                // id: 0
             },
             activeEditor: true
         });
@@ -57,7 +57,7 @@ export default class MainViewContainer extends Component {
             "x-auth-token": token
         };
         const requestBody = {
-            'name': this.state.newChecklist.title,
+            'name': this.state.newChecklist.name,
             'content': null
         };
 
@@ -96,12 +96,12 @@ export default class MainViewContainer extends Component {
             "x-token": token
         };
         const requestBody = {
-            'name': this.state.newChecklist.title,
+            'name': this.state.newChecklist.name,
             'content': content
         };
 
         try {
-            const response = await fetch(`/checklist`, {
+            const response = await fetch(`/checklist/:${this.state.newChecklist.id}`, {
                 method: "put",
                 headers: requestHeaders,
                 body: JSON.stringify(requestBody)
