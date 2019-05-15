@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class ThemeChanger extends Component {
     state = {
-        theme: 'light',
+        theme: localStorage.getItem("theme"),
     };
 
 
@@ -10,6 +10,7 @@ export default class ThemeChanger extends Component {
         const theme = this.state.theme === 'dark' ? 'light' : 'dark';
         this.setState({ theme });
         document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
     }
 
     render() {
