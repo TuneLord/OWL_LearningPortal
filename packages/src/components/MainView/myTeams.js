@@ -38,7 +38,6 @@ export default class MyTeams extends Component {
                 checkLists: response.checkLists,
                 teamsNumber: response.teams.length
             })
-            console.log(this.state)
         } catch (err) {
             console.log(err)
         }
@@ -64,7 +63,6 @@ export default class MyTeams extends Component {
                 },
                 teamShowed: index
             })
-            console.log(this.state)
         } catch (err) {
             console.log(err)
         }
@@ -188,6 +186,25 @@ export default class MyTeams extends Component {
         }
     }
 
+    onClickShareList = async () => {
+        const id = document.getElementById('share').value;
+        try {
+            let response = await fetch(`/share/team/${id}`, {
+                method: 'put',
+                body: JSON.stringify(this.state.teamShowedData),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'x-auth-token': sessionStorage.getItem("x-auth-token")
+                }
+            })
+            if (response.status !== 200) throw response;           
+            this.showTeam(this.state.teamShowed);
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     render() {
         const windowWidth = window.innerWidth;
         return ( 
@@ -232,7 +249,7 @@ export default class MyTeams extends Component {
                                     }
                                 </ul>
                             </div>
-                            {this.state.checkLists.length > 0 && this.state.teams[this.state.teamShowed].isOwner === true &&
+                            {this.state.checkLists.length > 0 && this.state.teamShowed !== null && this.state.teams[this.state.teamShowed].isOwner === true &&
                             <div className="checklists-content">
                                 <div className="myteams-title">
                                     <i className="fas fa-tasks"></i>
@@ -240,15 +257,20 @@ export default class MyTeams extends Component {
                                 </div>
                                 <ul className="">
                                     <div className = "myteams-list">
+                                    {!!this.state.teamShowedData.checkLists && this.state.teamShowedData.checkLists.map((el, index) =>
+                                        <li key={index} id={el.listId}>
+                                            {el.name}
+                                        </li>)
+                                    }
                                     </div>
-                                    <div className="add">
-                                        <select name="nazwa">
-                                            {this.state.checkLists.map((el, index) => 
-                                                <option key={index} value={el.listId}>{el.name}</option>
-                                            )}
-                                        </select>                                       
+                                        <div className="add">
+                                            <select id="share" name="nazwa">
+                                                {this.state.checkLists.map((el, index) => 
+                                                    <option key={index} value={el.listId}>{el.name}</option>
+                                                )}
+                                            </select>                                       
                                         <div>
-                                            <button className="" onClick={this.onClickAddTeam} disabled={this.state.addTeam.isDisable}>Przypisz</button>
+                                            <button className="" onClick={this.onClickShareList}>Przypisz</button>
                                         </div>
                                     </div>                            
                                 </ul>

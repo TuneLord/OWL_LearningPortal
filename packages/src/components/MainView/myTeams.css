@@ -110,7 +110,7 @@
     list-style-type: none;
     width: 100%;
     border-radius: 5px;
-    max-height: 159px;
+    max-height: 156px;
     overflow: auto;
 }
 
@@ -128,7 +128,7 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    height: 53px;
+    height: 52px;
 }
 
 #myteams .team-content  li {
