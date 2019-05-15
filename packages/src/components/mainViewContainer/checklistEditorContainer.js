@@ -20,6 +20,13 @@ export default class ChecklistEditorContainer extends Component {
         if (this.props.changeEditorToReader !== prevProps.changeEditorToReader) {
             this.changeOnlyToRead();
             this.setState({ disabled: !this.props.disabled });
+            console.log('kupa')
+        }
+
+        if (this.props.changeReaderToEditor !== prevProps.changeReaderToEditor) {
+            this.changeOnlyToRead();
+            this.setState({ disabled: !this.props.disabled });
+            console.log('dupa')
         }
 
         if (this.props.disabled !== prevProps.disabled) {
@@ -43,11 +50,12 @@ export default class ChecklistEditorContainer extends Component {
     }
 
     render() {
+
         return (
             <section className="checkList-editor-content content">
                 <div className="title-content">
                     <i className="fas fa-tasks"></i>
-                    <h3>Aktualna lista</h3>                 
+                    <h3>Aktualna lista</h3>
                 </div>
                 <div>
                     {this.props.chosenList}
@@ -58,7 +66,7 @@ export default class ChecklistEditorContainer extends Component {
                     >
                         {" "}
                         Zmiana edytora
-					</button> */}  
+					</button> */}
                     <button
                         className="checklist__header-save"
                         onClick={this.props.onClick}
