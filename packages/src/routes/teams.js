@@ -56,7 +56,6 @@ router.put('/:id', auth, async (req, res) => {
        if(team.name !== req.query.name) {
             team.members.forEach(async el => {
                 const user = await User.findById(el);
-                console.log(el)
                 const newName = user.modifyTeam(team._id, req.query.name);
                 user.teams = [];
                 user.teams = newName;
