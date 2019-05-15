@@ -95,26 +95,3 @@
             color-stop(.5, rgba(255, 255, 255, .2)),
             color-stop(.5, transparent), to(transparent));
 }
-
-
-/* mobile */
-@media only screen and (max-width: 768px) {
-    #mychecklists {
-        height: 70%;
-    }
-
-    .mychecklists_container {
-        /* height: auto; */
-        width: 90%;
-    }
-
-    .mychecklists_list {
-        overflow-y: auto;
-    }
-}
-
-@media (max-width: 1024px) {
-    .noMobile {
-        display: none
-    }
-}

@@ -180,7 +180,7 @@ export default class MyTeam extends Component {
                         </div>
                     }
                 </div>
-                <ul className="myteams-list">
+                <ul className="myteam-list list">
                     {this.props.team.members.map((el, index) =>
                         <li key={index} id={index}><div>
                             {el._id === this.props.team.mentorId ? 
