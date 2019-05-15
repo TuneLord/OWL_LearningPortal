@@ -11,7 +11,13 @@ const teamSchema = new mongoose.Schema({
     },
     members: {
         type: Array,
-        default: []
+        default: [],
+        required: true
+    },
+    checkLists: {
+        type: Array,
+        default: [],
+        required: true
     }
 })
 
