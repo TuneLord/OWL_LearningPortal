@@ -253,17 +253,19 @@ export default class MainViewContainer extends Component {
             console.log(error);
             return;
         }
-    }
+    };
 
     updateChecklistNumber() {
         this.setState({ updateNumber: this.state.updateNumber + 1 });
-    }
-
-    selectChecklist() { }
+    };
 
     changeEditorToReader() {
         this.setState({ showReader: true });
-    }
+    };
+
+    changeReaderToEditor() {
+        this.setState({ showReader: false });
+    };
 
     render() {
         const windowWidth = window.innerWidth;
@@ -291,6 +293,7 @@ export default class MainViewContainer extends Component {
                     newChecklist={this.state.newChecklist}
                     chooseList={e => this.chooseList(e)}
                     changeEditorToReader={() => this.changeEditorToReader()}
+                    changeReaderToEditor={() => this.changeReaderToEditor()}
                     activeEditor={this.state.activeEditor}
                     inputExist={this.state.inputExist}
                 />

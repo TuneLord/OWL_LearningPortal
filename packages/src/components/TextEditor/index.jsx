@@ -417,7 +417,7 @@ class TextEditor extends React.Component {
 	render() {
 		this._createToolbar();
 		return (
-			<div className="textEditor__container">
+			<div id={this.props.id} className="textEditor__container noMobile">
 				<DraftailEditor
 					rawContentState={this.props.value}
 					onSave={this.onSave}

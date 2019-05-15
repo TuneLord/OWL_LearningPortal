@@ -43,7 +43,7 @@
     list-style-type: none;
     overflow-y: auto;
     border-radius: 5px;
-    background-color:var(--bgrSingIn);
+    background-color: var(--bgrSingIn);
 }
 
 .mychecklists_checklista {
