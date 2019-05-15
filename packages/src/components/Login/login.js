@@ -16,7 +16,12 @@ class Login extends React.Component {
             isDisable: true
         };
     }
-    
+
+    componentDidMount() {
+        const token = localStorage.getItem("x-auth-token");
+        if (token) this.props.history.push(`/me`);
+    }
+
     onChangeEmail = (e) => {
         let error = '';
         let isDisable = true;
@@ -52,7 +57,7 @@ class Login extends React.Component {
         });
     }
 
-    onSubmitForm = async(e) => {
+    onSubmitForm = async (e) => {
         e.preventDefault();
 
         const requestBody = {};
@@ -67,13 +72,10 @@ class Login extends React.Component {
                 body: JSON.stringify(requestBody)
             });
             if (response.status !== 200) throw response;
-            sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
+            localStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             response = await response.json();
-            response = Number.parseInt(response);
             this.props.loginStatus(true);
-            sessionStorage.setItem("id", response);
-            this.props.history.push(`/me/${response}`);
-            console.log('Logowanie przebiegło pomyślnie');
+            this.props.history.push(`/me`);
         } catch (err) {
             console.log(err);
             if ([404, 400].includes(err.status)) {
@@ -101,12 +103,10 @@ class Login extends React.Component {
                 }
             });
             if (response.status !== 200) throw response;
-            sessionStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
+            localStorage.setItem("x-auth-token", response.headers.get('x-auth-token'));
             response = await response.json();
             this.props.loginStatus(true);
-            sessionStorage.setItem("id", response);
-            this.props.history.push(`/me/${response}`);
-            console.log('Logowanie przebiegło pomyślnie')
+            this.props.history.push(`/me`);
         } catch (err) {
             console.log(err);
             if ([404, 400].includes(err.status)) {
@@ -120,56 +120,51 @@ class Login extends React.Component {
                     }
                 });
             }
-        }  
+        }
     }
 
     render() {
         const windowWidth = window.innerWidth;
 
         return (
-            <div>
-        {windowWidth < 1025 ?
-          <SplashScreenMenuMobile /> :
-          <SplashScreenMenuDesktop />
-        }
-            <div className='form login'>
-                <h2>Zaloguj się</h2>
-                <form onSubmit={this.onSubmitForm}>
-                    <div className="form-el">
-                        <i className="fas fa-envelope"></i>
-                        <input type='email' value={this.state.email} onChange={this.onChangeEmail} placeholder='podaj adres e-mail' />                       
-                    </div>
-                    {this.state.errors.email && (<div className='error'>{this.state.errors.email}</div>)}
-                    <div className="form-el">
-                        <i className="fas fa-lock"></i>
-                        <input type="password" value={this.state.password} onChange={this.onChangePassword} placeholder='podaj hasło' /> 
-                    </div>
-                    {this.state.errors.password && (<div className='error'>{this.state.errors.password}</div>)}   
-                    <input id='submit' type='submit' value='Zaloguj się' disabled={this.state.isDisable}/>
-                    <div className="or"><span>lub</span></div>
-                    <GoogleLogin
-                        clientId="609136166131-5spsmc9vddptv62kfv0i6uttslesqjfq.apps.googleusercontent.com"
-                        render={renderProps => (
-                            <button className='gplus' onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                                <i className="fab fa-google"></i>
-                                <span>Użyj konta Google</span>
-                            </button>
-                        )}
-                        buttonText="Login"
-                        onSuccess={this.responseGoogle}
-                        onFailure={this.responseGoogle}
-                        cookiePolicy={'single_host_origin'}
-                    />      
-                </form>
+            <div id='container'>
+                {windowWidth < 1025 ?
+                    <SplashScreenMenuMobile /> :
+                    <SplashScreenMenuDesktop />
+                }
+                <div className='form login'>
+                    <h2>Zaloguj się</h2>
+                    <form onSubmit={this.onSubmitForm}>
+                        <div className="form-el">
+                            <i className="fas fa-envelope"></i>
+                            <input type='email' value={this.state.email} onChange={this.onChangeEmail} placeholder='podaj adres e-mail' />
+                        </div>
+                        {this.state.errors.email && (<div className='error'>{this.state.errors.email}</div>)}
+                        <div className="form-el">
+                            <i className="fas fa-lock"></i>
+                            <input type="password" value={this.state.password} onChange={this.onChangePassword} placeholder='podaj hasło' />
+                        </div>
+                        {this.state.errors.password && (<div className='error'>{this.state.errors.password}</div>)}
+                        <input id='submit' type='submit' value='Zaloguj się' disabled={this.state.isDisable} />
+                        <div className="or"><span>lub</span></div>
+                        <GoogleLogin
+                            clientId="609136166131-5spsmc9vddptv62kfv0i6uttslesqjfq.apps.googleusercontent.com"
+                            render={renderProps => (
+                                <button className='gplus' onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                                    <i className="fab fa-google"></i>
+                                    <span>Użyj konta Google</span>
+                                </button>
+                            )}
+                            buttonText="Login"
+                            onSuccess={this.responseGoogle}
+                            onFailure={this.responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                        />
+                    </form>
+                </div>
             </div>
-        </div>
         );
-    }
-}   
-
-// const mapStateToProps = (state) => {
-//     console.log(state);
-//     return state;
-// }
+    };
+};
 
 export default connect(null, { loginStatus })(Login);

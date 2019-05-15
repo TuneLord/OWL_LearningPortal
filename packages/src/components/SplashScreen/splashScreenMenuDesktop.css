@@ -2,7 +2,7 @@
 
 /* Kontener menu w wersji desktop *************************************************************************************/
 .splashScreenMenuDesktop {
-    width: 100vw;
+    width: 100%;
     height: 90px;
     border-bottom: 1px solid var(--border);
     display: flex;
@@ -14,7 +14,7 @@
 .splashScreenMenuDesktop a {
     text-decoration: none;
     color: var(--mainColor);
-    padding: 15px 15px;
+    padding: 12px;
 }
 
 .splashScreenMenuDesktop a:hover {
@@ -53,13 +53,13 @@ a.splashScreenMenuDesktop__logo:hover
 }
 
 .splashScreenMenuDesktop__logo h1 {
-    font-size: 12px;
+    padding-left: 10px;
+    font-size: 14px;
     font-family: var(--logoFont);
 }
 
 .splashScreenMenuDesktop__logo h1 > span {
     font-size: 16px;
-    padding-left: 10px;
     font-family: var(--logoFont);
     color: var(--mainColor);
 }
