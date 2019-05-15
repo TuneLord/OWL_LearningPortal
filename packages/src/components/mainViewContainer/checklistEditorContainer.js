@@ -8,30 +8,15 @@ export default class ChecklistEditorContainer extends Component {
     state = {
         isContentLoaded: true,
         initial: "",
-        onlyToRead: false,
-        disabled: this.props.disabled
+        onlyToRead: this.props.changeEditorToReader,
+        disabled: !this.props.changeEditorToReader
     };
 
     componentDidUpdate(prevProps) {
+        
         if (this.props.cleanEditor !== prevProps.cleanEditor) {
             this.setState({ initial: null });
-        }
-
-        if (this.props.changeEditorToReader !== prevProps.changeEditorToReader) {
-            this.changeOnlyToRead();
-            if (this.state.disabled === 'disabled') this.setState({ disabled: '' });
-            if (this.state.disabled === '') this.setState({ disabled: 'disabled' });
-        }
-
-        // if (this.props.changeReaderToEditor !== prevProps.changeReaderToEditor) {
-        //     this.changeOnlyToRead();
-        //     this.setState({ disabled: !this.props.disabled });
-        //     console.log('dupa')
-        // }
-
-        if (this.props.disabled !== prevProps.disabled) {
-            this.setState({ disabled: this.props.disabled });
-        }
+        }      
 
         if (this.props.showLoadedContent !== prevProps.showLoadedContent) {
             this.setState({
@@ -44,13 +29,7 @@ export default class ChecklistEditorContainer extends Component {
         sessionStorage.setItem("draftail:content", JSON.stringify(content));
     };
 
-    changeOnlyToRead() {
-        if (!this.state.onlyToRead) this.setState({ onlyToRead: true });
-        if (this.state.onlyToRead) this.setState({ onlyToRead: false });
-    }
-
     render() {
-
         return (
             <section className="checkList-editor-content content">
                 <div className="title-content">
@@ -68,7 +47,7 @@ export default class ChecklistEditorContainer extends Component {
                 <div className="checklistEditor">
                     <div className={this.state.disabled} />
                     {this.state.isContentLoaded ? (
-                        this.state.onlyToRead ? (
+                        !!this.props.showReader ? (
                             <TextReader value={this.state.initial} />
                         ) : (
                                 <TextEditor value={this.state.initial} onSave={this.onSave} />

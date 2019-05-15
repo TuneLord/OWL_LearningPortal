@@ -18,7 +18,7 @@ export default class MainViewContainer extends Component {
         updateNumber: 0,
         activeChecklist: 0,
         chosenList: "",
-        showReader: false,
+        showReader: true,
         loadedContent: 0,
         inputExist: false,
         changeNameInputExist: false,
@@ -106,9 +106,13 @@ export default class MainViewContainer extends Component {
         this.setState({ dialogOpen: false });
     }
 
-    editExistList() {
+    editExistList(e) {
+        e.stopPropagation();
         if (this.state.inputExist) return
-        this.setState({ activeEditor: true });
+        this.setState({
+            activeEditor: true,
+            showReader: false
+        });
         this.changeDisabled();
     }
 
@@ -181,6 +185,7 @@ export default class MainViewContainer extends Component {
     }
 
     async saveChecklist(isChange) {
+        this.changeEditorToReader();
         if (isChange === false) {
             this.setState({
                 activeEditor: false,
@@ -270,6 +275,7 @@ export default class MainViewContainer extends Component {
 
     render() {
         const windowWidth = window.innerWidth;
+        // alert(this.state.showReader)
 
         return (
             <section className="container">
@@ -288,7 +294,7 @@ export default class MainViewContainer extends Component {
                 </aside>
                 <div className = "aside">
                 <MyChecklists
-                    editChecklist={() => this.editExistList()}
+                    editChecklist={(e) => this.editExistList(e)}
                     editChecklistName={(e, listId) => this.editChecklistName(e, listId)}
                     updateChecklistNumber={() => this.updateChecklistNumber()}
                     newChecklist={this.state.newChecklist}
@@ -305,7 +311,7 @@ export default class MainViewContainer extends Component {
                     onClick={(isChange) => this.saveChecklist(isChange)}
                     disabled={this.state.disabled}
                     chosenList={this.state.chosenList}
-                    changeEditorToReader={this.state.showReader}
+                    showReader={this.state.showReader}
                     saveDisplay={this.state.saveDisplay}
                 />
 
