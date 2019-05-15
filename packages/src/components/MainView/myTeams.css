@@ -38,6 +38,7 @@
     font-size: 32px;
     justify-self: center;
     color: var(--colorMenuButtom);
+    cursor: pointer
 }
 
 #myteams .state-container {
@@ -124,15 +125,14 @@
     width: 100%;
     border-bottom: 1px solid var(--mainViewChecklists);
     padding: 16px;
-    cursor: pointer;
     position: relative;
     display: flex;
     justify-content: space-between;
     height: 52px;
 }
 
-#myteams .team-content  li {
-    height: 52px;
+#myteams .teams-content  li {
+    cursor: pointer;
 }
 
 #myteams .myteams-title svg {
