@@ -1,5 +1,4 @@
 import React from 'react';
-import './checklistCounter.css';
 
 export class ChecklistCounter extends React.Component {
     state = {
@@ -52,10 +51,10 @@ export class ChecklistCounter extends React.Component {
 
     render() {
         return (
-            <div className="state checklistCounter">
-                <span className="checklistNumber">{this.state.number}</span>
-                <p>Liczba twoich checklist</p>
-            </div>
+            <button className="state state-button checklistCounter">
+                <span>{this.state.number}</span>
+                Liczba twoich checklist
+            </button>
         )
     }
 };

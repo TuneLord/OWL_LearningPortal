@@ -265,7 +265,7 @@ export default class MyTeams extends Component {
                     <Loader /> :
                     <section className="container">
                         <div className="header">
-                            <h2>Panel {this.state.type}a</h2>
+                            <h2>Panel użytkownika</h2>
                             {windowWidth <= 1024 ? <div className="menu-burger" onClick={this.props.onClick}><i className="fas fa-bars"></i></div> : null}
                         </div>
                         <div className="state-container">
@@ -301,12 +301,12 @@ export default class MyTeams extends Component {
                                     }
                                 </ul>
                             </div>
-                            {this.state.isLoaded.myTeam && this.state.checkLists.length > 0 && this.state.teamShowed !== null && this.state.teams[this.state.teamShowed].isOwner === true &&
                             <div className="checklists-content">
                                 <div className="myteams-title">
                                     <i className="fas fa-tasks"></i>
                                     <h3 className="myteams-title-header">Przypisane checklisty</h3>
                                 </div>
+                                {this.state.isLoaded.myTeam && this.state.checkLists.length > 0 && this.state.teamShowed !== null && this.state.teams[this.state.teamShowed].isOwner === true &&
                                 <ul className="">
                                     <div className = "myteams-list">
                                     {!!this.state.teamShowedData.checkLists && this.state.teamShowedData.checkLists.map((el, index) =>
@@ -317,15 +317,18 @@ export default class MyTeams extends Component {
                                     </div>
                                     {this.generateShareSelect()}                                                                 
                                 </ul>
+                                }
                             </div>
-                            }
+                            
                         </div>
                         <div className="team-content">
                             <div className="myteams-title">
                                 <i className="material-icons">people</i>
                                 <h3 className="myteams-title-header">Członkowie</h3>
                             </div>
+                            <div className="myteams-content">
                             {this.loadMyTeam()}
+                            </div>
                         </div>
                     </section>
                 }
