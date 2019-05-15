@@ -14,7 +14,7 @@ const teamSchema = new mongoose.Schema({
         default: [],
         required: true
     },
-    checklists: {
+    checkLists: {
         type: Array,
         default: [],
         required: true

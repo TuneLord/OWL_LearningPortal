@@ -34,7 +34,7 @@ router.get('/:id', auth, async (req, res) => {
         return res.status(400).send("Invalid object ID");
     }
 
-    const team = await Team.findById(req.params.id).select('mentorId name members');
+    const team = await Team.findById(req.params.id).select('mentorId name members checkLists');
     if ((team.members.filter((member) => String(member._id) === String(req.user._id))).length === 0) 
         return res.status(403).send('Access denied - not a team member or mentor.');
 
@@ -85,7 +85,7 @@ router.put('/:id', auth, async (req, res) => {
 
         const { _id, email, name } = user;
         team.members = [...team.members, { _id, email, name }];
-        await Team.findByIdAndUpdate(team._id, team);
+        await team.save();
 
         return res.status(200).send(team);
     }
