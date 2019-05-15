@@ -248,17 +248,19 @@ export default class MainViewContainer extends Component {
             alert("Nie udało się połączyć z serwerem!");
             return;
         }
-    }
+    };
 
     updateChecklistNumber() {
         this.setState({ updateNumber: this.state.updateNumber + 1 });
-    }
-
-    selectChecklist() { }
+    };
 
     changeEditorToReader() {
         this.setState({ showReader: true });
-    }
+    };
+
+    changeReaderToEditor() {
+        this.setState({ showReader: false });
+    };
 
     render() {
         const windowWidth = window.innerWidth;
@@ -286,6 +288,7 @@ export default class MainViewContainer extends Component {
                     newChecklist={this.state.newChecklist}
                     chooseList={e => this.chooseList(e)}
                     changeEditorToReader={() => this.changeEditorToReader()}
+                    changeReaderToEditor={() => this.changeReaderToEditor()}
                     activeEditor={this.state.activeEditor}
                     inputExist={this.state.inputExist}
                 />
