@@ -269,18 +269,13 @@ div.width100 {
     border: none;
 }
 
-#myteams .checklists-content option {
-    background-color: #fff;
-    border: none;
-}
-
-#myteams .checklists-content option:active {
-    background-color: var(--colorMenuButtom);
-}
-
 #myteams li.active {
     background-color: var(--menuCross);
     color: #fff;
+}
+
+li:last-of-type.active {
+     pointer-events: auto;
 }
 
 #myteams li.active:hover {

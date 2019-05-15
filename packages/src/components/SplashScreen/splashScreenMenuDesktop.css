@@ -41,13 +41,14 @@
 }
 
 /* Kontener logo ******************************************************************************************************/
-.splashScreenMenuDesktop__logo {
+.splashScreenMenuDesktop .splashScreenMenuDesktop__logo {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-a.splashScreenMenuDesktop__logo:hover
+ a.splashScreenMenuDesktop__logo:hover
 {
     color: var(--mainColor);
 }
@@ -58,15 +59,26 @@ a.splashScreenMenuDesktop__logo:hover
     font-family: var(--logoFont);
 }
 
-.splashScreenMenuDesktop__logo h1 > span {
+.splashScreenMenuDesktop__logo h1>span {
     font-size: 16px;
     font-family: var(--logoFont);
     color: var(--mainColor);
 }
 
+.splashScreenMenuDesktop .splashScreenMenuDesktop__logo svg {
+     font-size: 40px;
+     color: var(--menuBackground);
+}
+
 .splashScreenMenuDesktop__logo svg {
-    font-size: 40px;
     color: var(--menuBackground);
+}
+
+.splashScreenMenuDesktop__logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
