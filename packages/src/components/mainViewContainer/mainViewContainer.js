@@ -42,25 +42,7 @@ export default class MainViewContainer extends Component {
         // if (this.state.activeEditor) return;
         if (this.state.inputExist) return;
         if (this.state.changeNameinputExist) return;
-        // this.setState({ inputExist: true });
-        // const checklistNameContainer = document.createElement("div");
-        // const checklistNameInput = document.createElement("input");
-        // checklistNameInput.className = "addInput";
-        // const checklistNameButton = document.createElement("button");
-        // checklistNameButton.className = "addButton";
-        // checklistNameButton.innerText = "Dodaj";
-        // const checklistsList = document.querySelector(".mychecklists_list");
-        // if (document.querySelector(".mychecklists_checklista")) {
-        // 	checklistsList.insertBefore(
-        // 		checklistNameContainer,
-        // 		document.querySelector(".mychecklists_checklista")
-        // 	);
-        // } else {
-        // 	checklistsList.appendChild(checklistNameContainer);
-        // }
-        // checklistNameContainer.appendChild(checklistNameInput);
-        // checklistNameContainer.appendChild(checklistNameButton);
-        // checklistNameButton.onclick = this.createNewChecklist.bind(this);
+        
         this.setState({
             dialogOpen: true,
             dialogTitle: "Wpisz nazwę nowej listy",
@@ -134,7 +116,8 @@ export default class MainViewContainer extends Component {
             name
         };
         try {
-            const response = await fetch(`/checklist/${this.tempElement.id}`, {
+            this.setState({ isLoaded: false });
+            const response = await fetch(`/checklist/${this.tempListId}`, {
                 method: "put",
                 headers: requestHeaders,
                 body: JSON.stringify(requestBody)
@@ -150,40 +133,22 @@ export default class MainViewContainer extends Component {
             };
             
             this.setState({ newChecklist: changedList });
-            this.tempElement.innerText = name;
+            this.chooseList(this.tempListId, name);
+            this.setState({ isLoaded: true });
         } catch (error) {
             console.log(error);
         }
-        this.tempElement = undefined;
+        this.tempListId = undefined;
         this.setState({ dialogOpen: false });
     }
 
-    editChecklistName(e) {
+    editChecklistName(e, listId) {
         e.stopPropagation();
-        if (this.state.activeEditor) return;
+        // if (this.state.activeEditor) return;
         if (this.state.inputExist) return;
         if (this.state.changeNameinputExist) return;
-        // console.log(this.state.changeNameInputExist);
-        // this.setState({ changeNameInputExist: true });
-        // console.log(this.state.changeNameInputExist);
-        const checklist = e.currentTarget.parentElement;
-        const checklistTitle = checklist.firstElementChild;
-        this.tempElement = checklistTitle;
-        // const checklistNameContainer = document.createElement("div");
-        // const checklistNameInput = document.createElement("input");
-        // checklistNameInput.className = "addInput";
-        // const checklistNameButton = document.createElement("button");
-        // checklistNameButton.className = "addButton";
-        // checklistNameButton.innerText = "Zmień nazwę";
-        // const checklistNameCancel = document.createElement("div");
-        // checklistNameCancel.innerHTML = `<i class="fas fa-times"></i>`;
-        // const checklistsList = document.querySelector(".mychecklists_list");
-        // checklistsList.insertBefore(checklistNameContainer, checklist);
-        // checklist.hidden = true;
-        // checklistNameContainer.appendChild(checklistNameInput);
-        // checklistNameContainer.appendChild(checklistNameButton);
-        // checklistNameContainer.appendChild(checklistNameCancel);
-        // checklistNameCancel.addEventListener("click",
+        this.tempListId = listId;
+     
         this.setState({
             dialogOpen: true,
             dialogTitle: "Wpisz nową nazwę listy",
