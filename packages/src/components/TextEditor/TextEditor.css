@@ -60,9 +60,9 @@
   
   .Draftail-Editor {
     background-color: var(--editorBackground);
-    border: 1px solid var(--editorBorder);
-    height: 100%;
-    border-radius: 5px;
+    border-top: 1px solid var(--editorBorder);
+    height: auto;
+    border-radius: 0 0 5px 5px;
     width: 100%;
     font-family: var(--mainFont);
   }
@@ -88,7 +88,6 @@
   } */
   .Draftail-Editor .DraftEditor-root {
     color: var(--editorMainColor);
-    height: 85%;
     font-size: 1rem;
     line-height: 1.5;
     font-family: sans-serif;
@@ -100,7 +99,8 @@
 .Draftail-Editor .public-DraftEditor-content,
 .Draftail-Editor .public-DraftEditorPlaceholder-root {
     padding: 0.75rem;
-    height: calc(100vh - 290px);
+    /* height: calc(100vh - 290px); */
+    color: var(--mainColor)
 }
 
 .Draftail-Editor .public-DraftEditor-content>*>figure {
@@ -121,8 +121,8 @@
     padding: 0.25rem;
     background-color: var(--editorToolbarBackground);
     color: var(--editorMainColor);
-    border-radius: 0;
-    border-bottom: 1px solid var(--editorBorder);
+    border-radius: 0 0 5px 5px;
+ 
   }
   .Draftail-Editor--focus .Draftail-Toolbar {
     position: -webkit-sticky;

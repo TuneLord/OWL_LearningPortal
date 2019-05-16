@@ -89,7 +89,7 @@
 #myteams .add input {
     width: 100%;
     padding: 8px 16px;
-    color: var(--mainColor);
+    color: #323232;
     border-radius: 16px;
 
 }
@@ -97,12 +97,12 @@
 #myteams .add button {
     padding: 8px 16px;
     background-color: transparent;
-    color: var(--bgrSingIn);
+    color: var(--myteams);
     border-radius: 12px;
     font-size: 16px;
     cursor: pointer;
     margin-top: 15px;
-    border: 1px solid var(--bgrSingIn);
+    border: 1px solid var(--myteams);
 }
 
 #myteams .add button:first-of-type {
@@ -156,7 +156,7 @@ div.width100 {
     outline: none;
     width: 100%;
     padding: 8px 16px;
-    color: var(--mainColor);
+    color: #323232;
     border-radius: 16px;
     border: none;
 }

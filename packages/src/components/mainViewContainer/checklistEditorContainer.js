@@ -31,11 +31,7 @@ export default class ChecklistEditorContainer extends Component {
 
     render() {
         return (
-            <section className="checkList-editor-content content">
-                <div className="title-content">
-                    <i className="fas fa-tasks"></i>
-                    <h3>Aktualna lista</h3>
-                </div>
+            <div>
                 <div className="change">
                     <div className="change-title">{this.props.chosenList}</div>
                     <div className = "change-button" style={{ display: this.props.saveDisplay }}>
@@ -45,7 +41,7 @@ export default class ChecklistEditorContainer extends Component {
                     </div>
                 </div>
                 <div className="checklistEditor">
-                    <div className={this.state.disabled} />
+                    <div />
                     {this.state.isContentLoaded ? (
                         !!this.props.showReader ? (
                             <TextReader value={this.state.initial} />
@@ -56,7 +52,7 @@ export default class ChecklistEditorContainer extends Component {
                             <ClipLoader />
                         )}
                 </div>
-            </section>
+            </div>
         );
     }
 }

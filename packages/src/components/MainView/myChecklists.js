@@ -8,15 +8,21 @@ export default class MyChecklists extends Component {
 
     this.state = {
       author: null,
-      data: [],
-      myLists: [],
-      noMyLists: [],
-      isLoaded: false
+      data: []
     };
   }
 
-  componentDidMount() {
-    this.getChecklistsFromServer();
+  async componentDidMount() {
+    await this.getChecklistsFromServer(); 
+   
+    const lastList = this.state.data;
+    if (lastList.length > 0) {
+      const id = lastList[lastList.length - 1].listId;
+      const name = lastList[lastList.length - 1].name;
+      this.props.chooseList(id, name);
+    }
+
+    this.props.isLoaded();
   }
 
   componentDidUpdate(prevProps) {
@@ -49,10 +55,10 @@ export default class MyChecklists extends Component {
       response = await response.json();
       console.log(response.checkLists)
       this.setState({
-        data: response.checkLists,
-        isLoaded: true
+        data: response.checkLists
       });
       if (this.interval) clearInterval(this.interval);
+
     } catch (err) {
       if (!this.interval) {
         const callback = this.getChecklistsFromServer.bind(this);
@@ -62,8 +68,9 @@ export default class MyChecklists extends Component {
       return;
     }
   }
-  async deleteChecklist(listId) {
-    if (this.props.activeEditor) return;
+  async deleteChecklist(e, listId) {
+    e.stopPropagation();
+    // if (this.props.activeEditor) return;
     if (this.props.inputExist) return;
     const token = localStorage.getItem("x-auth-token");
     const requestHeaders = {
@@ -71,20 +78,19 @@ export default class MyChecklists extends Component {
       "x-auth-token": token
     };
 
-    this.setState({ isLoaded: false });
     try {
       let response = await fetch(`/checklist/${listId}`, {
         method: "delete",
         headers: requestHeaders
       });
+      
       if (response.status !== 200) throw response;
       this.setState({
-        data: this.state.data.filter(el => el.listId !== listId),
-        isLoaded: true
-      });
+        data: this.state.data.filter(el => el.listId !== listId)
+      });   
       this.props.updateChecklistNumber();
+      this.props.chooseList(this.state.data[this.state.data.length-1].listId, this.state.data[this.state.data.length-1].name)
     } catch (error) {
-      this.setState({ isLoaded: false });
     }
   }
 
@@ -150,62 +156,66 @@ export default class MyChecklists extends Component {
 
   filterShared = el => el.isOwner === false;
 
-  clickSharedList(e) {
-      this.props.chooseList(e);
-      this.props.changeEditorToReader();
-  };
-
-  clickMyList(e) {
-    this.props.chooseList(e);
-    this.props.changeEditorToReader();  
+  clickList(e) {
+    const id = e.currentTarget.getAttribute('data-id');
+    const name = e.currentTarget.getAttribute('data-name');
+    this.props.chooseList(id, name);
+    // this.props.changeEditorToReader();  
   };
 
   editName(e, listId) {
     this.props.editChecklistName(e, listId);
   }
 
-  createMyChecklist = el => (
-    <li
-      id={el.name}
-      data-id={el.listId}
-      className="mychecklists_checklista"
-      key={el.listId}
-      onClick={e => this.clickMyList(e)}
-    >
-      <div className="desc">
-        <span>{el.name}</span>
-        <span className="mychecklist_author">Autor: {el.listAuthor}</span>
-      </div>
-      <div className="to-right">
-      <i
-        className="material-icons icon-float icon-color"
-        onClick={(e) => this.props.editChecklist(e)}
+  createMyChecklist = (el) => {
+    const windowWidth = window.innerWidth;
+
+    return (
+      <li
+        data-name={el.name}
+        data-id={el.listId}
+        className="mychecklists_checklista"
+        key={el.listId}
+        onClick={e => this.clickList(e)}
       >
-        edit
-			</i>
-      <i
-        className="material-icons icon-float icon-color"
-        onClick={(e, listId) => this.editName(e, listId)}
-      >
-        title{" "}
-      </i>
-      <i
-        className="material-icons icon-float icon-color"
-        onClick={() => this.deleteChecklist(el.listId)}
-      >
-        delete
-			</i>
-      </div>
-    </li>
-  );
+        <div className="desc">
+          <span>{el.name}</span>
+          <span className="mychecklist_author">Autor: {el.listAuthor}</span>
+        </div>
+        <div className="to-right">
+        {windowWidth > 1024 &&
+          <i
+            className="material-icons icon-float icon-color"
+            onClick={(e) => this.props.editChecklist(e, el.listId, el.name)}
+          >
+            edit
+          </i>
+        }
+        <i
+          className="material-icons icon-float icon-color"
+          onClick={(e, listId) => this.editName(e, listId)}
+        >
+          title{" "}
+        </i>
+        <i
+          className="material-icons icon-float icon-color"
+          onClick={(e) => this.deleteChecklist(e, el.listId)}
+        >
+          delete
+        </i>
+        </div>
+      </li>
+    ) 
+};
 
   createSharedChecklist = el => (
     <li
       id={el.name}
+      data-name={el.name}
       data-id={el.listId}
       className="mychecklists_checklista"
       key={el.listId}
-      onClick={e => this.clickSharedList(e)}
+      onClick={e => this.clickList(e)}
     >
      <p id={el.listId}> 
       <i className="material-icons icon-check icon-color" onClick={() => this.toggleCheck(el.listId)}>check_circle_outline</i>
@@ -231,7 +241,7 @@ export default class MyChecklists extends Component {
         <div className="title-content">
           <i className="material-icons"> school </i>
           <h3 className="mychecklists_title__header">Moje checklisty</h3>
-        </div>
+        </div>    
         <ul className="mychecklists_list">
           {this.state.data
             ? this.state.data
@@ -261,7 +271,7 @@ export default class MyChecklists extends Component {
 
   createRender() {
     const { StandardRender } = this;
-    return this.state.isLoaded ? <StandardRender /> : <Loader />;
+    return <StandardRender />;
   }
   render() {
     return this.createRender();

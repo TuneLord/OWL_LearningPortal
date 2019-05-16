@@ -63,6 +63,7 @@
 }
 
 .mychecklists_checklista .to-right {
+    display: flex;
     justify-self: right;
 }
 
