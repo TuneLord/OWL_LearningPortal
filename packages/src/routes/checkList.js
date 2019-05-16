@@ -7,6 +7,7 @@ const isAuthor = require('../middleware/isAuthor');
 
 const Checklist = require('../models/checkListModel');
 const { User } = require('../models/userModel');
+const Team = require('../models/teamModel');
 
 const router = express.Router();
 
@@ -51,7 +52,7 @@ router.put('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
     req.checklist.name = req.body.name || req.checklist.name;
     req.checklist.content = req.body.content || req.checklist.content;
 
-    //zmienia imię w user.checLists tylko wtedy jeśli różni się od poprzedniego
+    //zmienia imię w user.checkLists i team,checkLists tylko wtedy jeśli różni się od poprzedniego
     if (currentName !== req.checklist.name) {
         req.checklist.members.forEach(async el => {
             const user = await User.findById(el);
@@ -60,6 +61,17 @@ router.put('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
             user.checkLists = []; //z niewiadomych powodów muszę najpierw przypisać pustą tablicę do user.checkLists, inaczej nie przypisze nowych wartości
             user.checkLists = newName;
             await user.save();
+        })
+
+        //iteruje się po teamach usera w celu usnięcia ich przypisania do niej w obiekcie Team
+        const user = await User.findById(req.user._id);
+        user.teams.forEach(async el => {
+            const team = await Team.findById(el.teamId);
+
+            const newName = team.modifyCheckList(req.checklist._id, req.body.name);
+            team.checkLists = [];
+            team.checkLists = newName;
+            await team.save();
         })
     }
 
@@ -75,12 +87,19 @@ router.delete('/:id', auth, checkListExistance, isAuthor, async (req, res) => {
         await user.save();
     })
 
+    //iteruje się po teamach usera w celu usnięcia ich przypisania do niej w obiekcie Team
+    const user = await User.findById(req.user._id);
+    user.teams.forEach(async el => {
+        const team = await Team.findById(el.teamId);
+        team.checkLists = team.unpinCheckList(req.checklist._id);
+        await team.save();
+    })
+
     //usuwa listę
     await Checklist.findByIdAndDelete(req.checklist._id);
 
     //zwraca listy usuwającego usera
     const ownerChecklists = await User.findById(req.user._id)
-    console.log(ownerChecklists.checkLists);
     res.status(200).send(ownerChecklists.checkLists);
 });
 

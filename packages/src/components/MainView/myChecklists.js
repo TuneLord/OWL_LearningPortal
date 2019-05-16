@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Loader } from "../Loader/loader";
 import "./myChecklists.css";
 
 export default class MyChecklists extends Component {
@@ -53,7 +52,6 @@ export default class MyChecklists extends Component {
       });
       if (!response.ok) throw response;
       response = await response.json();
-      console.log(response.checkLists)
       this.setState({
         data: response.checkLists
       });
@@ -193,7 +191,7 @@ export default class MyChecklists extends Component {
         }
         <i
           className="material-icons icon-float icon-color"
-          onClick={(e, listId) => this.editName(e, listId)}
+          onClick={(e) => this.editName(e, el.listId)}
         >
           title{" "}
         </i>
