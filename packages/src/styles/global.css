@@ -33,14 +33,16 @@
     --colorMenuButtom: #888;
     --checkedForm: #e65100;
 
+    --myteams: #fff;
+
     /* Loader */
     --loaderBackground: rgba(0, 0, 0, .8);
 
     /* Editor */
-    --editorMainColor: #000;
+    --editorMainColor: #323232;
     --editorBackground: #fff;
-    --editorBorder: #ddd;
-    --editorToolbarBackground: #e65100;
+    --editorBorder: #f5f3f0;
+    --editorToolbarBackground: #ffa726;
     --editorBoxShadow: rgba(0, 0, 0, 0.1);
     --editorAlternativeBoxShadow: rgba(220, 220, 220, 1);
     --editorLinkBackground: #EEF8FF;
@@ -80,14 +82,15 @@ html[data-theme="dark"] {
     --bgrSingIn: #12122e;
     --bgrSignInInput: #2b2b47;
     --checkedForm: #d9d9e2;
+     --colorMenuButtom: #222423;
 
     /* Loader */
     --loaderBackground: rgba(0, 0, 0, .8);
 
     /* Editor */
     --editorMainColor: #000;
-    --editorBackground: rgb(75, 73, 73);
-    --editorBorder: #ddd;
+    --editorBackground:#222423;
+    --editorBorder: #2e2e44;
     --editorToolbarBackground: #464341;
     --editorBoxShadow: rgba(0, 0, 0, 0.1);
     --editorAlternativeBoxShadow: rgba(220, 220, 220, 1);
@@ -103,6 +106,8 @@ html[data-theme="dark"] {
     --mainFont: 'Roboto', sans-serif;
     --logoFont: 'Fredoka One', cursive;
     background-color: var(--mainViewMenu);
+
+    --myteams: #9d9da3;
 }
 
 html {
